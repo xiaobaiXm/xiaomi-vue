@@ -1,0 +1,81 @@
+<template>
+  <div class="con_left">
+    <ul>
+      <li>
+        <template v-if="!child">
+          <a href="#" class="big hover_List_up">
+            <img v-lazy="list.containerLeft[0].containerChild[0].containerImgUrl" alt="">
+          </a>
+        </template>
+        <template v-else>
+          <a href="#" class="mini hover_List_up" v-for="item in list.containerLeft[0].containerChild"
+            :key="item.containerId">
+            <img v-lazy="item.containerImgUrl" alt="">
+          </a>
+        </template>
+      </li>
+    </ul>
+  </div>
+</template>
+
+<script setup lang="ts">
+import { IContainerChild } from '@/store/Home/Container/Type/Container'
+import { computed } from 'vue'
+
+const list = defineProps<{
+  containerLeft: IContainerChild
+}>()
+
+const child = computed(() => {
+  let flag: boolean | string = ''
+  if (Object.keys(list.containerLeft[0].containerChild).length >= 2) {
+    flag = true
+  } else {
+    flag = false
+  }
+  return flag
+})
+
+</script>
+
+<style lang="less" scoped>
+.con_left {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: #fff;
+
+  ul {
+    li {
+      transition: all .2s linear;
+
+      .mini {
+        display: block;
+        width: 234px;
+        height: 300px;
+        transition: all .2s linear;
+
+        img {
+          width: 100%;
+          height: 100%;
+        }
+
+        &:nth-child(1) {
+          margin-bottom: 14px;
+        }
+      }
+
+      .big {
+        display: block;
+        width: 234px;
+        height: 614px;
+
+        img {
+          width: 100%;
+          height: 100%;
+        }
+      }
+    }
+  }
+}
+</style>

@@ -1,0 +1,137 @@
+.col {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.col-check {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.col-img {
+  width: 120px;
+  height: 80px;
+  padding-right: 40px;
+  overflow: hidden;
+
+  a {
+    img {
+      width: 80px;
+      width: 80px;
+    }
+  }
+}
+
+.col-name {
+  .tags {
+    margin-bottom: 6px;
+  }
+
+  .name {
+    line-height: 1;
+    margin-top: 8px;
+    margin-bottom: 8px;
+    font-size: 18px;
+    font-weight: 400;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+
+    a {
+      color: #424242;
+
+      &:hover {
+        color: #424242 !important;
+      }
+    }
+  }
+}
+
+.col-price {
+  font-size: 16px;
+}
+
+.col-num {
+  font-size: 16px;
+
+  .change-goods-num {
+    width: 150px;
+    height: 40px;
+    border: 1px solid #e0e0e0;
+    text-align: center;
+    background-color: #fff;
+    position: relative;
+    zoom: 1;
+
+    a {
+      display: block;
+      width: 38px;
+      height: 38px;
+      line-height: 38px;
+      box-sizing: border-box;
+
+      .iconfont {
+        color: #757575;
+        font-size: 12px;
+
+      }
+
+      &:hover {
+        color: #757575;
+        background-color: rgb(244, 244, 244);
+      }
+    }
+
+    .red {
+      float: left;
+    }
+
+    .goods-num {
+      float: left;
+      width: 72px;
+      height: 36px;
+      line-height: 38px;
+      padding: 0;
+      border-width: 0;
+      color: #424242;
+      font-size: 16px;
+      text-align: center;
+      box-sizing: border-box;
+    }
+
+    .add {
+      float: right;
+    }
+  }
+}
+
+.col-total {
+  color: #ff6700;
+  font-size: 16px;
+}
+
+.col-action {
+  .del {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    line-height: 24px;
+    text-align: center;
+    border-radius: 12px;
+    transition: all .3s;
+
+    .iconfont {
+      color: #757575;
+      font-size: 8px;
+      font-weight: 600;
+    }
+
+    &:hover {
+      background-color: rgb(229, 57, 53);
+
+      .iconfont {
+        color: #fff;
+      }
+    }
+  }
+}
