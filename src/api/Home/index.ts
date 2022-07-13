@@ -32,7 +32,7 @@ export const reqGetTypeNavList = () => requests({
 
 // 获取手机数据
 export const reqGetPhoneListInfo = () => requests({
-  url: '/phone',
+  url: '/home/phone',
   method: 'GET'
 })
 
@@ -48,8 +48,8 @@ export const reqGetChannelListInfo = () => requests({
   method: 'GET'
 })
 
-// vide
+// video
 export const reqGetVideoInfo = () => requests({
-  url: '/video',
+  url: '/home/homeVideo',
   method: 'GET'
 })

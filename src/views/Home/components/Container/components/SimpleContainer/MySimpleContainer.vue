@@ -1,12 +1,12 @@
 <template>
   <div class="content">
     <!-- header -->
-    <MyMoreVue :title="'手机'"></MyMoreVue>
+    <MyMoreVue :title="store.phoneList.phoneTitle"></MyMoreVue>
     <div class="cont_body">
       <!-- left -->
       <MyConLeftVue></MyConLeftVue>
       <!-- right -->
-      <MyConRightVue></MyConRightVue>
+      <MyConRightVue :phoneRight="store.phoneList.phoneChild[0]"></MyConRightVue>
     </div>
   </div>
 </template>
@@ -15,6 +15,12 @@
 import MyMoreVue from '@/components/Home/MyMore.vue'
 import MyConLeftVue from './components/MyConLeft.vue'
 import MyConRightVue from './components/MyConRight.vue'
+
+import { useContainer } from '@/store/Home/Container/index'
+
+const store = useContainer()
+
+store.getPhoneListInfo()
 
 </script>
 

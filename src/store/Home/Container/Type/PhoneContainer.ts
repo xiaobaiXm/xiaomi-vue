@@ -1,12 +1,19 @@
-export interface IPhone {
-  containerTitle: string
-  containerChild: Array<{
-    containerId?: number,
-    containerName?: string,
-    containerDesc?: string,
-    containerPrice?: number,
-    containerOldPrice?: number,
-    containerImgUrl?: string,
-    containerGroup?: string,
+
+export interface IPhoneChildren {
+  [key: number]: Array<{
+    [key: number]: {
+      desc?: number
+      id: number
+      img: string
+      name?: string
+      oldPrice?: number
+      price?: number
+      productId: number
+    }
   }>
+}
+
+export interface IPhone {
+  phoneTitle: string
+  phoneChild: Array<IPhoneChildren>
 }

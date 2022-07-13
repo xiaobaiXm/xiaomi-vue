@@ -1,13 +1,14 @@
 <template>
   <div class="video clearfix">
     <!-- header -->
-    <MyMoreVue :title="store.videoList[0]?.videoTitle + ''"></MyMoreVue>
+    <MyMoreVue :title="title|| ''"></MyMoreVue>
     <!-- body -->
-    <MyVideoBodyVue :videoChild="store.videoList[0]?.videoChild"></MyVideoBodyVue>
+    <MyVideoBodyVue :video="store.videoList[0].videoInfo"></MyVideoBodyVue>
   </div>
 </template>
 
 <script setup lang="ts">
+import { ref } from 'vue'
 import MyMoreVue from '@/components/Home/MyMore.vue'
 import MyVideoBodyVue from './VideoBody/MyVideoBody.vue'
 
@@ -16,6 +17,8 @@ import { useContainer } from '@/store/Home/Container/index'
 const store = useContainer()
 
 store.getVideoListInfo()
+
+const title = ref<string>('视频')
 </script>
 
 <style lang="less" scoped>

@@ -17,7 +17,7 @@ export const useContainer = defineStore(Container.Test, {
   },
   actions: {
     // get container info
-    async getContainerList ():Promise<void> {
+    async getContainerList (): Promise<void> {
       await reqGetContainerList().then((result) => {
         this.containerList = result.data
       }, err => {
@@ -25,25 +25,34 @@ export const useContainer = defineStore(Container.Test, {
       })
     },
     // get phone info
-    async getPhoneListInfo ():Promise<void> {
+    async getPhoneListInfo (): Promise<void> {
       await reqGetPhoneListInfo().then((result) => {
-        this.phoneList = result.data
+        if (result.code === 200) {
+          console.log(result.data)
+          this.phoneList = result.data
+        } else {
+          return Promise.reject(new Error('failed'))
+        }
       }, err => {
         return err.message
       })
     },
     // get video info
-    async getVideoListInfo ():Promise<void> {
+    async getVideoListInfo (): Promise<void> {
       await reqGetVideoInfo().then((result) => {
-        this.videoList = result.data
+        if (result.code === 200) {
+          this.videoList = result.data
+        } else {
+          return Promise.reject(new Error('failed'))
+        }
       }, err => {
         return err.message
       })
     }
   },
   getters: {
-    containerChild: store => {
-      return store.phoneList[0]?.containerChild || []
-    }
+    // containerChild: store => {
+    //   return store.phoneList[0]?.containerChild || []
+    // }
   }
 })

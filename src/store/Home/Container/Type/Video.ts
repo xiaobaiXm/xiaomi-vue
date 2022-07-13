@@ -1,13 +1,13 @@
-export interface IVideoChild {
+export interface IVideoInfo {
   [key: number]: {
-    videoId: number
-    videoName: string
-    videoDesc: string
-    videoImgUrl: string
+    id: number
+    title: string
+    img: string
+    desc: string
+    link: string
   }
 }
 
 export interface IVideo {
-  videoTitle: string
-  videoChild: IVideoChild
+  videoInfo: IVideoInfo
 }

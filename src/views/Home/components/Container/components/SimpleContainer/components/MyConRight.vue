@@ -1,18 +1,18 @@
 <template>
   <div class="con_right">
     <ul>
-      <li class="hover_List_up" v-for="phone in containerChild" :key="phone.containerId">
+      <li class="hover_List_up" v-for="phone in containerChild" :key="phone.id">
         <a href="#">
           <div class="img">
-            <img v-lazy="phone.containerImgUrl" alt="">
+            <img v-lazy="phone.img" alt="">
           </div>
-          <h3 class="title">{{ phone.containerName }}</h3>
-          <p class="describe">{{ phone.containerDesc }}</p>
+          <h3 class="title">{{ phone.name }}</h3>
+          <p class="describe">{{ phone.desc }}</p>
           <p class="price">
             <span class="num">
-              {{ phone.containerPrice }}元起
+              {{ phone.price }}元起
             </span>
-            <span class="old_price" v-if="phone?.containerOldPrice">{{ phone.containerOldPrice }}元</span>
+            <span class="old_price" v-if="phone?.oldPrice">{{ phone.oldPrice }}元</span>
           </p>
         </a>
       </li>
@@ -21,14 +21,6 @@
 </template>
 
 <script setup lang="ts">
-import { useContainer } from '@/store/Home/Container/index'
-import { storeToRefs } from 'pinia'
-
-const store = useContainer()
-
-store.getPhoneListInfo()
-
-const { containerChild } = storeToRefs(store)
 
 </script>
 
