@@ -1,10 +1,10 @@
 export interface INavList {
-  navId: number;
-  navTitle: string;
-  navChild: Array<{
-    navId: number,
-    navName: string,
-    navPrice: number,
-    navImgUrl: string,
+  navTitle: string
+  navChildren: Array<{
+    id: number
+    productId: number
+    name: string
+    price: number
+    img: string
   }>
 }

@@ -4,7 +4,7 @@ import { Container } from '@/enums/store/Home/store_name'
 import { reqGetContainerList, reqGetPhoneListInfo, reqGetVideoInfo } from '@/api/Home/index'
 
 import { IContainer } from './Type/Container'
-import { IPhone } from './Type/PhoneContainer'
+import { IPhone } from './Type/Phone'
 import { IVideo } from './Type/Video'
 
 export const useContainer = defineStore(Container.Test, {
@@ -19,7 +19,11 @@ export const useContainer = defineStore(Container.Test, {
     // get container info
     async getContainerList (): Promise<void> {
       await reqGetContainerList().then((result) => {
-        this.containerList = result.data
+        if (result.code === 200) {
+          this.containerList = result.data
+        } else {
+          return Promise.reject(new Error('filed'))
+        }
       }, err => {
         return err.message
       })
@@ -28,7 +32,6 @@ export const useContainer = defineStore(Container.Test, {
     async getPhoneListInfo (): Promise<void> {
       await reqGetPhoneListInfo().then((result) => {
         if (result.code === 200) {
-          console.log(result.data)
           this.phoneList = result.data
         } else {
           return Promise.reject(new Error('failed'))
@@ -51,8 +54,5 @@ export const useContainer = defineStore(Container.Test, {
     }
   },
   getters: {
-    // containerChild: store => {
-    //   return store.phoneList[0]?.containerChild || []
-    // }
   }
 })

@@ -1,13 +1,11 @@
 <template>
   <div class="video_body clearfix">
     <ul class="clearfix">
-      <li class="hover_List_up clearfix" v-for="item in video"
+      <li class="hover_List_up clearfix" v-for="item in store.videoList"
        :key="item.id">
         <a href="#">
           <div class="video_img">
-            <img
-              v-lazy="item.img"
-              alt="">
+            <img v-lazy="item.img" alt="">
             <span class="video_play"><span class="iconfont icon-bofang"></span></span>
           </div>
           <h3 class="title">{{ item.title }}</h3>
@@ -19,12 +17,11 @@
 </template>
 
 <script setup lang="ts">
-import { IVideoInfo } from '@/store/Home/Container/Type/Video'
+import { useContainer } from '@/store/Home/Container/index'
 
-defineProps<{
-  video : IVideoInfo
-}>()
+const store = useContainer()
 
+store.getVideoListInfo()
 </script>
 
 <style lang="less" scoped>

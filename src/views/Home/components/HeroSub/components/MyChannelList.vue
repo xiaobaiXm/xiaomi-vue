@@ -1,7 +1,7 @@
 <template>
   <div class="channel_list">
     <ul>
-      <li v-for="item in store.channelList" :key="item.id">
+      <li v-for="item in store.heroList" :key="item.id">
         <a href="#">
           <span class="iconfont" :class="item.icon"></span>
           {{ item.name }}
@@ -16,7 +16,7 @@ import { useHeaderMainStore } from '@/store/Home/HeaderMain/index'
 
 const store = useHeaderMainStore()
 
-store.getChannelList()
+store.getHeroList()
 </script>
 
 <style lang="less" scoped>

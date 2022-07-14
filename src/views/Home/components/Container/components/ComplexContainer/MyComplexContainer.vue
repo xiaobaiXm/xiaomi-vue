@@ -2,12 +2,12 @@
   <div class="content_complex">
     <MyComplexContainerHeaderVue
     :title="list.containerTitle"
-    :containerChild="list.containerChild[1]"></MyComplexContainerHeaderVue>
+    :container ="list.containerChild.right"
+    ></MyComplexContainerHeaderVue>
     <div class="cont_body">
       <div class="row">
-        <MyConLeftVue :containerLeft="list.containerChild[0]"></MyConLeftVue>
-
-        <MyConRightVue :container ="list.containerChild[1]"></MyConRightVue>
+        <MyConLeftVue :containerLeft="list.containerChild.left"></MyConLeftVue>
+        <MyConRightVue :containerRight ="list.containerChild.right"></MyConRightVue>
       </div>
     </div>
   </div>

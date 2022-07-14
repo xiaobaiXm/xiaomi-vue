@@ -1,46 +1,43 @@
 <template>
   <div class="con_right">
     <div>
-      <ul :class="flag == index ? 'show' : 'hide'" v-for="(conItem, index) in container" :key="index">
-        <div v-for="item in conItem.containerChild" :key="item.containerId">
+      <ul :class="flag == index ? 'show' : 'hide'" v-for="(conItem, index) in containerRight" :key="index">
+        <div v-for="item in conItem.groupChildren" :key="item.id">
           <li class="hover_List_up">
             <a href="#">
               <div class="img">
-                <img v-lazy="item.containerImgUrl" alt="">
+                <img v-lazy="item.img" alt="">
               </div>
-              <h3 class="title">{{ item.containerName }}</h3>
-              <p class="describe">{{ item.containerDesc }}</p>
+              <h3 class="title">{{ item.name }}</h3>
+              <p class="describe">{{ item.desc }}</p>
               <p class="price">
                 <span class="num">
-                  {{ item.containerPrice }}元
+                  {{ item.price }}元
                 </span>
-                <span v-if="item.containerOldPrice && !'null'" class="old_price">{{ item.containerOldPrice }}元</span>
+                <span v-if="item.oldPrice && !'null'" class="old_price">{{ item.oldPrice }}元</span>
               </p>
             </a>
           </li>
         </div>
-        <!-- <div>
+        <div v-if="conItem.groupMini.length > 0">
           <li id="go_hot" class="hover_List_up">
             <a href="#" class="go_a_hot">
               <section class="move">
-                <h3 class="godd_title">米家全自动波轮洗衣机8kg
-                </h3>
-                <span class="price">799元</span>
+                <h3 class="good_title">{{ conItem.groupMini[0].name }}</h3>
+                <span class="price">{{ conItem.groupMini[0].price }}元</span>
                 <span class="good_img">
-                  <img
-                    src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/b649a329983ad590fde607472f73e55a.jpg?thumb=1&w=125&h=125&f=webp&q=90"
-                    alt="">
+                  <img v-lazy="conItem.groupMini[0].img" alt="">
                 </span>
               </section>
             </a>
           </li>
-        </div> -->
+        </div>
         <div>
           <li id="go_hot" class="hover_List_up">
             <a href="#" class="go_a_hot">
               <section class="move">
                 <h3 class="title">浏览更多</h3>
-                <span class="text">{{ conItem.containerTitle }}</span>
+                <span class="text">{{ conItem.groupTitle }}</span>
                 <span class="iconfont icon-youjiantou1"></span>
               </section>
             </a>
@@ -53,7 +50,7 @@
 
 <script setup lang="ts">
 import { ref, getCurrentInstance } from 'vue'
-import { IContainerChild } from '@/store/Home/Container/Type/Container'
+import { IContainerChildRight } from '@/store/Home/Container/Type/Container'
 const instance = getCurrentInstance()
 
 let flag = ref<number | string>(0)
@@ -64,7 +61,7 @@ instance?.proxy?.$Bus.on('headerIndexChange', (index): void => {
 })
 
 defineProps<{
-  container: IContainerChild
+  containerRight: IContainerChildRight
 }>()
 
 </script>
@@ -182,7 +179,7 @@ defineProps<{
                 color: #757575;
               }
 
-              .godd_title {
+              .good_title {
                 font-size: 14px;
               }
 

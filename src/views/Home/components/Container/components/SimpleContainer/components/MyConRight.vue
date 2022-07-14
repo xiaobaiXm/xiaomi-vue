@@ -1,18 +1,16 @@
 <template>
   <div class="con_right">
     <ul>
-      <li class="hover_List_up" v-for="phone in containerChild" :key="phone.id">
+      <li class="hover_List_up" v-for="item in phoneRight" :key="item.id">
         <a href="#">
           <div class="img">
-            <img v-lazy="phone.img" alt="">
+            <img v-lazy="item.img" alt="">
           </div>
-          <h3 class="title">{{ phone.name }}</h3>
-          <p class="describe">{{ phone.desc }}</p>
+          <h3 class="title">{{ item.name }}}</h3>
+          <p class="describe">{{ item.desc }}}</p>
           <p class="price">
-            <span class="num">
-              {{ phone.price }}元起
-            </span>
-            <span class="old_price" v-if="phone?.oldPrice">{{ phone.oldPrice }}元</span>
+            <span class="num">{{ item.price }}元起</span>
+            <span class="old_price" v-if="item.oldPrice">{{ item.oldPrice}}元</span>
           </p>
         </a>
       </li>
@@ -21,7 +19,10 @@
 </template>
 
 <script setup lang="ts">
-
+import { IPhoneChildren } from '@/store/Home/Container/Type/Phone'
+defineProps<{
+  phoneRight : IPhoneChildren
+}>()
 </script>
 
 <style lang="less" scoped>

@@ -1,9 +1,9 @@
 <template>
   <div class="promo_list">
     <ul>
-      <li v-for="promo in store.bannerPromo" :key="promo.id">
+      <li v-for="promo in store.heroBanner" :key="promo.id">
         <a href="#">
-          <img v-lazy="promo.imgUrl" alt="">
+          <img v-lazy="promo.img" alt="">
         </a>
       </li>
     </ul>
@@ -13,7 +13,7 @@
 <script setup lang="ts">
 import { useHeaderMainStore } from '@/store/Home/HeaderMain/index'
 const store = useHeaderMainStore()
-store.getPromoList()
+store.getHeroBanner()
 </script>
 
 <style lang="less" scoped>

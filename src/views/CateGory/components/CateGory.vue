@@ -1,7 +1,7 @@
 <template>
   <div class="category clearfix ">
     <!-- tab  -->
-    <MyCategoryTab :categoryName="list.categoryName"></MyCategoryTab>
+    <MyCategoryTab :categoryTitle="list.categoryTitle"></MyCategoryTab>
     <!-- list  -->
     <MyCateGoryList :categoryChild="list.categoryChild"></MyCateGoryList>
   </div>
@@ -11,10 +11,10 @@
 import MyCategoryTab from './components/CateGoryTab.vue'
 import MyCateGoryList from './components/CateGoryList.vue'
 
-import { ITypeNav } from '@/store/TypeNav/Type/TypeNav'
+import { ICategory } from '@/store/Home/Category/Type/Category'
 
 defineProps<{
-list : ITypeNav
+list : ICategory
 }>()
 </script>
 

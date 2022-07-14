@@ -1,4 +1,5 @@
 export interface IBanner {
   id: number,
-  imgUrl: string
+  img: string,
+  productId: number
 }

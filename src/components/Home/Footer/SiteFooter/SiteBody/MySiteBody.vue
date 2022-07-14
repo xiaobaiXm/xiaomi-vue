@@ -1,44 +1,10 @@
 <template>
-  <div class="site_body">
-    <dl>
-      <dt>帮助中心</dt>
-      <dd><a href="#">账户管理</a></dd>
-      <dd><a href="#">购物指南</a></dd>
-      <dd><a href="#">订单操作</a></dd>
+  <div class="site_body clearfix">
+    <dl v-for="(item , index) in store.footerNavList" :key="index">
+      <dt>{{ item.footerNavDt }}</dt>
+      <dd v-for="DD in item.footerNavDd" :key="DD.id"><a href="#">{{ DD.name }}</a></dd>
     </dl>
-    <dl>
-      <dt>服务支持</dt>
-      <dd><a href="#">售后政策</a></dd>
-      <dd><a href="#">自助服务</a></dd>
-      <dd><a href="#">相关下载</a></dd>
-    </dl>
-    <dl>
-      <dt>线下门店</dt>
-      <dd><a href="#">小米之家</a></dd>
-      <dd><a href="#">服务网点</a></dd>
-      <dd><a href="#">授权体验店/专区</a></dd>
-    </dl>
-    <dl>
-      <dt>关于小米</dt>
-      <dd><a href="#">了解小米</a></dd>
-      <dd><a href="#">加入小米</a></dd>
-      <dd><a href="#">投资者关系</a></dd>
-      <dd><a href="#">企业社会责任</a></dd>
-      <dd><a href="#">廉洁举报</a></dd>
-    </dl>
-    <dl>
-      <dt>关注我们</dt>
-      <dd><a href="#">新浪微博</a></dd>
-      <dd><a href="#">官方微信</a></dd>
-      <dd><a href="#">联系我们</a></dd>
-      <dd><a href="#">公益基金会</a></dd>
-    </dl>
-    <dl>
-      <dt>特色服务</dt>
-      <dd><a href="#">F 码通道</a></dd>
-      <dd><a href="#">礼物码</a></dd>
-      <dd><a href="#">防伪查询</a></dd>
-    </dl>
+
     <div class="contact">
       <p class="phone">400-100-5678</p>
       <p>8:00-18:00（仅收市话费）</p>
@@ -56,12 +22,17 @@
 </template>
 
 <script setup lang="ts">
+import { useFooter } from '@/store/Home/Footer'
+
+const store = useFooter()
+
+store.getFooterNavInfo()
+
 </script>
 
 <style lang="less" scoped>
 .site_body {
-  height: 252px;
-  padding: 40px 0;
+  padding: 40px 0 40px 160px;
 
   dl {
     width: 160px;

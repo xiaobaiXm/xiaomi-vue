@@ -2,7 +2,7 @@
   <div class="big_banner">
     <a href="#">
       <img
-        src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/0e2b43800d3e1ef40470ac04b3e0140b.jpg?thumb=1&w=1533&h=150&f=webp&q=90"
+        src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/2656295f6c067f48a04a425acf15a096.jpg?thumb=1&w=1226&h=120&f=webp&q=90"
         alt="">
     </a>
   </div>

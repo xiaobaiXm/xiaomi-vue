@@ -1,33 +1,30 @@
 <template>
   <div class="header_nav">
     <ul class="clearfix">
-      <li class="category category-hide"><a href="#"><span class="text">全部商品分类</span></a></li>
-      <li class="nav-item nav-item-active" v-for="item in store.navList" :key="item.navId"
-        @mouseenter="shoeIdChange(item.navId)">
+      <li class="category category-hide"><router-link to="/category"><span class="text">全部商品分类</span></router-link></li>
+      <li class="nav-item nav-item-active" v-for="(item,index ) in store.navList" :key="index"
+        @mouseenter="shoeIdChange(index)" @mouseleave="shoeIdChange(null)">
         <a href="#">
           <span class="text">{{ item.navTitle }}</span>
         </a>
       </li>
+       <li class="nav-item nav-item-active"><a href="#"><span class="text">服务中心</span></a></li>
+      <li class="nav-item nav-item-active"><a href="#"><span class="text">社区</span></a></li>
     </ul>
   </div>
 </template>
 
 <script setup lang="ts">
-
 import { getCurrentInstance } from 'vue'
 import { useHeaderStore } from '@/store/Home/Header/index'
-// import { storeToRefs } from 'pinia'
 const store = useHeaderStore()
 
-// 加载数据
 store.getHeaderNav()
-
-// const { navList } = storeToRefs(store)
 
 const instance = getCurrentInstance()
 
-const shoeIdChange = (index: number) => {
-  instance?.proxy?.$Bus.emit('indexChange', index)
+const shoeIdChange = (index: number | null): void => {
+  instance?.proxy?.$Bus.emit('navIndexChange', index)
 }
 </script>
 

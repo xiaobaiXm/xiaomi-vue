@@ -14,25 +14,31 @@ export const useHeaderStore = defineStore(HeaderName.Test, {
     }
   },
   actions: {
-    // 获取nav bar数据
+    // get nav bar info
     async getHeaderNavBarList ():Promise<void> {
       await reqGetHeaderNavBarList().then((result) => {
-        this.navBarList = result.data
+        if (result.code === 200) {
+          this.navBarList = result.data
+        } else {
+          return Promise.reject(new Error('filed'))
+        }
       }, (err) => {
         return err.message
       })
     },
 
-    // 获取Nav数据
+    // get nav info
     async  getHeaderNav ():Promise<void> {
       await reqGetHeaderNavList().then((result) => {
-        this.navList = result.data
+        if (result.code === 200) {
+          this.navList = result.data
+        } else {
+          return Promise.reject(new Error('filed'))
+        }
       }, err => {
         return err.message
       })
     }
   },
-  getters: {
-
-  }
+  getters: {}
 })

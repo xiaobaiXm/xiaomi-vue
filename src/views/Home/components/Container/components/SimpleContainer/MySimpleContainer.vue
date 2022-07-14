@@ -1,12 +1,12 @@
 <template>
   <div class="content">
     <!-- header -->
-    <MyMoreVue :title="store.phoneList.phoneTitle"></MyMoreVue>
+    <MyMoreVue :title="'手机'"></MyMoreVue>
     <div class="cont_body">
       <!-- left -->
       <MyConLeftVue></MyConLeftVue>
       <!-- right -->
-      <MyConRightVue :phoneRight="store.phoneList.phoneChild[0]"></MyConRightVue>
+      <MyConRightVue :phoneRight="store?.phoneList[0]?.phoneChild"></MyConRightVue>
     </div>
   </div>
 </template>

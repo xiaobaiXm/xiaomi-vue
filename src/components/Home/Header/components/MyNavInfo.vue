@@ -1,15 +1,15 @@
 <template>
   <teleport to="body">
-    <div class="navBarInfo">
+    <div class="navBarInfo" :class="show == null ? 'hide' : 'slide-down'">
       <div class="container w">
-        <ul :class="show == v.navId ? 'show' : 'hide'" v-for="v in navList" :key="v.navId">
-          <li v-for="item in v.navChild" :key="item.navId">
+        <ul :class="show == index ? 'show' : 'hide'" v-for="(v, index) in navList" :key="index">
+          <li v-for="item in v.navChildren" :key="item.id">
             <a href="#">
               <div class="imgUrl">
-                <img v-lazy="item.navImgUrl" alt="">
+                <img v-lazy="item.img" alt="">
               </div>
-              <div class="text">{{ item.navName }}</div>
-              <p class="price">{{ item.navPrice }}</p>
+              <div class="text">{{ item.name }}</div>
+              <p class="price">{{ item.price }}</p>
             </a>
           </li>
         </ul>
@@ -31,8 +31,8 @@ defineProps<{
 
 const instance = getCurrentInstance()
 
-instance?.proxy?.$Bus.on('indexChange', (index): void => {
-  show.value = index as number
+instance?.proxy?.$Bus.on('navIndexChange', (index): void => {
+  show.value = index as number | null
 })
 
 </script>
@@ -44,19 +44,17 @@ instance?.proxy?.$Bus.on('indexChange', (index): void => {
 
 .navBarInfo {
   position: absolute;
-  top: 100px;
-  left: 0;
+  top: 140px;
+  width: 100%;
   height: 229px;
-  margin: 0 auto;
+  margin: 0 0;
   border-top: 1px solid #e0e0e0;
   z-index: 9999;
   background-color: #fff;
-  overflow: hidden;
   box-shadow: 0 3px 4px rgb(0 0 0 / 18%);
-  transition: box-shadow .2s, height .3s, -webkit-box-shadow .2s;
+  transition: box-shadow .2s, all .3s;
 
   .container {
-
     ul {
       li {
         width: 204px;
@@ -108,14 +106,6 @@ instance?.proxy?.$Bus.on('indexChange', (index): void => {
         }
       }
     }
-  }
-
-  #hiddenEle {
-    display: none;
-  }
-
-  #showEle {
-    display: block;
   }
 }
 </style>

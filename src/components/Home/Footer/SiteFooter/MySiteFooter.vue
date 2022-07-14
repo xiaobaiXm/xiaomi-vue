@@ -1,5 +1,5 @@
 <template>
-  <div class="site_footer">
+  <div class="site_footer clearfix">
     <!-- header -->
     <MySieHeaderVue></MySieHeaderVue>
     <!-- body -->
@@ -13,7 +13,4 @@ import MySiteBodyVue from './SiteBody/MySiteBody.vue'
 </script>
 
 <style lang="less" scoped>
-.site_footer {
-  height: 333px;
-}
 </style>

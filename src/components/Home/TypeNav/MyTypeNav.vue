@@ -3,12 +3,12 @@
   <div class="main">
     <div class="type_nav">
       <ul>
-        <li v-for="(item, index) in store.typeNav" :key="index">
-          <a href="javascript:;">{{ item.categoryName }}<span class="iconfont icon-youjiantou"></span></a>
+        <li v-for="(item, index) in store.category" :key="index">
+          <a href="javascript:;">{{ item.categoryTitle }}<span class="iconfont icon-youjiantou"></span></a>
           <div class="secondary_menu">
-            <a href="#" v-for="childItem in item.categoryChild" :key="childItem.categoryId">
-              <img :src="childItem.categoryImgUrl" alt="">
-              <span>{{ childItem.categoryName }}</span>
+            <a href="#" v-for="childItem in item.categoryChild" :key="childItem.id">
+              <img v-lazy="childItem.img" alt="">
+              <span>{{ childItem.name }}</span>
             </a>
           </div>
         </li>
@@ -18,11 +18,11 @@
 </template>
 
 <script setup lang="ts">
-import { useTypeNav } from '@/store/TypeNav/index'
+import { useCategory } from '@/store/Home/Category/'
 
-const store = useTypeNav()
+const store = useCategory()
 
-store.getTypeNavList()
+store.getCategoryList()
 
 </script>
 

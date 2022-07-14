@@ -3,10 +3,10 @@
     <h2>{{ title }}</h2>
     <div class="more">
       <ul class="tab_lists">
-        <li v-for="( item ,index ) in containerChild"
+        <li v-for="( item ,index ) in container"
         :key="index"
          :class="flag===index? 'tab_active' :''"
-         @mouseenter="flagChange(index)">{{ item.containerTitle }}</li>
+         @mouseenter="flagChange(index)">{{ item.groupTitle }}</li>
       </ul>
     </div>
   </div>
@@ -14,7 +14,7 @@
 
 <script setup lang="ts">
 import { ref, getCurrentInstance } from 'vue'
-import { IContainerChild } from '@/store/Home/Container/Type/Container'
+import { IContainerChildRight } from '@/store/Home/Container/Type/Container'
 let flag = ref<number | string>(0)
 
 const instance = getCurrentInstance()
@@ -25,7 +25,7 @@ const flagChange = (index:number | string) => {
 }
 
 defineProps<{
-    containerChild: IContainerChild,
+    container: IContainerChildRight,
     title: string,
 }>()
 

@@ -8,8 +8,8 @@
 </template>
 
 <script setup lang="ts">
-import MyChannelListVue from './ChannelList/MyChannelList.vue'
-import MyPromoListVue from './PromoList/MyPromoList.vue'
+import MyChannelListVue from './components/MyChannelList.vue'
+import MyPromoListVue from './components/MyPromoList.vue'
 </script>
 
 <style lang="less" scoped>

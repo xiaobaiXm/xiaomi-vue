@@ -2,31 +2,31 @@ import requests from '@/utils/requests'
 
 // navBer接口
 export const reqGetHeaderNavBarList = () => requests({
-  url: '/headernav',
+  url: '/home/navBar',
   method: 'GET'
 })
 
 // nav接口
 export const reqGetHeaderNavList = () => requests({
-  url: '/nav',
+  url: '/home/nav',
   method: 'GET'
 })
 
 // banner接口
 export const reqGetBannerList = () => requests({
-  url: '/banner',
+  url: '/home/banner',
   method: 'GET'
 })
 
-// bannerList接口
-export const reqGetPromoList = () => requests({
-  url: '/bannerList',
+// hero banner接口
+export const reqGetHeroBannerInfo = () => requests({
+  url: '/home/heroBanner',
   method: 'GET'
 })
 
 // 获取三级分类接口
-export const reqGetTypeNavList = () => requests({
-  url: '/typeNav',
+export const reqGetCategoryList = () => requests({
+  url: '/home/category',
   method: 'GET'
 })
 
@@ -38,18 +38,30 @@ export const reqGetPhoneListInfo = () => requests({
 
 // 获取主体区域内容接口
 export const reqGetContainerList = () => requests({
-  url: '/container',
+  url: '/home/container',
   method: 'GET'
 })
 
-// channel_list接口
-export const reqGetChannelListInfo = () => requests({
-  url: '/channelList',
+// hero list接口
+export const reqGetHeroListInfo = () => requests({
+  url: '/home/heroList',
   method: 'GET'
 })
 
 // video
 export const reqGetVideoInfo = () => requests({
   url: '/home/homeVideo',
+  method: 'GET'
+})
+
+// footer help
+export const reqGetFooterHelpOInfo = () => requests({
+  url: '/home/footerHelp',
+  method: 'GET'
+})
+
+// footer nav
+export const reqGetFooterNavInfo = () => requests({
+  url: '/home/footerNav',
   method: 'GET'
 })

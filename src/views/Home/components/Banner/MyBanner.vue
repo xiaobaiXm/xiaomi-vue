@@ -8,7 +8,7 @@
   disableOnInteraction: false,
 }" :modules="modules" class="mySwiper">
       <swiper-slide v-for="item in store.bannerList" :key="item.id">
-        <a href="#"> <img :src="item.imgUrl" /></a>
+        <a href="#"> <img :src="item.img" /></a>
       </swiper-slide>
     </swiper>
   </div>

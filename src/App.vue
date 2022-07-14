@@ -7,7 +7,7 @@
 
 <script setup lang="ts">
 import MyHeader from '@/components/Home/Header/MyHeader.vue'
-import MyFooter from '@/components/Footer/MyFooter.vue'
+import MyFooter from '@/components/Home/Footer/MyFooter.vue'
 
 import { useRouter } from 'vue-router'
 const router = useRouter()

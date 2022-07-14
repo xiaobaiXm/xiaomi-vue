@@ -1,8 +1,8 @@
 <template>
   <div class="category_tab">
-    <h2 class="tab">
+    <h2 class="tab" @click="changeKistHeight">
       <div class="iconfont icon-xiajiantou_huaban"></div>
-      {{ categoryName }}
+      {{ categoryTitle }}
     </h2>
   </div>
 </template>
@@ -10,8 +10,12 @@
 <script setup lang="ts">
 
 defineProps<{
-  categoryName: string
+  categoryTitle: string
 }>()
+
+const changeKistHeight = () => {
+  console.log('ok')
+}
 
 </script>
 

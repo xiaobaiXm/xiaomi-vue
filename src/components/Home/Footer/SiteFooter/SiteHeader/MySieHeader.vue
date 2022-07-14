@@ -1,16 +1,20 @@
 <template>
   <div class="site_header">
     <ul>
-      <li><a href="#"><span class="iconfont icon-weixiubanshou"></span>预约维修服务</a></li>
-      <li><a href="#"><span class="iconfont icon-7tiantuihuanhuo"></span>7天无理由退货</a></li>
-      <li><a href="#"><span class="iconfont icon-15tianwuliyoutuihuo"></span>15天免费换货</a></li>
-      <li><a href="#"><span class="iconfont icon-liwu"></span>满69元包邮</a></li>
-      <li><a href="#"><span class="iconfont icon-dizhi"></span>520余家售后网点</a></li>
+      <li v-for="item in store.footerHelpList" :key="item.id">
+       <span class="iconfont" :class="item.icon"></span>{{ item.name }}
+      </li>
     </ul>
   </div>
 </template>
 
 <script setup lang="ts">
+import { useFooter } from '@/store/Home/Footer'
+
+const store = useFooter()
+
+store.getFooterHelpInfo()
+
 </script>
 
 <style lang="less" scoped>
@@ -20,6 +24,7 @@
   padding: 27px 0;
   border-bottom: 1px solid #e0e0e0;
   box-sizing: border-box;
+  transition: all .5s;
 
   ul {
     display: flex;

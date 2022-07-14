@@ -1,10 +1,10 @@
 <template>
   <div class="category_list">
     <ul>
-      <li v-for="item in categoryChild" :key="item.categoryId">
+      <li v-for="item in categoryChild" :key="item.id">
         <a href="#">
-          <img v-lazy="item.categoryImgUrl" alt="">
-          <span>{{ item.categoryName }}</span>
+          <img v-lazy="item.img" alt="">
+          <span>{{ item.name }}</span>
         </a>
       </li>
     </ul>
@@ -12,11 +12,13 @@
 </template>
 
 <script setup lang="ts">
+// import { ref } from 'vue'
+
 defineProps<{
   categoryChild:Array<{
-    categoryId: number
-    categoryName: string
-    categoryImgUrl: string
+    id: number
+    name: string
+    img: string
   }>
 }>()
 
@@ -24,7 +26,6 @@ defineProps<{
 
 <style lang="less" scoped>
 .category_list {
-  height: 400px;
   transition: all .7s;
 
   ul {

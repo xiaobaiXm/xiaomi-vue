@@ -4,13 +4,12 @@
       <li>
         <template v-if="!child">
           <a href="#" class="big hover_List_up">
-            <img v-lazy="list.containerLeft[0].containerChild[0].containerImgUrl" alt="">
+            <img v-lazy="list.containerLeft[0].img" alt="">
           </a>
         </template>
         <template v-else>
-          <a href="#" class="mini hover_List_up" v-for="item in list.containerLeft[0].containerChild"
-            :key="item.containerId">
-            <img v-lazy="item.containerImgUrl" alt="">
+          <a href="#" class="mini hover_List_up" v-for="item  in list.containerLeft" :key="item.id">
+            <img v-lazy="item.img" alt="">
           </a>
         </template>
       </li>
@@ -19,16 +18,16 @@
 </template>
 
 <script setup lang="ts">
-import { IContainerChild } from '@/store/Home/Container/Type/Container'
+import { IContainerChildLeft } from '@/store/Home/Container/Type/Container'
 import { computed } from 'vue'
 
 const list = defineProps<{
-  containerLeft: IContainerChild
+  containerLeft: IContainerChildLeft
 }>()
 
 const child = computed(() => {
   let flag: boolean | string = ''
-  if (Object.keys(list.containerLeft[0].containerChild).length >= 2) {
+  if (Object.keys(list.containerLeft).length >= 2) {
     flag = true
   } else {
     flag = false
@@ -69,6 +68,7 @@ const child = computed(() => {
         display: block;
         width: 234px;
         height: 614px;
+        transition: all .2s linear;
 
         img {
           width: 100%;

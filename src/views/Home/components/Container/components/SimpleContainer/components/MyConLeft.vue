@@ -3,9 +3,7 @@
     <ul>
       <li class="hover_List_up">
         <a href="#">
-          <!-- <img
-            v-lazy="list?.containerChild[0].containerLeftImgUrl"
-            alt=""> -->
+          <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/6b99bcb716c8f76e1fc5475172bdfc27.jpg?thumb=1&w=234&h=614&f=webp&q=90" alt="">
         </a>
       </li>
     </ul>
@@ -13,6 +11,11 @@
 </template>
 
 <script setup lang="ts">
+// import { IPhoneChildren } from '@/store/Home/Container/Type/Phone'
+
+// defineProps<{
+//   phoneLeft :IPhoneChildren
+// }>()
 
 </script>
 

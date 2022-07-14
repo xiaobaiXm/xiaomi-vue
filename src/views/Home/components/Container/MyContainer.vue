@@ -3,13 +3,10 @@
     <div class="main">
       <div class="container w">
         <MyBigBannerVue></MyBigBannerVue>
-
         <MySimpleContainerVue></MySimpleContainerVue>
-
         <MyComplexContainerVue
         v-for="(item, index) in store.containerList" :key="index"
         :list="item"></MyComplexContainerVue>
-
         <MyVideoVue></MyVideoVue>
       </div>
     </div>
@@ -36,7 +33,6 @@ store.getContainerList()
   padding-top: 4px;
   padding-bottom: 12px;
   background-color: #f5f5f5;
-
   .container {
     .hover_List_up:hover {
       box-shadow: 8px 15px 15px rgb(0 0 0 / 10%) !important;
