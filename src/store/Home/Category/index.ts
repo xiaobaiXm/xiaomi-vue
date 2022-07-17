@@ -13,15 +13,12 @@ export const useCategory = defineStore(Category.Test, {
   },
   actions: {
     async getCategoryList ():Promise<void> {
-      await reqGetCategoryList().then((result) => {
-        if (result.code === 200) {
-          this.category = result.data
-        } else {
-          return Promise.reject(new Error('filed'))
-        }
-      }, err => {
-        return err.message
-      })
+      const res = await reqGetCategoryList()
+      if (res.code === 200) {
+        this.category = res.data
+      } else {
+        return Promise.reject(new Error('filed'))
+      }
     }
   },
   getters: {}

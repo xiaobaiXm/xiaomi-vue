@@ -1,7 +1,14 @@
 <template>
   <MyHeader v-if="currentRoute.meta.HeaderShow"></MyHeader>
-  <MyFixedSildebar  v-if="currentRoute.meta.FixedSildebar"></MyFixedSildebar>
-  <router-view></router-view>
+  <MyFixedSildebar v-if="currentRoute.meta.FixedSildebar"></MyFixedSildebar>
+  <Suspense>
+    <template #default>
+      <router-view></router-view>
+    </template>
+    <template #fallback>
+      <MyLoading></MyLoading>
+    </template>
+  </Suspense>
   <MyFooter v-if="currentRoute.meta.FooterShow"></MyFooter>
 </template>
 
@@ -9,6 +16,7 @@
 import MyHeader from '@/components/Home/Header/MyHeader.vue'
 import MyFooter from '@/components/Home/Footer/MyFooter.vue'
 
+// import {defineAsyncComponent} from 'vue'
 import { useRouter } from 'vue-router'
 const router = useRouter()
 const currentRoute = router.currentRoute

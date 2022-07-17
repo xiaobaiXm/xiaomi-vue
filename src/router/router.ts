@@ -1,3 +1,4 @@
+import { defineAsyncComponent } from 'vue'
 import { RouteRecordRaw, RouteMeta } from 'vue-router'
 
 const routes: Array<RouteRecordRaw> = [
@@ -7,8 +8,8 @@ const routes: Array<RouteRecordRaw> = [
   },
   {
     path: '/home',
-    name: 'hHome',
-    component: () => import('@/views/Home/MyHome.vue'),
+    name: 'Home',
+    component: defineAsyncComponent(() => import('@/views/Home/MyHome.vue')),
     meta: { showTypeNav: true, HeaderShow: true, FooterShow: true, FixedSildebar: true } as RouteMeta
   },
   {

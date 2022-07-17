@@ -18,39 +18,30 @@ export const useHeaderMainStore = defineStore(HeaderMain.Test, {
   actions: {
     // 获取banner数据
     async getBannerList ():Promise<void> {
-      await reqGetBannerList().then((result) => {
-        if (result.code === 200) {
-          this.bannerList = result.data
-        } else {
-          return Promise.reject(new Error('filed'))
-        }
-      }, (err) => {
-        return err.message
-      })
+      const res = await reqGetBannerList()
+      if (res.code === 200) {
+        this.bannerList = res.data
+      } else {
+        return Promise.reject(new Error('filed'))
+      }
     },
     // 获取heroList数据
     async getHeroList ():Promise<void> {
-      await reqGetHeroListInfo().then((result) => {
-        if (result.code === 200) {
-          this.heroList = result.data
-        } else {
-          return Promise.reject(new Error('filed'))
-        }
-      }, err => {
-        return err.message
-      })
+      const res = await reqGetHeroListInfo()
+      if (res.code === 200) {
+        this.heroList = res.data
+      } else {
+        return Promise.reject(new Error('filed'))
+      }
     },
     // 获取heroBanner数据
     async getHeroBanner ():Promise<void> {
-      await reqGetHeroBannerInfo().then((result) => {
-        if (result.code === 200) {
-          this.heroBanner = result.data
-        } else {
-          return Promise.reject(new Error('filed'))
-        }
-      }, err => {
-        return err.message
-      })
+      const res = await reqGetHeroBannerInfo()
+      if (res.code === 200) {
+        this.heroBanner = res.data
+      } else {
+        return Promise.reject(new Error('flied'))
+      }
     }
   },
   getters: {

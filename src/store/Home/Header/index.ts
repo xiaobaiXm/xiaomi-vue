@@ -16,28 +16,22 @@ export const useHeaderStore = defineStore(HeaderName.Test, {
   actions: {
     // get nav bar info
     async getHeaderNavBarList ():Promise<void> {
-      await reqGetHeaderNavBarList().then((result) => {
-        if (result.code === 200) {
-          this.navBarList = result.data
-        } else {
-          return Promise.reject(new Error('filed'))
-        }
-      }, (err) => {
-        return err.message
-      })
+      const res = await reqGetHeaderNavBarList()
+      if (res.code === 200) {
+        this.navBarList = res.data
+      } else {
+        return Promise.reject(new Error('filed'))
+      }
     },
 
     // get nav info
     async  getHeaderNav ():Promise<void> {
-      await reqGetHeaderNavList().then((result) => {
-        if (result.code === 200) {
-          this.navList = result.data
-        } else {
-          return Promise.reject(new Error('filed'))
-        }
-      }, err => {
-        return err.message
-      })
+      const res = await reqGetHeaderNavList()
+      if (res.code === 200) {
+        this.navList = res.data
+      } else {
+        return Promise.reject(new Error('filed'))
+      }
     }
   },
   getters: {}

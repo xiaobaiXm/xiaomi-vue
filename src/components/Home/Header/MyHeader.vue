@@ -1,7 +1,7 @@
 <template>
-  <!-- 头部 start-->
+  <!-- head start-->
   <header class="header">
-    <!-- 头部导航栏 start -->
+    <!-- head nav start -->
     <div class="top_nav">
       <div class="topMain w">
         <!-- nav bar -->
@@ -19,7 +19,6 @@
         <!-- search -->
         <MySearchVue></MySearchVue>
       </div>
-      <MyNavInfoVue :navList="navList"></MyNavInfoVue>
     </div>
   </header>
 </template>
@@ -31,13 +30,6 @@ import MyLogoVue from './components/MyLogo.vue'
 import MyNavVue from './components/MyNav.vue'
 import MySearchVue from './components/MySearch.vue'
 
-import MyNavInfoVue from './components/MyNavInfo.vue'
-
-import { useHeaderStore } from '@/store/Home/Header/index'
-import { storeToRefs } from 'pinia'
-const store = useHeaderStore()
-
-const { navList } = storeToRefs(store)
 </script>
 
 <style scoped lang="less">
@@ -50,6 +42,7 @@ const { navList } = storeToRefs(store)
 
     .topMain {
       position: relative;
+      height: 40px;
     }
   }
 }

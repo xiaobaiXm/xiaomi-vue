@@ -16,25 +16,21 @@ export const useFooter = defineStore(Footer.Test, {
   actions: {
     // get footer help info
     async getFooterHelpInfo (): Promise<void> {
-      await reqGetFooterHelpOInfo().then(result => {
-        if (result.code === 200) {
-          this.footerHelpList = result.data
-        } else {
-          return Promise.reject(new Error('filed'))
-        }
-      }).catch(err => {
-        return err.message
-      })
+      const res = await reqGetFooterHelpOInfo()
+      if (res.code === 200) {
+        this.footerHelpList = res.data
+      } else {
+        return Promise.reject(new Error('filed'))
+      }
     },
     // get footer nav info
     async getFooterNavInfo (): Promise<void> {
-      await reqGetFooterNavInfo().then(result => {
-        if (result.code === 200) {
-          this.footerNavList = result.data
-        } else {
-          return Promise.reject(new Error('filed'))
-        }
-      }).catch(err => { return err.message })
+      const res = await reqGetFooterNavInfo()
+      if (res.code === 200) {
+        this.footerNavList = res.data
+      } else {
+        return Promise.reject(new Error('filed'))
+      }
     }
   },
   getters: {}

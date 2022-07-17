@@ -30,7 +30,7 @@ store.getHeaderNavBarList()
         }
       }
 
-      &:nth-child(-n + 11) {
+      &:nth-child(-n + 12) {
         padding-right: 17px;
 
         &::after {

@@ -18,39 +18,30 @@ export const useContainer = defineStore(Container.Test, {
   actions: {
     // get container info
     async getContainerList (): Promise<void> {
-      await reqGetContainerList().then((result) => {
-        if (result.code === 200) {
-          this.containerList = result.data
-        } else {
-          return Promise.reject(new Error('filed'))
-        }
-      }, err => {
-        return err.message
-      })
+      const res = await reqGetContainerList()
+      if (res.code === 200) {
+        this.containerList = res.data
+      } else {
+        return Promise.reject(new Error('filed'))
+      }
     },
     // get phone info
     async getPhoneListInfo (): Promise<void> {
-      await reqGetPhoneListInfo().then((result) => {
-        if (result.code === 200) {
-          this.phoneList = result.data
-        } else {
-          return Promise.reject(new Error('failed'))
-        }
-      }, err => {
-        return err.message
-      })
+      const res = await reqGetPhoneListInfo()
+      if (res.code === 200) {
+        this.phoneList = res.data
+      } else {
+        return Promise.reject(new Error('failed'))
+      }
     },
     // get video info
     async getVideoListInfo (): Promise<void> {
-      await reqGetVideoInfo().then((result) => {
-        if (result.code === 200) {
-          this.videoList = result.data
-        } else {
-          return Promise.reject(new Error('failed'))
-        }
-      }, err => {
-        return err.message
-      })
+      const res = await reqGetVideoInfo()
+      if (res.code === 200) {
+        this.videoList = res.data
+      } else {
+        return Promise.reject(new Error('failed'))
+      }
     }
   },
   getters: {
