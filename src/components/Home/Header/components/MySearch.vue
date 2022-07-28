@@ -1,23 +1,33 @@
 <template>
   <div class="search">
-    <input type="text" placeholder="手机">
-    <a href="#" class="submit"><span class="iconfont icon-sousuo1"></span></a>
-    <div class="all_goods">
+    <input type="search" :placeholder="searchKeyword" v-model="searchKeyword" :class="keywordFlag ? 'focus' : ''"
+      @focus="keywordFlag = true" @focusout="keywordFlag = false">
+    <a @click="test" href="javascript:;" class="submit" :class="keywordFlag ? 'focus' : ''"><span
+        class="iconfont icon-sousuo1"></span></a>
+    <div class="all_goods" v-if="keywordFlag">
       <ul>
-        <li><a href="#">全部商品</a></li>
-        <li><a href="#">全部商品</a></li>
-        <li><a href="#">全部商品</a></li>
-        <li><a href="#">全部商品</a></li>
-        <li><a href="#">全部商品</a></li>
-        <li><a href="#">全部商品</a></li>
-        <li><a href="#">全部商品</a></li>
-        <li><a href="#">全部商品</a></li>
+        <li v-for="item in store.homeSearchKeyword" :key="item.id"><a href="#">{{ item.keyword }}</a></li>
       </ul>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
+import { ref } from 'vue'
+
+import { useSearchStore } from '@/store/Search'
+
+const store = useSearchStore()
+
+store.getSearchKeywordInfo()
+
+let searchKeyword = ref<string>('手机')
+let keywordFlag = ref<boolean>(false)
+
+const test = () => {
+  console.log(searchKeyword.value)
+}
+
 </script>
 
 <style lang="less" scoped>
@@ -35,6 +45,12 @@
     color: #666;
     border: 1px solid #e0e0e0;
     transition: all 0.4s;
+    border-right: none;
+  }
+
+  // 搜索框获取焦点
+  .focus {
+    border-color: #ff6700 !important;
   }
 
   .submit {
@@ -45,7 +61,6 @@
     line-height: 50px;
     text-align: center;
     border: 1px solid #e0e0e0;
-    border-left: 0;
     box-sizing: border-box;
     transition: all 0.4s;
 
@@ -54,14 +69,9 @@
       color: #616161;
     }
 
-    // 搜索框获取焦点
-    .focus {
-      border-color: #ff6700 !important;
-    }
-
-    //
     &:hover {
       background-color: #ff6700;
+      border-color: #ff6700;
 
       .iconfont {
         color: #fff;
@@ -70,9 +80,8 @@
   }
 
   .all_goods {
-    display: none;
     position: absolute;
-    width: 296px;
+    width: 247px;
     height: 250px;
     background-color: #fff;
     z-index: 99;

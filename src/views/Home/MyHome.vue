@@ -1,7 +1,5 @@
 <template>
   <main class="header_main w">
-    <!-- type nav -->
-    <MyTypeNav></MyTypeNav>
     <!-- banner -->
     <MyBannerVue></MyBannerVue>
   </main>

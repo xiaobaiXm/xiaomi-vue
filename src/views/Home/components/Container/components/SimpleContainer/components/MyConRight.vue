@@ -6,8 +6,8 @@
           <div class="img">
             <img v-lazy="item.img" alt="">
           </div>
-          <h3 class="title">{{ item.name }}}</h3>
-          <p class="describe">{{ item.desc }}}</p>
+          <h3 class="title">{{ item.name }}</h3>
+          <p class="describe">{{ item.desc }}</p>
           <p class="price">
             <span class="num">{{ item.price }}元起</span>
             <span class="old_price" v-if="item.oldPrice">{{ item.oldPrice}}元</span>

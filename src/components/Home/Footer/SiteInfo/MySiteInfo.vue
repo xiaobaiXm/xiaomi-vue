@@ -49,7 +49,7 @@
 </template>
 
 <script setup lang="ts">
-import MyInfoLinksVue from './InfoLinks/MyInfoLinks.vue'
+import MyInfoLinksVue from './components/MyInfoLinks.vue'
 </script>
 
 <style lang="less" scoped>

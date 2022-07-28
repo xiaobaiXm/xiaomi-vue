@@ -1,49 +1,51 @@
 <template>
   <div class="con_right">
     <div>
-      <ul :class="flag == index ? 'show' : 'hide'" v-for="(conItem, index) in containerRight" :key="index">
-        <div v-for="item in conItem.groupChildren" :key="item.id">
-          <li class="hover_List_up">
-            <a href="#">
-              <div class="img">
-                <img v-lazy="item.img" alt="">
-              </div>
-              <h3 class="title">{{ item.name }}</h3>
-              <p class="describe">{{ item.desc }}</p>
-              <p class="price">
-                <span class="num">
-                  {{ item.price }}元
-                </span>
-                <span v-if="item.oldPrice && !'null'" class="old_price">{{ item.oldPrice }}元</span>
-              </p>
-            </a>
-          </li>
-        </div>
-        <div v-if="conItem.groupMini.length > 0">
-          <li id="go_hot" class="hover_List_up">
-            <a href="#" class="go_a_hot">
-              <section class="move">
-                <h3 class="good_title">{{ conItem.groupMini[0].name }}</h3>
-                <span class="price">{{ conItem.groupMini[0].price }}元</span>
-                <span class="good_img">
-                  <img v-lazy="conItem.groupMini[0].img" alt="">
-                </span>
-              </section>
-            </a>
-          </li>
-        </div>
-        <div>
-          <li id="go_hot" class="hover_List_up">
-            <a href="#" class="go_a_hot">
-              <section class="move">
-                <h3 class="title">浏览更多</h3>
-                <span class="text">{{ conItem.groupTitle }}</span>
-                <span class="iconfont icon-youjiantou1"></span>
-              </section>
-            </a>
-          </li>
-        </div>
-      </ul>
+      <template v-for="(conItem, index) in containerRight" :key="index">
+        <ul v-show="flag == index">
+          <div v-for="item in conItem.groupChildren" :key="item.id">
+            <li class="hover_List_up">
+              <a href="#">
+                <div class="img">
+                  <img v-lazy="item.img" alt="">
+                </div>
+                <h3 class="title">{{ item.name }}</h3>
+                <p class="describe">{{ item.desc }}</p>
+                <p class="price">
+                  <span class="num">
+                    {{ item.price }}元
+                  </span>
+                  <span v-if="item.oldPrice && !null" class="old_price">{{ item.oldPrice }}元</span>
+                </p>
+              </a>
+            </li>
+          </div>
+          <div v-if="conItem.groupMini.length > 0">
+            <li id="go_hot" class="hover_List_up">
+              <a href="#" class="go_a_hot">
+                <section class="move">
+                  <h3 class="good_title">{{ conItem.groupMini[0].name }}</h3>
+                  <span class="price">{{ conItem.groupMini[0].price }}元</span>
+                  <span class="good_img">
+                    <img v-lazy="conItem.groupMini[0].img" alt="">
+                  </span>
+                </section>
+              </a>
+            </li>
+          </div>
+          <div>
+            <li id="go_hot" class="hover_List_up">
+              <a href="#" class="go_a_hot">
+                <section class="move">
+                  <h3 class="title">浏览更多</h3>
+                  <span class="text">{{ conItem.groupTitle }}</span>
+                  <span class="iconfont icon-youjiantou1"></span>
+                </section>
+              </a>
+            </li>
+          </div>
+        </ul>
+      </template>
     </div>
   </div>
 </template>
@@ -55,8 +57,8 @@ const instance = getCurrentInstance()
 
 let flag = ref<number | string>(0)
 
-instance?.proxy?.$Bus.on('headerIndexChange', (index): void => {
-  console.log(index)
+instance?.proxy?.$Bus.on('containerIndexChange', (index): void => {
+  console.log('index', index)
   flag.value = index as number | string
 })
 

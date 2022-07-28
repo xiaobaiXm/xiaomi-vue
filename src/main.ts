@@ -10,7 +10,6 @@ import '@/assets/style/base.css'
 
 // 全局组件
 import MyLoading from './components/Loading/MyLoading.vue'
-import MyTypeNav from '@/components/Home/TypeNav/MyTypeNav.vue'
 import MyFixedSildebar from '@/components/Home/FixedSidebar/MyFixedSildebar.vue'
 import MyBread from '@/components/Bread/MyBread.vue'
 import MyGuessLike from '@/components/GuessLike/MyGuessLike.vue'
@@ -27,7 +26,6 @@ declare module 'vue' {
 const app = createApp(App)
 
 // 注册全局组件
-app.component('MyTypeNav', MyTypeNav)
 app.component('MyFixedSildebar', MyFixedSildebar)
 app.component('MyBread', MyBread)
 app.component('MyGuessLike', MyGuessLike)

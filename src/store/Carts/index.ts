@@ -3,7 +3,7 @@ import { Carts } from '@/enums/store/Carts/store_name'
 
 import { reqGetUserAllCartsInfo } from '@/api/Carts/'
 
-export const useCarts = defineStore(Carts.Test, {
+export const useCartsStore = defineStore(Carts.Test, {
   state: () => {
     return {
 

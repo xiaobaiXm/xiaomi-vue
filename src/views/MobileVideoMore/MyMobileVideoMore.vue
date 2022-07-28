@@ -9,7 +9,7 @@
 
 <script setup lang="ts">
 import MyVideoTitleVue from './components/VideoTitle/MyVideoTitle.vue'
-import MyContentImgVue from './components/VideoContent/ContentImg/MyContentImg.vue'
+import MyContentImgVue from './components/VideoContent/components/MyContentImg.vue'
 </script>
 
 <style lang="less" scoped>

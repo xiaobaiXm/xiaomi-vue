@@ -1,11 +1,11 @@
 <template>
   <div class="top_bar_info">
     <span class="user">
-      <a href="#" class="user-name" @mouseenter="showUserMenu = true" @mouseleave="showUserMenu = false">
+      <router-link to="/" class="user-name">
         <span class="name">青菜</span>
         <span class="iconfont icon-downforward"></span>
-      </a>
-      <div class="user-menu-wrapper" :style="{height: !showUserMenu  ? '0px' : '164px'}">
+      </router-link>
+      <div class="user-menu-wrapper">
         <ul class="user-menu">
           <li>
             <router to="" class="user_menu_info">个人中心</router>
@@ -20,7 +20,7 @@
             <router to="" class="user_menu_info">小米账户</router>
           </li>
           <li>
-            <router to="" class="user_menu_info">退出登录</router>
+            <router to="/" class="user_menu_info">退出登录</router>
           </li>
         </ul>
       </div>
@@ -28,7 +28,7 @@
     <span class="sep"></span>
     <span class="message"><a href="#">消息通知</a></span>
     <span class="sep"></span>
-    <a href="javascript:;" class="link-order">我的订单</a>
+    <router-link to="" class="link-order">我的订单</router-link>
   </div>
 </template>
 
@@ -80,17 +80,13 @@ let showUserMenu = ref<boolean>(false)
       .iconfont {
         font-size: 16px;
         margin-left: 4px;
+        vertical-align: bottom;
       }
 
       &:hover {
         background-color: #fff;
-
-        .user-menu-wrapper {
-          height: 164px !important;
-        }
       }
     }
-
     .user-menu-wrapper {
       position: absolute;
       left: 0;
@@ -109,6 +105,7 @@ let showUserMenu = ref<boolean>(false)
         list-style-type: none;
 
         li {
+          cursor: pointer;
           .user_menu_info {
             display: block;
             padding: 3px 30px;
@@ -123,7 +120,9 @@ let showUserMenu = ref<boolean>(false)
         }
       }
     }
-
+    &:hover .user-menu-wrapper {
+      height: 164px;
+    }
   }
 
   .message {
@@ -133,7 +132,7 @@ let showUserMenu = ref<boolean>(false)
 
   .link-order {
     width: 70px;
-    padding: 0 5px;
+    padding: 0 10px;
     text-align: center;
   }
 }

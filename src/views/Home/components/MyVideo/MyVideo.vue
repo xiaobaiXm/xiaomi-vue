@@ -9,7 +9,7 @@
 
 <script setup lang="ts">
 import MyMoreVue from '@/components/Home/MyMore.vue'
-import MyVideoBodyVue from './VideoBody/MyVideoBody.vue'
+import MyVideoBodyVue from './components/MyVideoBody.vue'
 
 </script>
 

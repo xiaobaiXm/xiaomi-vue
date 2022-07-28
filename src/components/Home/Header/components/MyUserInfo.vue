@@ -26,9 +26,9 @@ import MyUser from './MyUser.vue'
 
 import { ref } from 'vue'
 
-import { useCarts } from '@/store/Carts'
+import { useCartsStore } from '@/store/Carts'
 
-const store = useCarts()
+const store = useCartsStore()
 
 let authFlag = ref<boolean>(false)
 

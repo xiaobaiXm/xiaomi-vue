@@ -8,8 +8,8 @@
 </template>
 
 <script setup lang="ts">
-import MySieHeaderVue from './SiteHeader/MySieHeader.vue'
-import MySiteBodyVue from './SiteBody/MySiteBody.vue'
+import MySieHeaderVue from './components/MySieHeader.vue'
+import MySiteBodyVue from './components/MySiteBody.vue'
 </script>
 
 <style lang="less" scoped>

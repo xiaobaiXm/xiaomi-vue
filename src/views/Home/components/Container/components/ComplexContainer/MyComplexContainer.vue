@@ -29,7 +29,6 @@ defineProps<{
 <style lang="less" scoped>
 .content_complex {
   position: relative;
-
   .cont_body {
     position: relative;
     height: 614px;

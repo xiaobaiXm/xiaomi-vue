@@ -3,10 +3,8 @@
     <h2>{{ title }}</h2>
     <div class="more">
       <ul class="tab_lists">
-        <li v-for="( item ,index ) in container"
-        :key="index"
-         :class="flag===index? 'tab_active' :''"
-         @mouseenter="flagChange(index)">{{ item.groupTitle }}</li>
+        <li v-for="( item, index ) in container" :key="index" :class="flag === index ? 'tab_active' : ''"
+          @mouseenter="flagChange(index)">{{ item.groupTitle }}</li>
       </ul>
     </div>
   </div>
@@ -19,14 +17,14 @@ let flag = ref<number | string>(0)
 
 const instance = getCurrentInstance()
 
-const flagChange = (index:number | string) => {
+const flagChange = (index: number | string) => {
   flag.value = index
-  instance?.proxy?.$Bus.emit('headerIndexChange', index)
+  instance?.proxy?.$Bus.emit('containerIndexChange', index)
 }
 
 defineProps<{
-    container: IContainerChildRight,
-    title: string,
+  container: IContainerChildRight,
+  title: string,
 }>()
 
 </script>
@@ -54,7 +52,7 @@ defineProps<{
         margin-left: 30px;
         font-size: 16px;
         cursor: pointer;
-          transition: all .2s ;
+        transition: all .2s;
       }
 
       .tab_active {
