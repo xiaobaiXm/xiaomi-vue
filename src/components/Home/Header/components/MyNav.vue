@@ -37,7 +37,7 @@
 </template>
 
 <script setup lang="ts">
-import MyTypeNavVue from '@/components/Home/TypeNav/MyTypeNav.vue'
+import MyTypeNavVue from '@/components/Home/MyTypeNav.vue'
 
 import { ref, computed, getCurrentInstance } from 'vue'
 import { useRouter } from 'vue-router'

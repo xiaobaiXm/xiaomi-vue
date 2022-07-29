@@ -14,7 +14,7 @@
 </template>
 
 <script setup lang="ts">
-import MyBigBannerVue from '@/components/Home/BigBanner/MyBigBanner.vue'
+import MyBigBannerVue from '@/components/Home/MyBigBanner.vue'
 import MySimpleContainerVue from './components/SimpleContainer/MySimpleContainer.vue'
 import MyComplexContainerVue from './components/ComplexContainer/MyComplexContainer.vue'
 import MyVideoVue from '../MyVideo/MyVideo.vue'

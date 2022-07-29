@@ -12,8 +12,8 @@
 </template>
 
 <script setup lang="ts">
-import MyContentImgVue from './ContentImg/MyContentImg.vue'
-import MyContentVue from './Content/MyContent.vue'
+import MyContentImgVue from './components/MyContentImg.vue'
+import MyContentVue from './components/MyContent.vue'
 </script>
 
 <style lang="less" scoped>

@@ -1,9 +1,7 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios'
 
 const requests = axios.create({
-  // 基础路径
   baseURL: '/api',
-  // 请求超时时间
   timeout: 5000,
   headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;' }
 })

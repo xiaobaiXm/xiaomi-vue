@@ -10,7 +10,7 @@ import '@/assets/style/base.css'
 
 // 全局组件
 import MyLoading from './components/Loading/MyLoading.vue'
-import MyFixedSildebar from '@/components/Home/FixedSidebar/MyFixedSildebar.vue'
+import MyFixedSildebar from '@/components/Home/MyFixedSildebar.vue'
 import MyBread from '@/components/Bread/MyBread.vue'
 import MyGuessLike from '@/components/GuessLike/MyGuessLike.vue'
 

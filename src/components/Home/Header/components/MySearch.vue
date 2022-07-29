@@ -48,7 +48,6 @@ const test = () => {
     border-right: none;
   }
 
-  // 搜索框获取焦点
   .focus {
     border-color: #ff6700 !important;
   }
@@ -110,7 +109,6 @@ const test = () => {
   }
 
   &:hover {
-
     input,
     .submit {
       border-color: #b0b0b0;
