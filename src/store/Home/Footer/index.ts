@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { Footer } from '@/enums/store/Home/store_name'
+import { Footer } from '@/enums/store/home_store_name'
 
 import { reqGetFooterHelpOInfo, reqGetFooterNavInfo } from '@/api/Home/index'
 

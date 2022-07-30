@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { SearchName } from '@/enums/store/Search/store_name'
+import { SearchName } from '@/enums/store/search_store_name'
 
 import { reqGetSearchKeywordInfo } from '@/api/Search'
 

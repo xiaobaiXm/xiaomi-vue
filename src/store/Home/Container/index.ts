@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { Container } from '@/enums/store/Home/store_name'
+import { Container } from '@/enums/store/home_store_name'
 
 import { reqGetContainerList, reqGetPhoneListInfo, reqGetVideoInfo } from '@/api/Home/index'
 

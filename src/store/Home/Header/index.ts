@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { HeaderName } from '@/enums/store/Home/store_name'
+import { HeaderName } from '@/enums/store/home_store_name'
 
 import { reqGetHeaderNavList, reqGetHeaderNavBarList } from '@/api/Home/index'
 

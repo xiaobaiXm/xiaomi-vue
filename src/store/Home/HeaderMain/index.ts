@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { HeaderMain } from '@/enums/store/Home/store_name'
+import { HeaderMain } from '@/enums/store/home_store_name'
 
 import { reqGetBannerList, reqGetHeroListInfo, reqGetHeroBannerInfo } from '@/api/Home/index'
 

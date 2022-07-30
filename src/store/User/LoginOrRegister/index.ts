@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { UserLoginOrRegister } from '@/enums/store/User/store_name'
+import { UserLoginOrRegister } from '@/enums/store/user_store_name'
 
 export const useUserStore = defineStore(UserLoginOrRegister.Test, {
   state: () => {

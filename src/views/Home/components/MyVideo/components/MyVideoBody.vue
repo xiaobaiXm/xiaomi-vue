@@ -3,10 +3,10 @@
     <ul class="clearfix">
       <li class="hover_List_up clearfix" v-for="item in store.videoList"
        :key="item.id">
-        <a href="#">
+        <a href="javascript:;">
           <div class="video_img">
-            <img v-lazy="item.img" alt="">
-            <span class="video_play"><span class="iconfont icon-bofang"></span></span>
+            <img v-lazy="item.img" alt="点击播放视频" @click="videoInfo(item)">
+            <span class="video_play" @click="videoInfo(item)"><span class="iconfont icon-bofang"></span></span>
           </div>
           <h3 class="title">{{ item.title }}</h3>
           <p class="supplement">{{ item.desc }}</p>
@@ -14,14 +14,36 @@
       </li>
     </ul>
   </div>
+  <template v-if="videoInfoFlag">
+  <MyVideoInfo :title="title" :link="link" @cutVideoInfo="cutVideoInfo"></MyVideoInfo>
+  </template>
 </template>
 
 <script setup lang="ts">
+import MyVideoInfo from '@/components/VideoInfo/MyVideoInfo.vue'
 import { useContainer } from '@/store/Home/Container/index'
+import { IVideo } from '@/store/Home/Container/Type/Video'
+
+import { ref } from 'vue'
 
 const store = useContainer()
 
 store.getVideoListInfo()
+
+let videoInfoFlag = ref<boolean>(false)
+let title = ref<string>('')
+let link = ref<string>('')
+
+const cutVideoInfo = (flag:boolean):void => {
+  videoInfoFlag.value = flag
+}
+
+const videoInfo = (item:IVideo):void => {
+  videoInfoFlag.value = true
+  title.value = item.title
+  link.value = item.link
+}
+
 </script>
 
 <style lang="less" scoped>

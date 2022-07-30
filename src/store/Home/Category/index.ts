@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { Category } from '@/enums/store/Home/store_name'
+import { Category } from '@/enums/store/home_store_name'
 
 import { reqGetCategoryList } from '@/api/Home/index'
 

@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { Carts } from '@/enums/store/Carts/store_name'
+import { Carts } from '@/enums/store/cart_store_name'
 
 import { reqGetUserAllCartsInfo } from '@/api/Carts/'
 
