@@ -16,9 +16,9 @@ import MyMoreVue from '@/components/Home/MyMore.vue'
 import MyConLeftVue from './components/MyConLeft.vue'
 import MyConRightVue from './components/MyConRight.vue'
 
-import { useContainer } from '@/store/Home/Container/index'
+import { useContainerStore } from '@/store/Home/Container'
 
-const store = useContainer()
+const store = useContainerStore()
 
 store.getPhoneListInfo()
 

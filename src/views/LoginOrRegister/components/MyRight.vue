@@ -1,10 +1,7 @@
 <template>
   <div class="con_right">
-    <!-- header -->
     <MyUserHeaderVue></MyUserHeaderVue>
-    <!-- container  -->
     <MyUserContainerVue></MyUserContainerVue>
-    <!-- copy right -->
     <MyUserCopyRightVue></MyUserCopyRightVue>
   </div>
 </template>
@@ -20,6 +17,5 @@ import MyUserCopyRightVue from './components/UserCopyRight/MyUserCopyRight.vue'
 .con_right {
   width: 100%;
   height: 100%;
-
 }
 </style>

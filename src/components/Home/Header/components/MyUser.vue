@@ -35,9 +35,6 @@
 <script setup lang="ts">
 import '@/style/Home/Header.user.less'
 
-import { ref } from 'vue'
-
-let showUserMenu = ref<boolean>(false)
 </script>
 
 <style lang="less" scoped>

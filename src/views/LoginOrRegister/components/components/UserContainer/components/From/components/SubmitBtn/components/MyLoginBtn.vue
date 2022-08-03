@@ -1,7 +1,7 @@
 <template>
   <div class="login-submit">
-    <button v-if="!btnFlag" class="button-primary login-btn button-fullwidth button-disabled">登录</button>
-    <button v-else class="button-primary login-btn button-fullwidth">登录</button>
+    <button v-if="!btnFlag" class="button-primary login-btn button-fullWidth button-disabled">登录</button>
+    <button v-else class="button-primary login-btn button-fullWidth">登录</button>
   </div>
 </template>
 

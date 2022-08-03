@@ -1,28 +1,39 @@
 import { defineStore } from 'pinia'
 import { Container } from '@/enums/store/home_store_name'
 
-import { reqGetContainerList, reqGetPhoneListInfo, reqGetVideoInfo } from '@/api/Home/index'
+import { reqGetBigBannerList, reqGetContainerList, reqGetPhoneListInfo, reqGetVideoInfo } from '@/api/Home/index'
 
+import { IBigBanner } from './Type/BigBanner'
 import { IContainer } from './Type/Container'
 import { IPhone } from './Type/Phone'
 import { IVideo } from './Type/Video'
 
-export const useContainer = defineStore(Container.Test, {
+export const useContainerStore = defineStore(Container.Test, {
   state: () => {
     return {
+      bigBannerList: [] as IBigBanner[],
       containerList: [] as IContainer[],
       phoneList: [] as IPhone[],
       videoList: [] as IVideo[]
     }
   },
   actions: {
+    // get big banner info
+    async getBigBannerInfo () {
+      const res = await reqGetBigBannerList()
+      if (res.code === 200) {
+        this.bigBannerList = res.data
+      } else {
+        return Promise.reject(new Error('false'))
+      }
+    },
     // get container info
     async getContainerList (): Promise<void> {
       const res = await reqGetContainerList()
       if (res.code === 200) {
         this.containerList = res.data
       } else {
-        return Promise.reject(new Error('filed'))
+        return Promise.reject(new Error('false'))
       }
     },
     // get phone info
@@ -45,5 +56,14 @@ export const useContainer = defineStore(Container.Test, {
     }
   },
   getters: {
+    firstContainer ():IContainer[] {
+      return this.containerList.slice(0, 4)
+    },
+    contentContainer ():IContainer[] {
+      return this.containerList.slice(4, 7)
+    },
+    lastContainer (): IContainer[] {
+      return this.containerList.slice(7, 8)
+    }
   }
 })

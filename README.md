@@ -29,8 +29,3 @@ npm run lint
 See [Configuration Reference](https://cli.vuejs.org/config/).
 
 # xiaomi-vue
-
-# xiaomi-vue
-
-# xiaomi-vue
-# xiaomi-vue

@@ -1,8 +1,8 @@
 <template>
-  <div class="qr-switch-wrap" @click="changeFlag">
+  <div class="qr-switch-wrap" @click="switchWrap">
     <div class="qr-login-switch">
       <span class="qr-login-switch__icon">
-        <span class="iconfont" :class="flag? 'icon-erweima' :'icon-diannao'"></span>
+        <span class="iconfont" :class="flag ? 'icon-erweima' : 'icon-diannao'"></span>
       </span>
       <div style="position: absolute; top: 0px; left: 0px; width: 100%;">
         <div>
@@ -25,20 +25,32 @@
 </template>
 
 <script setup lang="ts">
-import { ref, getCurrentInstance } from 'vue'
-
+import { ref, watch } from 'vue'
 import { useRouter } from 'vue-router'
-const router = useRouter()
+import { clear } from '@/hooks/User/ChangeInpClassName'
 
-const instance = getCurrentInstance()
+const router = useRouter()
+const currentRoute = router.currentRoute
 
 let flag = ref<boolean>(true)
 
-const changeFlag = () => {
-  flag.value = !flag.value
-  instance?.proxy?.$Bus.emit('changeFromFlag', flag.value)
-  router.push('/login')
+watch(() => currentRoute.value.path, (newPath) => {
+  if (newPath === '/user/service/register' || newPath === '/user/service/login') {
+    flag.value = true
+  } else {
+    flag.value = false
+  }
+  clear()
+}, { immediate: true })
+
+const switchWrap = () => {
+  if (flag.value) {
+    router.push('/user/login/code')
+  } else {
+    router.push('/user/service/login')
+  }
 }
+
 </script>
 
 <style lang="less" scoped>

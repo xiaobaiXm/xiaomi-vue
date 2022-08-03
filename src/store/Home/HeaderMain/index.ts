@@ -22,7 +22,7 @@ export const useHeaderMainStore = defineStore(HeaderMain.Test, {
       if (res.code === 200) {
         this.bannerList = res.data
       } else {
-        return Promise.reject(new Error('filed'))
+        return Promise.reject(new Error('false'))
       }
     },
     // 获取heroList数据
@@ -31,7 +31,7 @@ export const useHeaderMainStore = defineStore(HeaderMain.Test, {
       if (res.code === 200) {
         this.heroList = res.data
       } else {
-        return Promise.reject(new Error('filed'))
+        return Promise.reject(new Error('false'))
       }
     },
     // 获取heroBanner数据

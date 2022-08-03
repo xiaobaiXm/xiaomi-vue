@@ -1,10 +1,10 @@
 <template>
   <div class="userInfo">
     <div class="shop_car">
-      <MyCart></MyCart>
+      <MyCartVue></MyCartVue>
     </div>
 
-    <MyUser v-if="!authFlag"></MyUser>
+    <MyUserVue v-if="!authFlag"></MyUserVue>
     <div class="user" v-else>
       <ul>
         <li><span>
@@ -21,8 +21,8 @@
 
 <script setup lang="ts">
 import '@/style/Home/Header.user.less'
-import MyCart from './MyCart.vue'
-import MyUser from './MyUser.vue'
+import MyCartVue from './MyCart.vue'
+import MyUserVue from './MyUser.vue'
 
 import { ref } from 'vue'
 

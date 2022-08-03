@@ -1,35 +1,23 @@
 <template>
   <div class="con_container">
-    <div class="user">
+    <div class="users">
       <MyQrSwitchWrapVue></MyQrSwitchWrapVue>
-
-      <component :is="flag ? MyFromVue : MyScanCodeLoginVue">
-      </component>
+      <router-view></router-view>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import MyQrSwitchWrapVue from './components/QrSwitchWrap/MyQrSwitchWrap.vue'
-import MyScanCodeLoginVue from './components/From/components/ScanCodeLogin/MyScanCodeLogin.vue'
-import MyFromVue from './components/From/MyFrom.vue'
-
-import { ref, getCurrentInstance } from 'vue'
-
-const instance = getCurrentInstance()
-
-let flag = ref<boolean>(true)
-
-instance?.proxy?.$Bus.on('changeFromFlag', (show) => {
-  flag.value = show as boolean
-})
+import '@/style/Login/AntPopover.less'
+import '@/style/Login/LoginCom.less'
+import '@/style/Login/LoginInfo.less'
 </script>
 
 <style lang="less" scoped>
 .con_container {
   padding-top: 20px;
-
-  .user {
+  .users {
     position: relative;
     width: 450px;
     min-width: 450px;

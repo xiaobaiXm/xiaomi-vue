@@ -21,12 +21,12 @@
 
 <script setup lang="ts">
 import MyVideoInfo from '@/components/VideoInfo/MyVideoInfo.vue'
-import { useContainer } from '@/store/Home/Container/index'
+import { useContainerStore } from '@/store/Home/Container'
 import { IVideo } from '@/store/Home/Container/Type/Video'
 
 import { ref } from 'vue'
 
-const store = useContainer()
+const store = useContainerStore()
 
 store.getVideoListInfo()
 

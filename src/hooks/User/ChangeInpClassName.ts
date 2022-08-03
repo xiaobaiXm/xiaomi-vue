@@ -1,23 +1,33 @@
+import { ref, reactive } from 'vue'
 
-import { ref } from 'vue'
+type IRegisterOrLoginFrom = {
+  username: string | null
+  password: string | null
+  repeatPassword: string | null
+}
 
-let name = ref<string | number>('')
-let passWord = ref<string | number>('')
-let passWordTwo = ref<string | number>('')
+export const from = reactive<IRegisterOrLoginFrom>({
+  username: null,
+  password: null,
+  repeatPassword: null
+})
 
-let userName = ref<number>(0)
-let userFloating = ref<number>(0)
+export let userName = ref<number>(0)
+export let userFloating = ref<number>(0)
+export let userPwd = ref<number>(0)
+export let userPwdFloating = ref<number>(0)
+export let userReqPwd = ref<number>(0)
+export let userReqPwdFloating = ref<number>(0)
 
-let userPwd = ref<number>(0)
-let userPwdFloating = ref<number>(0)
+export let loginError = ref<boolean>(false)
 
-const userNameFocusInp = () => {
+export const userNameFocusInp = () => {
   userName.value = 1
   userFloating.value = 1
 }
 
-const userNameFocusOutInp = () => {
-  if (name.value === '') {
+export const userNameFocusOutInp = () => {
+  if (from.username === null || from.username === '') {
     userName.value = 2
     userFloating.value = 2
   } else {
@@ -25,8 +35,13 @@ const userNameFocusOutInp = () => {
   }
 }
 
-const userPwdFocusOutInp = () => {
-  if (passWord.value === '') {
+export const userPwdFocusInp = () => {
+  userPwd.value = 1
+  userPwdFloating.value = 1
+}
+
+export const userPwdFocusOutInp = () => {
+  if (from.password === null || from.password === '') {
     userPwd.value = 2
     userPwdFloating.value = 2
   } else {
@@ -34,21 +49,29 @@ const userPwdFocusOutInp = () => {
   }
 }
 
-const userPwdFocusInp = () => {
-  userPwd.value = 1
-  userPwdFloating.value = 1
+export const userReqPwdFocusOutInp = () => {
+  userReqPwd.value = 1
+  userReqPwdFloating.value = 1
 }
 
-export {
-  name,
-  passWord,
-  passWordTwo,
-  userName,
-  userFloating,
-  userPwd,
-  userPwdFloating,
-  userNameFocusInp,
-  userNameFocusOutInp,
-  userPwdFocusInp,
-  userPwdFocusOutInp
+export const userReqPwdFocusInp = () => {
+  if (from.repeatPassword === null || from.repeatPassword === '') {
+    userReqPwd.value = 2
+    userReqPwdFloating.value = 2
+  } else {
+    userReqPwd.value = 0
+  }
+}
+
+// clear user info
+export const clear = () => {
+  from.username = null
+  from.password = null
+  from.repeatPassword = null
+  userName.value = 0
+  userFloating.value = 0
+  userPwd.value = 0
+  userPwdFloating.value = 0
+  userReqPwd.value = 0
+  userReqPwdFloating.value = 0
 }

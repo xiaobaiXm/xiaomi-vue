@@ -20,7 +20,7 @@ export const useFooter = defineStore(Footer.Test, {
       if (res.code === 200) {
         this.footerHelpList = res.data
       } else {
-        return Promise.reject(new Error('filed'))
+        return Promise.reject(new Error('false'))
       }
     },
     // get footer nav info
@@ -29,7 +29,7 @@ export const useFooter = defineStore(Footer.Test, {
       if (res.code === 200) {
         this.footerNavList = res.data
       } else {
-        return Promise.reject(new Error('filed'))
+        return Promise.reject(new Error('false'))
       }
     }
   },

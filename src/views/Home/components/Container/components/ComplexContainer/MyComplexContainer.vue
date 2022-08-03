@@ -2,8 +2,7 @@
   <div class="content_complex">
     <MyComplexContainerHeaderVue
     :title="list.containerTitle"
-    :container ="list.containerChild.right"
-    ></MyComplexContainerHeaderVue>
+    :container ="list.containerChild.right"></MyComplexContainerHeaderVue>
     <div class="cont_body">
       <div class="row">
         <MyConLeftVue :containerLeft="list.containerChild.left"></MyConLeftVue>
@@ -23,6 +22,7 @@ import { IContainer } from '@/store/Home/Container/Type/Container'
 defineProps<{
   list: IContainer
 }>()
+console.log('ok')
 
 </script>
 

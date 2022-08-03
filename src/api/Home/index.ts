@@ -30,6 +30,12 @@ export const reqGetCategoryList = () => requests({
   method: 'GET'
 })
 
+// 获取 大 banner 数据接口
+export const reqGetBigBannerList = () => requests({
+  url: '/home/bigBanner',
+  method: 'GET'
+})
+
 // 获取手机数据
 export const reqGetPhoneListInfo = () => requests({
   url: '/home/phone',

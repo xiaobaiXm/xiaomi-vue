@@ -1,7 +1,7 @@
 import requests from '@/utils/requests'
 
-// get user carts info
-export const reqGetUserAllCartsInfo = () => requests({
-  url: '/cart/',
-  method: 'GET'
+// 用户全部购物车接口
+export const reqGetAllUserShopCartInfo = () => requests({
+  url: '/cart/userCart',
+  method: 'POST'
 })

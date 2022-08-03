@@ -3,7 +3,7 @@
   .from-login,
   .from-reg {
     margin: 0 -5px;
-    display: flex;
+    // display: flex;
     flex-flow: row wrap;
     color: rgba(0, 0, 0, .85);
     transition: all 0.3s;
@@ -60,97 +60,6 @@
     }
   }
 
-
-  .accept-terms {
-    margin-top: 20px;
-    font-size: 14px;
-    font-weight: 400;
-    color: #aaa;
-    line-height: 20px;
-
-    .ant-checkbox-wrapper {
-      color: unset;
-      font-size: unset;
-      line-height: unset;
-
-      span {
-        display: inline-block;
-        box-sizing: border-box;
-      }
-
-      .ant-checkbox {
-        position: relative;
-        top: .2em;
-        margin: 0;
-        padding: 0;
-        color: rgba(0, 0, 0, .85);
-        font-size: 14px;
-        line-height: 1.5715;
-        list-style: none;
-        line-height: 1;
-        white-space: nowrap;
-        outline: none;
-        cursor: pointer;
-
-        .ant-checkbox-input {
-          touch-action: manipulation;
-          position: absolute;
-          top: 0;
-          right: 0;
-          bottom: 0;
-          left: 0;
-          z-index: 1;
-          width: 100%;
-          height: 100%;
-          vertical-align: middle;
-          cursor: pointer;
-          opacity: 0;
-        }
-
-        .ant-checkbox-inner {
-          position: relative;
-          top: 0;
-          left: 0;
-          display: block;
-          width: 16px;
-          height: 16px;
-          direction: ltr;
-          text-align: center;
-          color: #fff;
-          background-size: 100% 100%;
-          background-repeat: no-repeat;
-          border-radius: 2px;
-          background-color: #f9f9f9;
-          border: 1px solid #ddd;
-          border-collapse: separate;
-          transition: all .3s;
-
-          .iconfont {
-            font-size: 10px;
-          }
-        }
-
-        .ant-checkbox-inner-active {
-          border: none;
-          background-color: #ff6900;
-        }
-      }
-
-      .text {
-        padding: 0 4px;
-        vertical-align: middle;
-
-        a {
-          color: #333;
-
-          &:hover {
-            color: #333 !important;
-          }
-        }
-      }
-    }
-  }
-
   .login-submit,
   .reg-submit {
     .button-primary {
@@ -167,7 +76,7 @@
       }
     }
 
-    .button-fullwidth {
+    .button-fullWidth {
       width: 100%;
     }
 
@@ -221,36 +130,4 @@
     }
   }
 
-}
-
-.sns-login {
-  .sns-login-title {
-    text-align: center;
-    line-height: 40px;
-    color: #aaa;
-    font-size: 17px;
-    font-weight: 400;
-  }
-
-  .sns-login-content {
-    height: 46px;
-    margin-top: 10px;
-    overflow: hidden;
-
-    .sns-login-list {
-      width: 100%;
-      text-align: center;
-
-      .sns-login-item {
-        display: inline-block;
-        margin: 0 12px;
-        width: 46px;
-        width: 46px;
-
-        .iconfont {
-          font-size: 37px;
-        }
-      }
-    }
-  }
 }

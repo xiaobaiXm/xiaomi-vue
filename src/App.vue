@@ -1,6 +1,6 @@
 <template>
   <MyHeader v-if="currentRoute.meta.HeaderShow"></MyHeader>
-  <MyFixedSildebar v-if="currentRoute.meta.FixedSildebar"></MyFixedSildebar>
+  <MyFixedSlideBar v-if="currentRoute.meta.FixedSlideBar"></MyFixedSlideBar>
   <Suspense>
     <template #default>
       <router-view></router-view>

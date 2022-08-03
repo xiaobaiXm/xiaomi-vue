@@ -20,7 +20,7 @@ export const useHeaderStore = defineStore(HeaderName.Test, {
       if (res.code === 200) {
         this.navBarList = res.data
       } else {
-        return Promise.reject(new Error('filed'))
+        return Promise.reject(new Error('false'))
       }
     },
 
@@ -30,7 +30,7 @@ export const useHeaderStore = defineStore(HeaderName.Test, {
       if (res.code === 200) {
         this.navList = res.data
       } else {
-        return Promise.reject(new Error('filed'))
+        return Promise.reject(new Error('false'))
       }
     }
   },

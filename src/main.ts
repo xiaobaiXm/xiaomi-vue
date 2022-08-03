@@ -9,8 +9,8 @@ import mitt from 'mitt'
 import '@/assets/style/base.css'
 
 // 全局组件
-import MyLoading from './components/Loading/MyLoading.vue'
-import MyFixedSildebar from '@/components/Home/MyFixedSildebar.vue'
+import MyLoading from '@/components/Loading/MyLoading.vue'
+import MyFixedSlideBar from '@/components/Home/MyFixedSlideBar.vue'
 import MyBread from '@/components/Bread/MyBread.vue'
 import MyGuessLike from '@/components/GuessLike/MyGuessLike.vue'
 
@@ -26,7 +26,7 @@ declare module 'vue' {
 const app = createApp(App)
 
 // 注册全局组件
-app.component('MyFixedSildebar', MyFixedSildebar)
+app.component('MyFixedSlideBar', MyFixedSlideBar)
 app.component('MyBread', MyBread)
 app.component('MyGuessLike', MyGuessLike)
 app.component('MyLoading', MyLoading)

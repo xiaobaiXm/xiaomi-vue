@@ -17,7 +17,7 @@ export const useCategory = defineStore(Category.Test, {
       if (res.code === 200) {
         this.category = res.data
       } else {
-        return Promise.reject(new Error('filed'))
+        return Promise.reject(new Error('false'))
       }
     }
   },

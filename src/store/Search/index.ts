@@ -17,7 +17,7 @@ export const useSearchStore = defineStore(SearchName.Test, {
       if (res.code === 200) {
         this.keyword = res.data
       } else {
-        return Promise.reject(new Error('filed'))
+        return Promise.reject(new Error('false'))
       }
     }
   },
