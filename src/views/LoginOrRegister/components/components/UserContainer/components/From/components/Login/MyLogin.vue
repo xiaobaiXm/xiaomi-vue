@@ -1,6 +1,6 @@
 <template>
-  <div class="from-login">
-    <Form :validation-schema="VeeValidate" v-slot="{ errors }" class="from">
+  <div class="from-login" @click="onSubmit">
+    <Form :validation-schema="VeeValidate" @submit="onSubmit" v-slot="{ errors }" class="from" autocomplete="off" ref="formCom">
       <div class="ant-col ant-col-xs-24">
         <div class="text_field">
           <div class="form-field-field" :class="{ 'field-active': userName == 1, 'field-error': userName == 2 }">
@@ -39,9 +39,8 @@
 </template>
 
 <script setup lang="ts">
-import { changePasswordView, showPwd } from '@/hooks/User'
+import { from, changePasswordView, showPwd, formCom, login } from '@/hooks/User'
 import {
-  from,
   loginError,
   userName,
   userFloating,
@@ -56,6 +55,10 @@ import {
 import { Form, Field } from 'vee-validate'
 
 import VeeValidate from '@/utils/validate'
+
+const onSubmit = (value:any) => {
+  console.log(value)
+}
 
 </script>
 

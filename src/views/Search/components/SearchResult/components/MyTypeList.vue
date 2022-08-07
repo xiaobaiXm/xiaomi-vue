@@ -7,27 +7,28 @@
           <a href="javascript:void(0)">
             <span class="address_show">北京 北京市</span>
           </a>
+          <MyAddress></MyAddress>
         </div>
       </li>
       <li>
-        <a href="#">
-          <span class="checked">
+        <a href="javascript:;" @click="changeFilterTag('promotion')">
+          <span class="checked" :class="type.promotion ? 'active' : ''">
             <i class="iconfont icon-dagou"></i>
           </span>
           促销
         </a>
       </li>
       <li>
-        <a href="#">
-          <span class="checked">
+        <a href="javascript:;" @click="changeFilterTag('installment')">
+          <span class="checked" :class="type.installment ? 'active' : ''">
             <i class="iconfont icon-dagou"></i>
           </span>
           分期
         </a>
       </li>
       <li>
-        <a href="#">
-          <span class="checked">
+        <a href="javascript:;" @click="changeFilterTag('available')">
+          <span class="checked" :class="type.available ? 'active' : ''">
             <i class="iconfont icon-dagou"></i>
           </span>
           仅看有货
@@ -38,6 +39,25 @@
 </template>
 
 <script setup lang="ts">
+import { reactive, inject, getCurrentInstance } from 'vue'
+
+interface IType {
+  promotion: boolean
+  installment: boolean
+  available: boolean
+}
+
+const type = inject<IType>('type', reactive({
+  promotion: false,
+  installment: false,
+  available: false
+}))
+
+const instance = getCurrentInstance()
+
+const changeFilterTag = (type: string) => {
+  instance?.proxy?.$Bus.emit('changeSearchFilterTag', type)
+}
 </script>
 
 <style lang="less" scoped>
@@ -91,6 +111,12 @@
               border-color: rgba(0, 0, 0, 0) rgba(0, 0, 0, 0) rgba(0, 0, 0, 0) #a9a9a9;
               transform: rotate(45deg);
             }
+          }
+        }
+
+         &:hover ::v-deep{
+          .address_box_big {
+            display: block;
           }
         }
       }

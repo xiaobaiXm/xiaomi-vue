@@ -84,7 +84,6 @@ const categoryFlagChange = (flag: boolean) => {
 
   ul {
     position: relative;
-
     .category {
       position: relative;
       float: left;

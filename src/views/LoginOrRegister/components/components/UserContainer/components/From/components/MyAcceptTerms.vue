@@ -1,22 +1,22 @@
 <template>
   <div class="accept-terms">
-    <!-- <Form :validation-schema="VeeValidate" class="from"> -->
+    <Form :validation-schema="VeeValidate" class="from">
       <div class="ant-checkbox-wrapper">
         <span class="ant-checkbox" @click="changeChecked">
-          <!-- <Field type="checkbox" name="isAgree" v-model="checked" class="ant-checkbox-input"/> -->
-          <input type="checkbox" name="isAgree" class="ant-checkbox-input"/>
-          <div class="ant-checkbox-inner" :class="checked ? 'ant-checkbox-inner-active' : ''">
+          <Field type="checkbox" name="isAgree" v-model="from.isAgree" class="ant-checkbox-input"/>
+          <!-- <input type="checkbox" name="isAgree" class="ant-checkbox-input"/> -->
+          <div class="ant-checkbox-inner" :class="from.isAgree ? 'ant-checkbox-inner-active' : ''">
             <span class="iconfont icon-a-Frame3163"></span>
           </div>
         </span>
         <span class="text" @click="changeChecked">已阅读并同意小米帐号  <a href="javascript:;">用户协议</a>  和  <a href="#">隐私协议</a></span>
       </div>
-    <!-- </Form> -->
+    </Form>
   </div>
 </template>
 
 <script setup lang="ts">
-import { checked, changeChecked } from '@/hooks/User'
+import { from, changeChecked } from '@/hooks/User'
 
 import { Form, Field } from 'vee-validate'
 
@@ -31,7 +31,6 @@ import VeeValidate from '@/utils/validate'
     font-weight: 400;
     color: #aaa;
     line-height: 20px;
-
     .ant-checkbox-wrapper {
       color: unset;
       font-size: unset;
@@ -41,10 +40,9 @@ import VeeValidate from '@/utils/validate'
         display: inline-block;
         box-sizing: border-box;
       }
-
       .ant-checkbox {
         position: relative;
-        top: .2em;
+        top: 0;
         margin: 0;
         padding: 0;
         color: rgba(0, 0, 0, .85);
@@ -55,7 +53,6 @@ import VeeValidate from '@/utils/validate'
         white-space: nowrap;
         outline: none;
         cursor: pointer;
-
         .ant-checkbox-input {
           touch-action: manipulation;
           position: absolute;
@@ -91,7 +88,6 @@ import VeeValidate from '@/utils/validate'
             font-size: 10px;
           }
         }
-
         .ant-checkbox-inner-active {
           border: none;
           background-color: #ff6900;
@@ -101,7 +97,6 @@ import VeeValidate from '@/utils/validate'
         padding: 0 4px;
         vertical-align: bottom;
         cursor: pointer;
-
         a {
           color: #333;
 

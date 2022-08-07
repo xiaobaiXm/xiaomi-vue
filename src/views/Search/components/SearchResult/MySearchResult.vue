@@ -2,20 +2,20 @@
   <div class="search_result">
     <div class="result_order w">
       <div class="order_list_box">
-        <!-- address -->
-
-        <!-- header -->
-        <!-- order list -->
-        <MyOrderListVue></MyOrderListVue>
-        <!-- type list -->
+        <MyOrderListVue ></MyOrderListVue>
         <MyTypeListVue></MyTypeListVue>
       </div>
-      <!-- 商品信息 -->
       <div class="goods_list_box">
-        <!-- goods list -->
-        <MyGoodsListVue></MyGoodsListVue>
-        <!-- page nav -->
-        <MyPageNav></MyPageNav>
+        <Suspense>
+          <template #default>
+            <MyGoodsListVue v-if="!store.searchError"></MyGoodsListVue>
+            <MyEmptyList v-else></MyEmptyList>
+          </template>
+          <template #fallback>
+            <MyLoading></MyLoading>
+          </template>
+        </Suspense>
+        <MyPagination :pageNo="1" :pageSize="20" :continues="5"></MyPagination>
       </div>
     </div>
   </div>
@@ -24,8 +24,20 @@
 <script setup lang="ts">
 import MyOrderListVue from './components/MyOrderList.vue'
 import MyTypeListVue from './components/MyTypeList.vue'
-import MyGoodsListVue from './components/MyGoodsList.vue'
-import MyPageNav from './components/MyPageNav.vue'
+import MyEmptyList from './components/MyEmptyList.vue'
+
+import { defineAsyncComponent } from 'vue'
+
+import { useSearchStore } from '@/store/Search'
+import { ISearch } from '@/store/Search/Type/Search'
+const store = useSearchStore()
+
+defineProps<{
+  search : ISearch
+}>()
+
+const MyGoodsListVue = defineAsyncComponent(() => import('./components/MyGoodsList.vue'))
+
 </script>
 
 <style lang="less" scoped>

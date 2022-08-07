@@ -2,14 +2,14 @@
   <div>
     <div class="main">
       <div class="container w">
-        <MyBigBanner :img="store.bigBannerList[0].img"></MyBigBanner>
+        <!-- <MyBigBanner :img="store.bigBannerList[0].img"></MyBigBanner> -->
         <MySimpleContainer></MySimpleContainer>
         <MyComplexContainer v-for="(item, index) in store.firstContainer" :key="index" :list="item">
         </MyComplexContainer>
-        <MyBigBanner :img="store.bigBannerList[1].img"></MyBigBanner>
+        <!-- <MyBigBanner :img="store.bigBannerList[1].img"></MyBigBanner> -->
         <MyComplexContainer v-for=" (item, index) in store.contentContainer" :key="index" :list="item">
         </MyComplexContainer>
-        <MyBigBanner :img="store.bigBannerList[2].img"></MyBigBanner>
+        <!-- <MyBigBanner :img="store.bigBannerList[2].img"></MyBigBanner> -->
         <MyComplexContainer v-for=" (item, index) in store.lastContainer" :key="index" :list="item">
         </MyComplexContainer>
         <MyVideo></MyVideo>
@@ -19,7 +19,7 @@
 </template>
 
 <script setup lang="ts">
-import MyBigBanner from '@/components/Home/MyBigBanner.vue'
+// import MyBigBanner from '@/components/Home/MyBigBanner.vue'
 import MySimpleContainer from './components/SimpleContainer/MySimpleContainer.vue'
 import MyComplexContainer from './components/ComplexContainer/MyComplexContainer.vue'
 import MyVideo from '../MyVideo/MyVideo.vue'

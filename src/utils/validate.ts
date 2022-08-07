@@ -5,8 +5,13 @@ const VeeValidate = {
     return true
   },
   passwordFn (value: string) {
-    if (!value) return '请输入登录密码'
-    if (!/\w{8,16}/.test(value)) return '密码格式为8-16个字符'
+    if (!value) return '请输入密码'
+    if (!/^[\S]{8,16}$/.test(value)) return '密码格式为8-16个字符'
+    return true
+  },
+  secondaryPasswordFn (value: string) {
+    if (!value) return '请输入确认密码'
+    // if (passwordFn(value)) return '两次密码输入不正确'
     return true
   },
   isAgree (value:boolean) {

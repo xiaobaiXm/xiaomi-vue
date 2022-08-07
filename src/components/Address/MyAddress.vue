@@ -1,45 +1,41 @@
 <template>
   <div class="address_box_big">
-    <div class="address_select_title hide">
-      <span class="gray">选择省份/自治区</span>
-    </div>
-    <div class="address_list hide">
-      <span>北京</span>
-      <span>天津</span>
-      <span>河北</span>
-      <span>山西</span>
-      <span>内蒙古</span>
-      <span>辽宁</span>
-      <span>吉林</span>
-      <span>黑龙江</span>
-      <span>上海</span>
-      <span>江苏</span>
-      <span>浙江</span>
-      <span>安徽</span>
-      <span>福建</span>
-      <span>江西</span>
-      <span>山东</span>
-      <span>河南</span>
-      <span>湖北</span>
-      <span>湖南</span>
-      <span>广东</span>
-      <span>广西</span>
-      <span>海南</span>
-      <span>重庆</span>
-      <span>四川</span>
-      <span>贵州</span>
-      <span>云南</span>
-      <span>西藏</span>
-      <span>陕西</span>
-      <span>甘肃</span>
-      <span>青海</span>
-      <span>宁夏</span>
-      <span>新疆</span>
+    <div class="address_select_title" v-show="addressFlag">
+      <span v-show="addressArr[0] !== ''" @click="goBack(0)">{{ addressArr[0] }}</span>
+      <span v-show="addressArr[1] !== ''" @click="goBack(1)">{{ addressArr[1] }}</span>
+      <span v-show="addressArr[2] !== ''" @click="goBack(2)">{{ addressArr[2] }}</span>
+      <span v-show="addressArr[3] !== ''" @click="goBack(3)">{{ addressArr[3] }}</span>
+      <span class="gray" v-if="addressInfoFlag.provinces">选择省份/自治区</span>
+      <span class="gray" v-if="addressInfoFlag.city">选择城市/地区</span>
+      <span class="gray" v-if="addressInfoFlag.area">选择区县</span>
+      <span class="gray" v-if="addressInfoFlag.address">选择配送区域</span>
     </div>
     <div class="edit_address">
+      <div class="address_list" v-show="addressFlag">
+        <template v-for="(item, index) in provinces" :key="item.id">
+          <div v-if="chooseIndex === 0">
+            <span @click="choice(item.name, index)">{{ item.name }}</span>
+          </div>
+        </template>
+        <template v-for="(item, index) in city" :key="item.id">
+          <div v-if="chooseIndex === 1">
+            <span @click="choice(item.name, index)">{{ item.name }}</span>
+          </div>
+        </template>
+        <template v-for="(item, index) in area" :key="item.id">
+          <div v-if="chooseIndex === 2">
+            <span @click="choice(item.name, index)">{{ item.name }}</span>
+          </div>
+        </template>
+        <template v-for="(item, index) in address" :key="item.id">
+          <div v-if="chooseIndex === 3">
+            <span @click="choice(item.name, index)">{{ item.name }}</span>
+          </div>
+        </template>
+      </div>
       <div class="address_select">
         <div class="address_select_box">
-          <div class="con ">
+          <div class="con" v-show="!addressFlag">
             <div class="search_address">
               <span class="iconfont icon-sousuo1"></span>
               <div class="search_address_input">
@@ -48,15 +44,30 @@
             </div>
           </div>
           <div class="oper_box">
-            <span class="oper_text">手动选择地址 ></span>
-            <span class="oper_text hide">搜索地址快速定位 ></span>
+            <span class="oper_text" v-show="!addressFlag" @click="addressFlag = true">手动选择地址></span>
+            <span class="oper_text" v-show="addressFlag" @click="addressFlag = false">搜索地址快速定位 ></span>
           </div>
         </div>
       </div>
-      <div class="address_box ">
+      <div class="address_box" v-show="!addressFlag">
         <div class="title">我的收货地址</div>
-        <div class="noy_login">
-          现在<a href="#">登录</a>，可根据收货地址快速定位
+        <div class="noy_login" v-if="auth()">
+          现在<router-link to="/user/service/login">登录</router-link>，可根据收货地址快速定位
+        </div>
+        <div class="address-list" v-else>
+          <div class="con">
+            <ul class="clearfix">
+              <li @click="changeUserAddressInfo()">
+                <div class="address-title">小白 广东</div>
+                <div class="address-desc"> 广东 深圳市 福田区 莲花街道</div>
+              </li>
+            </ul>
+            <div class="address-page">
+              <span class="iconfont icon-xiangzuojiantou"></span>
+              <span class="pageNo">1</span> / 1
+              <span class="iconfont icon-xiangyoujiantou"></span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -64,10 +75,119 @@
 </template>
 
 <script setup lang="ts">
+import { ref, reactive, computed, watch, onMounted } from 'vue'
+import { useUserAddressStore } from '@/store/User/Address'
+import { IAddressInfoFlag } from './Type'
+import { IAddressInfo, ICity, IArea, IAddress } from '@/store/User/Address/Type/AddressInfo'
+
+import { auth } from '@/hooks/User/auth'
+
+const store = useUserAddressStore()
+
+let addressFlag = ref<boolean>(false)
+let addressInfoFlag = reactive<IAddressInfoFlag>({
+  provinces: false,
+  city: false,
+  area: false,
+  address: false
+})
+let chooseIndex = ref<number>(0)
+let index = reactive<number[]>([0, 0, 0])
+let addressArr = reactive<string[]>(['', '', '', ''])
+
+watch(chooseIndex, (newValue) => {
+  switch (newValue) {
+    case 0:
+      addressInfoFlag.provinces = true
+      addressInfoFlag.city = false
+      addressInfoFlag.area = false
+      addressInfoFlag.address = false
+      break
+    case 1:
+      addressInfoFlag.provinces = false
+      addressInfoFlag.city = true
+      addressInfoFlag.area = false
+      addressInfoFlag.address = false
+      break
+    case 2:
+      addressInfoFlag.provinces = true
+      addressInfoFlag.city = false
+      addressInfoFlag.area = true
+      addressInfoFlag.address = false
+      break
+    case 3:
+      addressInfoFlag.provinces = false
+      addressInfoFlag.city = false
+      addressInfoFlag.area = false
+      addressInfoFlag.address = true
+      break
+  }
+}, {
+  immediate: true
+})
+
+watch(addressFlag, (newValue) => {
+  if (newValue === true) {
+    chooseIndex.value = 0
+    addressArr = ['', '', '', '']
+  }
+}, {
+  immediate: true
+})
+
+const provinces = computed((): IAddressInfo[] => {
+  return store?.addressInfo
+})
+const city = computed((): ICity[] => {
+  return provinces?.value[index[0]]?.children
+})
+const area = computed((): IArea[] => {
+  return city?.value[index[1]]?.children
+})
+const address = computed((): IAddress[] => {
+  return area?.value[index[2]]?.children
+})
+
+const choice = (name: string, v: number): void => {
+  addressArr[chooseIndex.value] = name
+  if (chooseIndex.value === 3) {
+    addressFlag.value = false
+    return updateAddressInfo()
+  }
+  chooseIndex.value = chooseIndex.value !== 3 ? ++chooseIndex.value : 3
+  index[chooseIndex.value - 1] = v
+}
+
+const goBack = (v: number): void => {
+  if (chooseIndex.value > v || index[v]) {
+    chooseIndex.value = v
+    for (let idx = 0; idx < addressArr.length; idx++) {
+      if (idx > chooseIndex.value) {
+        addressArr[idx] = ''
+        index[idx - 1] = 0
+      }
+    }
+  }
+}
+
+const changeUserAddressInfo = (): void => {
+  console.log('ok')
+}
+
+const emit = defineEmits(['sendAddressInfo'])
+
+const updateAddressInfo = (): void => {
+  emit('sendAddressInfo', addressArr)
+}
+onMounted((): void => {
+  store.getAllAddressInfo()
+})
+
 </script>
 
 <style lang="less" scoped>
 .address_box_big {
+  // display: none;
   position: absolute;
   padding: 42px 20px 0 20px;
   top: 28px;
@@ -81,6 +201,15 @@
     padding: 6px 0;
     border-bottom: 1px solid #e0e0e0;
 
+    span {
+      line-height: 30px;
+      margin-right: 5px;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      color: #ff6700;
+      cursor: pointer;
+    }
+
     .gray {
       line-height: 30px;
       margin-right: 5px;
@@ -90,26 +219,31 @@
     }
   }
 
-  .address_list {
-    padding: 20px 0 14px 0;
-    border-bottom: 1px solid #e3e3e3;
-
-    span {
-      display: inline-block;
-      margin-right: 14px;
-      line-height: 30px;
-      margin-bottom: 6px;
-      color: #333;
-      font-size: 14px;
-      cursor: pointer;
-
-      &:hover {
-        color: #ff6700;
-      }
-    }
-  }
   .edit_address {
     min-height: 350px;
+
+    .address_list {
+      padding: 20px 0 14px 0;
+      border-bottom: 1px solid #e3e3e3;
+
+      div {
+        display: inline-block;
+
+        span {
+          display: inline-block;
+          margin-right: 14px;
+          line-height: 30px;
+          margin-bottom: 6px;
+          color: #333;
+          font-size: 14px;
+          cursor: pointer;
+
+          &:hover {
+            color: #ff6700;
+          }
+        }
+      }
+    }
 
     .address_select {
       width: 582px;
@@ -133,7 +267,7 @@
           .search_address {
             .iconfont {
               position: absolute;
-              top: 0;
+              top: 5px;
               left: 10px;
               font-size: 26px;
               color: #b2b2b2;
@@ -188,6 +322,47 @@
 
         a {
           color: #ff6700;
+        }
+      }
+
+      .address-list {
+        .con {
+          ul {
+            li {
+              float: left;
+              width: 50%;
+              padding: 14px 0;
+              line-height: 20px;
+              cursor: pointer;
+              transition: all .3s;
+
+              .address-title {
+                margin: 0 14px;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                overflow: hidden;
+              }
+
+              .address-desc {
+                font-size: 12px;
+                color: #b0b0b0;
+                margin: 0 14px;
+              }
+            }
+          }
+
+          .address-page {
+            text-align: center;
+            margin-top: 10px;
+
+            .pageNo {
+              color: #ff6700;
+            }
+
+            .iconfont {
+              margin: 0 14px;
+            }
+          }
         }
       }
     }

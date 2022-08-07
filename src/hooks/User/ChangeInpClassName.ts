@@ -1,16 +1,6 @@
-import { ref, reactive } from 'vue'
+import { ref } from 'vue'
 
-type IRegisterOrLoginFrom = {
-  username: string | null
-  password: string | null
-  repeatPassword: string | null
-}
-
-export const from = reactive<IRegisterOrLoginFrom>({
-  username: null,
-  password: null,
-  repeatPassword: null
-})
+import { from } from './index'
 
 export let userName = ref<number>(0)
 export let userFloating = ref<number>(0)
@@ -55,7 +45,7 @@ export const userReqPwdFocusOutInp = () => {
 }
 
 export const userReqPwdFocusInp = () => {
-  if (from.repeatPassword === null || from.repeatPassword === '') {
+  if (from.secondaryPasswordFn === null || from.secondaryPasswordFn === '') {
     userReqPwd.value = 2
     userReqPwdFloating.value = 2
   } else {
@@ -67,7 +57,8 @@ export const userReqPwdFocusInp = () => {
 export const clear = () => {
   from.username = null
   from.password = null
-  from.repeatPassword = null
+  from.secondaryPasswordFn = null
+  from.isAgree = false
   userName.value = 0
   userFloating.value = 0
   userPwd.value = 0

@@ -2,20 +2,12 @@
   <div class="search_filter">
     <div class="search_warp w">
       <div class="search_list">
-        <ul class="height">
+        <ul :class="!labelFlag ? 'height' : ''" class="clearfix">
           <span class="label">分类:</span>
-          <li><a href="#" class="active">全部</a></li>
-          <li><a href="#">小米平板</a></li>
-          <li><a href="#">入耳式耳机</a></li>
-          <li><a href="#">扫地机器人</a></li>
-          <li><a href="#">移动电源</a></li>
-          <li><a href="#">电风扇</a></li>
-          <li><a href="#">床垫</a></li>
-          <li><a href="#">空调</a></li>
-          <li><a href="#">积木</a></li>
-          <li><a href="#">小米电视</a></li>
-          <li><a href="#">充电器</a></li>
-          <span class="more_btn">更多<span class="iconfont icon-downforward"></span></span>
+          <li v-for="item in store.keyword" :key="item.id" @click="updateKeyword(item.keyword)"><a href="javascript:;"
+              :class="keyword === item.keyword ? 'active' : ''">{{ item.keyword }}</a></li>
+          <span class="more_btn" @click="showLabel">更多<span class="iconfont"
+              :class="labelFlag ? 'icon-downforward' : 'icon-upforward'"></span></span>
         </ul>
       </div>
     </div>
@@ -23,6 +15,23 @@
 </template>
 
 <script setup lang="ts">
+import { ref, Ref, inject, getCurrentInstance } from 'vue'
+
+import { useSearchStore } from '@/store/Search'
+
+const keyword = inject<Ref<string>>('keyword', ref(''))
+
+const instance = getCurrentInstance()
+const store = useSearchStore()
+let labelFlag = ref<boolean>(false)
+
+const showLabel = () => {
+  labelFlag.value = !labelFlag.value
+}
+
+const updateKeyword = (keyword: string): void => {
+  instance?.proxy?.$Bus.emit('changeSearchKeyword', keyword)
+}
 </script>
 
 <style lang="less" scoped>
@@ -30,11 +39,10 @@
   background-color: #fff;
 
   .search_warp {
+    padding: 18px 0;
+
     .search_list {
       position: relative;
-      height: 84px;
-      padding: 18px 0;
-      box-sizing: border-box;
 
       ul {
         position: relative;

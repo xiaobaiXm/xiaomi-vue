@@ -1,24 +1,27 @@
 <template>
   <div class="page_nav">
-    <a href="javascript:void(0)">
-      <span class="iconfont icon-xiangzuojiantou"></span>
-    </a>
-    <a href="javascript:void(0)">1</a>
-    <span>...</span>
-    <a href="javascript:void(0)">3</a>
-    <a href="javascript:void(0)" class="avtive">4</a>
-    <a href="javascript:void(0)" class="current">5</a>
-    <a href="javascript:void(0)">7</a>
-    <a href="javascript:void(0)">8</a>
-    <span>...</span>
-    <a href="javascript:void(0)">27</a>
-    <a href="javascript:void(0)">
-      <span class="iconfont icon-xiangyoujiantou"></span>
-    </a>
+    <span class="numbers first iconfont icon-xiangzuojiantou"></span>
+    <!-- <a href="javascript:;" class="numbers first iconfont icon-xiangzuojiantou"></a> -->
+    <span class="numbers">1</span>
+    <span class="numbers">···</span>
+    <span class="numbers">3</span>
+    <span class="numbers">4</span>
+    <span class="numbers current">5</span>
+    <span class="numbers">7</span>
+    <span class="numbers">8</span>
+    <span class="numbers">···</span>
+    <span class="numbers">27</span>
+    <!-- <span class="numbers last iconfont icon-xiangyoujiantou"></span> -->
+    <a href="javascript:;" class="numbers last iconfont icon-xiangyoujiantou"></a>
   </div>
 </template>
 
 <script setup lang="ts">
+defineProps<{
+  pageNo: number
+  pageSize: number
+  continues: number
+}>()
 </script>
 
 <style lang="less" scoped>
@@ -27,10 +30,10 @@
   padding: 15px 0;
   text-align: center;
 
-  a {
+  .numbers {
     display: inline-block;
     width: 48px;
-    height: 24px;
+    height: 30px;
     padding: 3px 0;
     margin: 0 5px;
     font-size: 18px;
@@ -40,15 +43,17 @@
     font-weight: 400;
     text-align: center;
     transition: all .2s linear;
+    box-sizing: border-box;
 
     .iconfont {
       margin-top: -3px;
       margin-left: -1px;
       vertical-align: top;
       font-size: 24px;
-
     }
+  }
 
+  a {
     &:hover {
       background-color: #b0b0b0;
       color: #fff !important;
@@ -57,18 +62,6 @@
         color: #fff !important;
       }
     }
-  }
-
-  span {
-    display: inline-block;
-    width: 48px;
-    height: 24px;
-    padding: 3px 0;
-    margin: 0 5px;
-    font-size: 18px;
-    line-height: 24px;
-    color: #b0b0b0;
-    box-sizing: border-box;
   }
 
   .current {

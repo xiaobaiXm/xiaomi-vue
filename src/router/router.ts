@@ -13,7 +13,7 @@ const routes: Array<RouteRecordRaw> = [
     meta: { showTypeNav: true, HeaderShow: true, FooterShow: true, FixedSlideBar: true } as RouteMeta
   },
   {
-    path: '/search',
+    path: '/search:keyword?',
     name: 'Search',
     component: () => import('@/views/Search/MySearch.vue'),
     meta: { HeaderShow: true, FooterShow: true, FixedSlideBar: true } as RouteMeta

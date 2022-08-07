@@ -1,21 +1,32 @@
-import { ref } from 'vue'
+import { ref, reactive } from 'vue'
+
+import { IRegisterOrLoginFrom } from './Type'
 
 export let showPwd = ref<boolean>(true)
-export let checked = ref<boolean>(false)
-export const fromCom = ref(null)
+export const formCom = ref(null)
+
+export const from = reactive<IRegisterOrLoginFrom>({
+  username: null,
+  password: null,
+  secondaryPasswordFn: null,
+  isAgree: false
+})
 
 export const changePasswordView = () => {
   showPwd.value = !showPwd.value
 }
 
 export const changeChecked = ():void => {
-  checked.value = !checked.value
+  from.isAgree = !from.isAgree
 }
 
 export const register = async () => {
-  console.log('ok')
+  // const valid = await fromCom?.value?.validate()
+  // console.log(valid)
 }
 
 export const login = async () => {
-  console.log('ok')
+  // console.log(formCom)
+  // const valid = await formCom.value?.validate()
+  // console.log(valid)
 }

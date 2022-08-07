@@ -31,22 +31,22 @@
         <div class="form-field-field"  :class="{ 'field-active': userReqPwd == 1, 'field-error': userReqPwd == 2 }">
           <div class="form-field-control">
             <div class="text-field-input">
-              <Field type="password" v-model="from.repeatPassword" name="passwordFn" class="from-inp"
+              <Field type="password" v-model="from.secondaryPasswordFn" name="secondaryPasswordFn" class="from-inp"
                 @focus="userReqPwdFocusOutInp" @focusout="userReqPwdFocusInp" />
               <label class="floating-label"
-                :class="{ 'floating-label-active': userReqPwdFloating == 1, 'floating-label-error': userReqPwdFloating == 2 }">确认注册密码</label>
+                :class="{ 'floating-label-active': userReqPwdFloating == 1, 'floating-label-error': errors.secondaryPasswordFn }">确认密码</label>
             </div>
           </div>
         </div>
-        <div class="form-helper-text-error" v-if="errors.passwordFn">{{ errors.passwordFn }}</div>
+        <div class="form-helper-text-error" v-if="errors.secondaryPasswordFn">{{ errors.secondaryPasswordFn }}</div>
       </div>
     </Form>
   </div>
 </template>
 
 <script setup lang="ts">
+import { from } from '@/hooks/User'
 import {
-  from,
   userName,
   userFloating,
   userPwd,

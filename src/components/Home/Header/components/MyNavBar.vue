@@ -9,7 +9,6 @@
 <script setup lang="ts">
 import { useHeaderStore } from '@/store/Home/Header/index'
 const store = useHeaderStore()
-// 加载所有数据
 store.getHeaderNavBarList()
 </script>
 

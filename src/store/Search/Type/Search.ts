@@ -1,4 +1,4 @@
-export type ISeach = {
+export interface ISearch {
   keyword: string
   order: string
   filterTag: Array<{

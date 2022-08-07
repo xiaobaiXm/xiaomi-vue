@@ -1,6 +1,6 @@
 <template>
   <div class="bread w">
-    <a href="#">首页</a>
+    <router-link to="/">首页</router-link>
     <span class="horizontal">/</span>
     <span>全部商品分类</span>
   </div>

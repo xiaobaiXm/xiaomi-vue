@@ -1,12 +1,14 @@
 <template>
   <div class="search">
-    <input type="search" :placeholder="searchKeyword" v-model="searchKeyword" :class="keywordFlag ? 'focus' : ''"
-      @focus="keywordFlag = true" @focusout="keywordFlag = false">
-    <a @click="test" href="javascript:;" class="submit" :class="keywordFlag ? 'focus' : ''"><span
+    <input type="text" :placeholder="keyword" v-model="keyword" :class="keywordFlag ? 'focus' : ''" @focus="keywordFlag = true"
+      @focusout="keywordFlag = false">
+    <a @click="submit(keyword)" href="javascript:;" class="submit" :class="keywordFlag ? 'focus' : ''"><span
         class="iconfont icon-sousuo1"></span></a>
-    <div class="all_goods" v-if="keywordFlag">
+    <div class="all_goods" v-if="keywordFlag && keyword == ''">
       <ul>
-        <li v-for="item in store.homeSearchKeyword" :key="item.id"><a href="#">{{ item.keyword }}</a></li>
+        <li v-for="item in store.homeSearchKeyword" :key="item.id">
+        <a href="javascript:;" @click="submit(item.keyword)">{{ item.keyword }}</a>
+        </li>
       </ul>
     </div>
   </div>
@@ -14,18 +16,21 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
 
 import { useSearchStore } from '@/store/Search'
 
+const router = useRouter()
 const store = useSearchStore()
 
 store.getSearchKeywordInfo()
 
-let searchKeyword = ref<string>('手机')
+const keyword = ref<string>('小米手机')
 let keywordFlag = ref<boolean>(false)
 
-const test = () => {
-  console.log(searchKeyword.value)
+const submit = (keyword: string) => {
+  const location = { name: 'Search', query: { keyword } }
+  router.push(location)
 }
 
 </script>
@@ -90,10 +95,11 @@ const test = () => {
 
     ul {
       li {
-        padding: 5px 10px;
-        line-height: 20px;
-
         a {
+          position: relative;
+          display: block;
+          padding: 6px 15px;
+          font-size: 12px;
           color: #424242;
 
           &:hover {
@@ -109,6 +115,7 @@ const test = () => {
   }
 
   &:hover {
+
     input,
     .submit {
       border-color: #b0b0b0;

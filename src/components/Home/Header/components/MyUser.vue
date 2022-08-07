@@ -4,26 +4,26 @@
       <router-link to="/" class="user-name">
         <span class="name">青菜</span>
         <span class="iconfont icon-downforward"></span>
+        <div class="user-menu-wrapper">
+          <ul class="user-menu">
+            <li>
+              <router to="" class="user_menu_info">个人中心</router>
+            </li>
+            <li>
+              <router to="" class="user_menu_info">评价晒单</router>
+            </li>
+            <li>
+              <router to="" class="user_menu_info">我的喜欢</router>
+            </li>
+            <li>
+              <router to="" class="user_menu_info">小米账户</router>
+            </li>
+            <li>
+              <router to="/" class="user_menu_info">退出登录</router>
+            </li>
+          </ul>
+        </div>
       </router-link>
-      <div class="user-menu-wrapper">
-        <ul class="user-menu">
-          <li>
-            <router to="" class="user_menu_info">个人中心</router>
-          </li>
-          <li>
-            <router to="" class="user_menu_info">评价晒单</router>
-          </li>
-          <li>
-            <router to="" class="user_menu_info">我的喜欢</router>
-          </li>
-          <li>
-            <router to="" class="user_menu_info">小米账户</router>
-          </li>
-          <li>
-            <router to="/" class="user_menu_info">退出登录</router>
-          </li>
-        </ul>
-      </div>
     </span>
     <span class="sep"></span>
     <span class="message"><a href="#">消息通知</a></span>
@@ -84,6 +84,7 @@ import '@/style/Home/Header.user.less'
         background-color: #fff;
       }
     }
+
     .user-menu-wrapper {
       position: absolute;
       left: 0;
@@ -103,6 +104,7 @@ import '@/style/Home/Header.user.less'
 
         li {
           cursor: pointer;
+
           .user_menu_info {
             display: block;
             padding: 3px 30px;
@@ -117,6 +119,7 @@ import '@/style/Home/Header.user.less'
         }
       }
     }
+
     &:hover .user-menu-wrapper {
       height: 164px;
     }

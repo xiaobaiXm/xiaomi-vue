@@ -1,37 +1,55 @@
 <template>
   <div class="goods_list">
     <div class="goods_item">
-      <a href="#" class="goods_info">
-        <div class="figure_img">
-          <img src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-shopapi-pms/pms_1595400926.0448806.jpg" alt="">
-        </div>
-        <h2 class="title">Redmi 9A 晴空蓝</h2>
-        <p class="price"><span>599元</span><del class="old_price">1199元</del></p>
+      <a href="javascript:;" @click="product(goods.productId)" class="goods_info"
+        v-for="goods in store.searchProductInfo.list" :key="goods.productId">
+        <template v-for="item in goods.productInfo" :key="item.infoId">
+          <div v-show="item.isCheck">
+            <div class="figure_img">
+              <img v-lazy="item.img" alt="">
+            </div>
+            <h2 class="title">{{ goods.productName }} {{ item.version }}</h2>
+            <p class="price"><span>{{ item.price }}元</span>
+              <del class="old_price" v-if="item.oldPrice !== null || ''">
+                {{ item.oldPrice }}元</del>
+            </p>
+          </div>
+        </template>
         <div class="thumbs">
           <ul>
-            <li class="active"><img
-                src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-shopapi-pms/pms_1595400896.0831679.jpg" alt="">
-            </li>
-            <li><img src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-shopapi-pms/pms_1595400896.0831679.jpg" alt="">
-            </li>
-            <li><img src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-shopapi-pms/pms_1595400896.0831679.jpg" alt="">
+            <li @mouseenter="updateActive(goods.productInfo, item)" :class="item.isCheck ? 'active' : ''"
+              v-for="item in goods.productInfo" :key="item.infoId">
+              <img v-lazy="item.img" alt="">
             </li>
           </ul>
         </div>
         <div class="flags">
-          <span class="salel_label">
+          <span class="sale_label">
             <img src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/05c84c8d8ffebf7fd17c8838b5d81ee6.png"
               alt="">
-            <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/c02cd0743d6ded615afe101af6a8a918.png" alt="">
           </span>
         </div>
       </a>
     </div>
-
   </div>
 </template>
 
 <script setup lang="ts">
+import { useSearchStore } from '@/store/Search'
+import { IProductInfo } from '@/store/Search/Type/SearchProduct'
+
+const store = useSearchStore()
+
+const product = (productId: number): void => {
+  console.log(productId)
+}
+
+const updateActive = (productInfo: IProductInfo, item: IProductInfo): void => {
+  productInfo.forEach((items: IProductInfo) => {
+    items.isCheck = false
+  })
+  item.isCheck = true
+}
 </script>
 
 <style lang="less" scoped>
@@ -46,7 +64,7 @@
     margin: 0 27px 14px 0;
     text-align: center;
     background-color: #fff;
-    transition: all .5s linear;
+    transition: all .3s linear;
 
     .goods_info {
       display: block;
@@ -119,7 +137,7 @@
         min-height: 18px;
         text-align: center;
 
-        .salel_label {
+        .sale_label {
           margin: 0 2px;
 
           img {
@@ -136,7 +154,7 @@
     }
 
     &:hover {
-      box-shadow: 0 0 20px rgb(0 0 0 / 25%) !important;
+      box-shadow: 0 0 10px rgb(0 0 0 / 25%) !important;
       transform: translateY(-1px);
 
       .title {

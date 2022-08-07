@@ -4,7 +4,7 @@ import { getToken } from './token'
 
 const requests = axios.create({
   baseURL: '/api',
-  timeout: 5000,
+  timeout: 10000,
   headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;' }
 })
 
