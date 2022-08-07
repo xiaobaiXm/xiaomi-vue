@@ -1,6 +1,6 @@
 <template>
   <div class="search_favourite w">
-    <div class="recommend">
+    <div class="recommend clearfix">
       <MyRecommendTitleVue></MyRecommendTitleVue>
       <MyRecommendSearchVue v-if="show"></MyRecommendSearchVue>
       <MyEmptyCartBottom v-if="!show"></MyEmptyCartBottom>
@@ -33,7 +33,6 @@ const show = computed(() => {
 <style lang="less" scoped>
 .search_favourite {
   position: relative;
-  height: 520px;
-  padding: 20px 0 100px;
+  padding: 140px 0 120px;
 }
 </style>

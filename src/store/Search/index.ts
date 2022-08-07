@@ -12,7 +12,7 @@ export const useSearchStore = defineStore(SearchName.Test, {
     return {
       keyword: [] as ISearchKeyword[],
       searchError: false as boolean,
-      searchProductInfo: [] as ISearchProductInfo[]
+      searchProductInfo: {} as ISearchProductInfo
     }
   },
   actions: {
@@ -28,6 +28,7 @@ export const useSearchStore = defineStore(SearchName.Test, {
       const res = await reqGetSearchProductInfo(search)
       if (res.code === 200) {
         if (res.data.total > 0) {
+          this.searchError = false
           this.searchProductInfo = res.data
         } else {
           this.searchError = true

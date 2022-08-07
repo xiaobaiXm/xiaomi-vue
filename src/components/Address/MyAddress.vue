@@ -1,10 +1,10 @@
 <template>
   <div class="address_box_big">
     <div class="address_select_title" v-show="addressFlag">
-      <span v-show="addressArr[0] !== ''" @click="goBack(0)">{{ addressArr[0] }}</span>
-      <span v-show="addressArr[1] !== ''" @click="goBack(1)">{{ addressArr[1] }}</span>
-      <span v-show="addressArr[2] !== ''" @click="goBack(2)">{{ addressArr[2] }}</span>
-      <span v-show="addressArr[3] !== ''" @click="goBack(3)">{{ addressArr[3] }}</span>
+      <span v-if="addressArr[0] !== ''" @click="goBack(0)">{{ addressArr[0] }}</span>
+      <span v-if="addressArr[1] !== ''" @click="goBack(1)">{{ addressArr[1] }}</span>
+      <span v-if="addressArr[2] !== ''" @click="goBack(2)">{{ addressArr[2] }}</span>
+      <span v-if="addressArr[3] !== ''" @click="goBack(3)">{{ addressArr[3] }}</span>
       <span class="gray" v-if="addressInfoFlag.provinces">选择省份/自治区</span>
       <span class="gray" v-if="addressInfoFlag.city">选择城市/地区</span>
       <span class="gray" v-if="addressInfoFlag.area">选择区县</span>
@@ -51,21 +51,24 @@
       </div>
       <div class="address_box" v-show="!addressFlag">
         <div class="title">我的收货地址</div>
-        <div class="noy_login" v-if="auth()">
+        <div class="noy_login" v-if="!auth()">
           现在<router-link to="/user/service/login">登录</router-link>，可根据收货地址快速定位
         </div>
         <div class="address-list" v-else>
           <div class="con">
             <ul class="clearfix">
-              <li @click="changeUserAddressInfo()">
-                <div class="address-title">小白 广东</div>
-                <div class="address-desc"> 广东 深圳市 福田区 莲花街道</div>
-              </li>
+              <template v-for="item in store.userAddressInfo.list" :key="item.id">
+                <li @click="changeUserAddressInfo(item)">
+                  <div class="address-title">{{ item.consignee }} {{ item.provinces }}</div>
+                  <div class="address-desc">{{ item.provinces }} {{ item.city }} {{ item.area }} {{ item.address }}
+                  </div>
+                </li>
+              </template>
             </ul>
             <div class="address-page">
-              <span class="iconfont icon-xiangzuojiantou"></span>
-              <span class="pageNo">1</span> / 1
-              <span class="iconfont icon-xiangyoujiantou"></span>
+              <span class="iconfont icon-xiangzuojiantou" @click="last"></span>
+              <span class="pageNo">{{ store.userAddressInfo.pageNo }}</span> / {{ totalPage }}
+              <span class="iconfont icon-xiangyoujiantou" @click="next"></span>
             </div>
           </div>
         </div>
@@ -77,12 +80,18 @@
 <script setup lang="ts">
 import { ref, reactive, computed, watch, onMounted } from 'vue'
 import { useUserAddressStore } from '@/store/User/Address'
-import { IAddressInfoFlag } from './Type'
+import { IAddressInfoFlag, IPage } from './Type'
 import { IAddressInfo, ICity, IArea, IAddress } from '@/store/User/Address/Type/AddressInfo'
+import { IAddressInfoList } from '@/store/User/Address/Type/UserAddressInfo'
 
 import { auth } from '@/hooks/User/auth'
 
 const store = useUserAddressStore()
+
+const {
+  pageSize,
+  total
+} = store.userAddressInfo
 
 let addressFlag = ref<boolean>(false)
 let addressInfoFlag = reactive<IAddressInfoFlag>({
@@ -94,6 +103,15 @@ let addressInfoFlag = reactive<IAddressInfoFlag>({
 let chooseIndex = ref<number>(0)
 let index = reactive<number[]>([0, 0, 0])
 let addressArr = reactive<string[]>(['', '', '', ''])
+
+let page = reactive<IPage>({
+  pageNo: 1,
+  pageSize: 4
+})
+
+if (auth()) {
+  store.getUserAddressInfo(page)
+}
 
 watch(chooseIndex, (newValue) => {
   switch (newValue) {
@@ -110,7 +128,7 @@ watch(chooseIndex, (newValue) => {
       addressInfoFlag.address = false
       break
     case 2:
-      addressInfoFlag.provinces = true
+      addressInfoFlag.provinces = false
       addressInfoFlag.city = false
       addressInfoFlag.area = true
       addressInfoFlag.address = false
@@ -148,6 +166,10 @@ const address = computed((): IAddress[] => {
   return area?.value[index[2]]?.children
 })
 
+const totalPage = computed((): number => {
+  return Math.ceil(total / pageSize)
+})
+
 const choice = (name: string, v: number): void => {
   addressArr[chooseIndex.value] = name
   if (chooseIndex.value === 3) {
@@ -170,8 +192,26 @@ const goBack = (v: number): void => {
   }
 }
 
-const changeUserAddressInfo = (): void => {
-  console.log('ok')
+const last = (): void => {
+  page.pageNo = page.pageNo - 1
+  if (page.pageNo < 1) {
+    page.pageNo = totalPage.value
+  }
+  store.getUserAddressInfo(page)
+}
+
+const next = (): void => {
+  page.pageNo = page.pageNo + 1
+  if (page.pageNo > totalPage.value) {
+    page.pageNo = 1
+  }
+  store.getUserAddressInfo(page)
+}
+
+const changeUserAddressInfo = (address: IAddressInfoList): void => {
+  addressArr[0] = address.provinces
+  addressArr[1] = address.city
+  updateAddressInfo()
 }
 
 const emit = defineEmits(['sendAddressInfo'])
@@ -187,7 +227,7 @@ onMounted((): void => {
 
 <style lang="less" scoped>
 .address_box_big {
-  // display: none;
+  display: none;
   position: absolute;
   padding: 42px 20px 0 20px;
   top: 28px;
@@ -361,6 +401,7 @@ onMounted((): void => {
 
             .iconfont {
               margin: 0 14px;
+              cursor: pointer;
             }
           }
         }

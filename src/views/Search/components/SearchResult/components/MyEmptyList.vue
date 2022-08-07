@@ -2,11 +2,17 @@
   <div class="empty-list">
     <img src="https://m.mi.com/static/img/icon-search-empty.3d766c8b3f.png" alt="">
     <p class="empty">对应筛选条件下没有找到商品，换个筛选条件吧</p>
-    <div class="btn">重置筛选条件</div>
+    <div class="btn" @click="reset">重置筛选条件</div>
   </div>
 </template>
 
 <script setup lang="ts">
+import { getCurrentInstance } from 'vue'
+
+const instance = getCurrentInstance()
+const reset = ():void => {
+  instance?.proxy?.$Bus.emit('resetSearchConditions')
+}
 </script>
 
 <style lang="less" scoped>

@@ -1,17 +1,20 @@
 import { defineStore } from 'pinia'
 import { UserAddress } from '@/enums/store/user_store_name'
 
-import { reqGetAllAddressInfo } from '@/api/Address'
+import { reqGetAllAddressInfo, reqUserAddressInfo } from '@/api/Address'
 
 import { IAddressInfo } from './Type/AddressInfo'
+import { IUserAddressInfo, IAddressPrams } from './Type/UserAddressInfo'
 
 export const useUserAddressStore = defineStore(UserAddress.Test, {
   state: () => {
     return {
-      addressInfo: [] as IAddressInfo[]
+      addressInfo: [] as IAddressInfo[],
+      userAddressInfo: {} as IUserAddressInfo
     }
   },
   actions: {
+    // get all address info
     async getAllAddressInfo ():Promise<void> {
       const res = await reqGetAllAddressInfo()
       if (res.code === 200) {
@@ -28,6 +31,15 @@ export const useUserAddressStore = defineStore(UserAddress.Test, {
           return item.deep === 0
         })
         this.addressInfo = result
+      } else {
+        return Promise.reject(new Error('false'))
+      }
+    },
+    // get user all address info
+    async getUserAddressInfo (params: IAddressPrams): Promise<void> {
+      const res = await reqUserAddressInfo(params)
+      if (res.code === 200) {
+        this.userAddressInfo = res.data
       } else {
         return Promise.reject(new Error('false'))
       }

@@ -5,9 +5,13 @@
         <div class="address_choose">
           <span>收货地</span>
           <a href="javascript:void(0)">
-            <span class="address_show">北京 北京市</span>
+            <span class="address_show">{{ addressArr[0] === '' ? '北京' : addressArr[0] }} {{ addressArr[1] === '' ? '北京市'
+                : addressArr[1]
+            }}</span>
           </a>
-          <MyAddress></MyAddress>
+          <keep-alive>
+            <MyAddress @sendAddressInfo="sendAddressInfo"></MyAddress>
+          </keep-alive>
         </div>
       </li>
       <li>
@@ -53,10 +57,17 @@ const type = inject<IType>('type', reactive({
   available: false
 }))
 
+let addressArr = reactive<string[]>(['', ''])
+
 const instance = getCurrentInstance()
 
 const changeFilterTag = (type: string) => {
   instance?.proxy?.$Bus.emit('changeSearchFilterTag', type)
+}
+
+const sendAddressInfo = (address: string[]): void => {
+  addressArr[0] = address[0]
+  addressArr[1] = address[1]
 }
 </script>
 
@@ -114,7 +125,7 @@ const changeFilterTag = (type: string) => {
           }
         }
 
-         &:hover ::v-deep{
+        &:hover ::v-deep {
           .address_box_big {
             display: block;
           }

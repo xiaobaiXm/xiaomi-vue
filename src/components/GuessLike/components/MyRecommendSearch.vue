@@ -39,9 +39,10 @@ import { ref } from 'vue'
 const modules = [Pagination, Autoplay]
 
 let flag = ref<number>(1)
-let timer: number | null = null
+// eslint-disable-next-line no-undef
+let timer: null| NodeJS.Timeout = null
 
-const joinCart = ():void => {
+const joinCart = (): void => {
   flag.value = 0
   timer = setTimeout(() => {
     flag.value = 1

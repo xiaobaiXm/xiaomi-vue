@@ -2,7 +2,10 @@
   <div class="main">
     <MyBread></MyBread>
     <MySearchFilterVue></MySearchFilterVue>
-    <MySearchResultVue :search="search"></MySearchResultVue>
+    <keep-alive>
+      <MySearchResultVue :search="search"></MySearchResultVue>
+    </keep-alive>
+    <MyPagination @updateData="updateData" :total="101" :pageNo="1" :pageSize="20" :continues="5"></MyPagination>
     <MyGuessLike></MyGuessLike>
   </div>
 </template>
@@ -63,8 +66,24 @@ instance?.proxy?.$Bus.on('changeSearchOrder', (order): void => {
   getData()
 })
 
+instance?.proxy?.$Bus.on('resetSearchConditions', (): void => {
+  search.order = '1:DESC'
+  search.filterTag[0] = {
+    promotion: false,
+    installment: false,
+    available: false
+  }
+  search.pageNo = 1
+  search.pageSize = 20
+  getData()
+})
+
 const getData = (): void => {
   store.getSearchProductInfo(search)
+}
+
+const updateData = (pageNo:number): void => {
+  search.pageNo = pageNo
 }
 
 onBeforeMount(() => {

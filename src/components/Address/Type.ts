@@ -11,3 +11,8 @@ export type IAddressInfoFlag = {
   area: boolean
   address: boolean
 }
+
+export interface IPage {
+  pageNo: number
+  pageSize : number
+}

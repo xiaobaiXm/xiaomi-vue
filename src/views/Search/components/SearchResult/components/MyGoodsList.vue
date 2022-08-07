@@ -44,7 +44,7 @@ const product = (productId: number): void => {
   console.log(productId)
 }
 
-const updateActive = (productInfo: IProductInfo, item: IProductInfo): void => {
+const updateActive = (productInfo: IProductInfo[], item: IProductInfo): void => {
   productInfo.forEach((items: IProductInfo) => {
     items.isCheck = false
   })
@@ -54,7 +54,7 @@ const updateActive = (productInfo: IProductInfo, item: IProductInfo): void => {
 
 <style lang="less" scoped>
 .goods_list {
-  min-height: 480px;
+  min-height: 440px;
 
   .goods_item {
     position: relative;

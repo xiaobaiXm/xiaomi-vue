@@ -15,7 +15,6 @@
             <MyLoading></MyLoading>
           </template>
         </Suspense>
-        <MyPagination :pageNo="1" :pageSize="20" :continues="5"></MyPagination>
       </div>
     </div>
   </div>
@@ -29,12 +28,7 @@ import MyEmptyList from './components/MyEmptyList.vue'
 import { defineAsyncComponent } from 'vue'
 
 import { useSearchStore } from '@/store/Search'
-import { ISearch } from '@/store/Search/Type/Search'
 const store = useSearchStore()
-
-defineProps<{
-  search : ISearch
-}>()
 
 const MyGoodsListVue = defineAsyncComponent(() => import('./components/MyGoodsList.vue'))
 
@@ -42,14 +36,13 @@ const MyGoodsListVue = defineAsyncComponent(() => import('./components/MyGoodsLi
 
 <style lang="less" scoped>
 .search_result {
-  padding: 20px 0 100px;
+  padding: 20px 0 0;
 
   .result_order {
     .order_list_box {
       position: relative;
       height: 30px;
       margin: 30px 0;
-
     }
   }
 }

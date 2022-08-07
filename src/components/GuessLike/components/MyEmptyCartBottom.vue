@@ -28,7 +28,8 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 let flag = ref<number>(1)
-let timer: number | null = null
+// eslint-disable-next-line no-undef
+let timer: null| NodeJS.Timeout = null
 
 const joinCart = (): void => {
   flag.value = 0
