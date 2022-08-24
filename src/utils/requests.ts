@@ -5,7 +5,7 @@ import { getToken } from './token'
 const requests = axios.create({
   baseURL: '/api',
   timeout: 10000,
-  headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;' }
+  headers: { 'Content-Type': 'application/json' }
 })
 
 // 请求拦截器

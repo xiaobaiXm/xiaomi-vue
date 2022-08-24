@@ -2,43 +2,59 @@
   <div class="order_list">
     <ul>
       <li class="order_item">
-        <a href="javascript:;" @click="changeOrder('1')" :class="{'active' : order==='1:DESC' || order==='1:ASC'}">综合</a>
+        <a href="javascript:;" @click="changeOrder('1')" :class="{ 'active': isOne }">综合</a>
       </li>
       <li class="order_item">
-        <a href="javascript:;" @click="changeOrder('4')"  :class="{'active' : order==='4:DESC' || order==='4:ASC'}">新品</a>
+        <a href="javascript:;" @click="changeOrder('4')" :class="{ 'active': isFour }">新品</a>
       </li>
       <li class="order_item">
-        <a href="javascript:;" @click="changeOrder('3')"  :class="{'active' : order==='4:DESC' || order==='4:ASC'}">销量</a>
+        <a href="javascript:;" @click="changeOrder('3')" :class="{ 'active': isThere }">销量</a>
       </li>
       <li class="order_item">
-        <a href="javascript:;" @click="changeOrder('2')"
-          :class="{'active' : order==='2:DESC' || order==='2:ASC'}">价格<span class="iconfont icon-shang--jiantou"
-          :class="order === '2:DESC' ? 'icon-shang--jiantou' : 'icon-xia--jiantou'"></span></a>
+        <a href="javascript:;" @click="changeOrder('2')" :class="{ 'active': isTwo }">价格<span
+            class="iconfont"
+            :class="{ 'icon-shang--jiantou': isDesc, 'icon-xia--jiantou': isAsc }"></span></a>
       </li>
     </ul>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, Ref, inject, getCurrentInstance } from 'vue'
+import { ref, Ref, computed, inject } from 'vue'
 
-const instance = getCurrentInstance()
-const order = inject<Ref<string>>('order', ref('1:DESC'))
+const order = inject<Ref<string>>('order', ref(''))
 
-const changeOrder = (flag: string):void => {
-  let originFlag: string = order.value.split(':')[0]
-  let originSort: string = order.value.split(':')[1]
-  console.log(`${originFlag} ------ ${originSort}`)
+const changeOrder = (flag: string): void => {
+  const originFlag: string = order.value.split(':')[0]
+  const originSort: string = order.value.split(':')[1]
   let newOrder = ref<string>('')
-
   if (flag === originFlag) {
     newOrder.value = `${originFlag}:${originSort === 'DESC' ? 'ASC' : 'DESC'}`
   } else {
     newOrder.value = `${flag}:${originSort === 'DESC' ? 'DESC' : 'ASC'}`
   }
-  console.log(newOrder.value)
-  instance?.proxy?.$Bus.emit('changeSearchOrder', newOrder.value)
+  order.value = newOrder.value
 }
+
+const isOne = computed(() => {
+  return order.value.indexOf('1') !== -1
+})
+const isTwo = computed(() => {
+  return order.value.indexOf('2') !== -1
+})
+const isThere = computed(() => {
+  return order.value.indexOf('3') !== -1
+})
+const isFour = computed(() => {
+  return order.value.indexOf('4') !== -1
+})
+const isDesc = computed(() => {
+  return order.value.indexOf('DESC') !== -1
+})
+const isAsc = computed(() => {
+  return order.value.indexOf('ASC') !== -1
+})
+
 </script>
 
 <style lang="less" scoped>

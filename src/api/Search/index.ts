@@ -13,7 +13,5 @@ export const reqGetSearchProductInfo = (data:ISeach) => requests({
   url: '/search/',
   method: 'POST',
   data: JSON.stringify(data),
-  headers: {
-    'Content-Type': 'application/json'
-  }
+
 })

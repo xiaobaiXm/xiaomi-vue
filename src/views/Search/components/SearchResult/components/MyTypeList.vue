@@ -43,9 +43,9 @@
 </template>
 
 <script setup lang="ts">
-import { reactive, inject, getCurrentInstance } from 'vue'
+import { reactive, inject } from 'vue'
 
-interface IType {
+type IType ={
   promotion: boolean
   installment: boolean
   available: boolean
@@ -59,10 +59,18 @@ const type = inject<IType>('type', reactive({
 
 let addressArr = reactive<string[]>(['', ''])
 
-const instance = getCurrentInstance()
-
-const changeFilterTag = (type: string) => {
-  instance?.proxy?.$Bus.emit('changeSearchFilterTag', type)
+const changeFilterTag = (typeName: string) => {
+  switch (typeName) {
+    case 'promotion':
+      type.promotion = !type.promotion
+      break
+    case 'installment':
+      type.installment = !type.installment
+      break
+    case 'available':
+      type.available = !type.available
+      break
+  }
 }
 
 const sendAddressInfo = (address: string[]): void => {

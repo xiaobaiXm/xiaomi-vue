@@ -1,6 +1,6 @@
 import { ref } from 'vue'
 
-import { from } from './index'
+import { from, isAgree } from './index'
 
 export let userName = ref<number>(0)
 export let userFloating = ref<number>(0)
@@ -11,12 +11,12 @@ export let userReqPwdFloating = ref<number>(0)
 
 export let loginError = ref<boolean>(false)
 
-export const userNameFocusInp = () => {
+export const userNameFocusInp = (): void => {
   userName.value = 1
   userFloating.value = 1
 }
 
-export const userNameFocusOutInp = () => {
+export const userNameFocusOutInp = (): void => {
   if (from.username === null || from.username === '') {
     userName.value = 2
     userFloating.value = 2
@@ -25,12 +25,13 @@ export const userNameFocusOutInp = () => {
   }
 }
 
-export const userPwdFocusInp = () => {
+export const userPwdFocusInp = (): void => {
+  loginError.value = false
   userPwd.value = 1
   userPwdFloating.value = 1
 }
 
-export const userPwdFocusOutInp = () => {
+export const userPwdFocusOutInp = (): void => {
   if (from.password === null || from.password === '') {
     userPwd.value = 2
     userPwdFloating.value = 2
@@ -39,12 +40,12 @@ export const userPwdFocusOutInp = () => {
   }
 }
 
-export const userReqPwdFocusOutInp = () => {
+export const userReqPwdFocusOutInp = (): void => {
   userReqPwd.value = 1
   userReqPwdFloating.value = 1
 }
 
-export const userReqPwdFocusInp = () => {
+export const userReqPwdFocusInp = (): void => {
   if (from.secondaryPasswordFn === null || from.secondaryPasswordFn === '') {
     userReqPwd.value = 2
     userReqPwdFloating.value = 2
@@ -54,11 +55,11 @@ export const userReqPwdFocusInp = () => {
 }
 
 // clear user info
-export const clear = () => {
-  from.username = null
-  from.password = null
-  from.secondaryPasswordFn = null
-  from.isAgree = false
+export const clear = (): void => {
+  from.username = ''
+  from.password = ''
+  from.secondaryPasswordFn = ''
+  isAgree.value = false
   userName.value = 0
   userFloating.value = 0
   userPwd.value = 0

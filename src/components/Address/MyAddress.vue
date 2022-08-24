@@ -1,10 +1,11 @@
 <template>
   <div class="address_box_big">
+        {{ addressArr }}
     <div class="address_select_title" v-show="addressFlag">
-      <span v-if="addressArr[0] !== ''" @click="goBack(0)">{{ addressArr[0] }}</span>
-      <span v-if="addressArr[1] !== ''" @click="goBack(1)">{{ addressArr[1] }}</span>
-      <span v-if="addressArr[2] !== ''" @click="goBack(2)">{{ addressArr[2] }}</span>
-      <span v-if="addressArr[3] !== ''" @click="goBack(3)">{{ addressArr[3] }}</span>
+      <span v-if="addressArr[0]" @click="goBack(0)">{{ addressArr[0] }}</span>
+      <span v-if="addressArr[1]" @click="goBack(1)">{{ addressArr[1] }}</span>
+      <span v-if="addressArr[2]" @click="goBack(2)">{{ addressArr[2] }}</span>
+      <span v-if="addressArr[3]" @click="goBack(3)">{{ addressArr[3] }}</span>
       <span class="gray" v-if="addressInfoFlag.provinces">选择省份/自治区</span>
       <span class="gray" v-if="addressInfoFlag.city">选择城市/地区</span>
       <span class="gray" v-if="addressInfoFlag.area">选择区县</span>
@@ -102,7 +103,7 @@ let addressInfoFlag = reactive<IAddressInfoFlag>({
 })
 let chooseIndex = ref<number>(0)
 let index = reactive<number[]>([0, 0, 0])
-let addressArr = reactive<string[]>(['', '', '', ''])
+let addressArr = reactive<string[]>([])
 
 let page = reactive<IPage>({
   pageNo: 1,
@@ -147,7 +148,7 @@ watch(chooseIndex, (newValue) => {
 watch(addressFlag, (newValue) => {
   if (newValue === true) {
     chooseIndex.value = 0
-    addressArr = ['', '', '', '']
+    addressArr = []
   }
 }, {
   immediate: true
@@ -172,6 +173,7 @@ const totalPage = computed((): number => {
 
 const choice = (name: string, v: number): void => {
   addressArr[chooseIndex.value] = name
+  console.log(addressArr)
   if (chooseIndex.value === 3) {
     addressFlag.value = false
     return updateAddressInfo()
@@ -219,7 +221,7 @@ const emit = defineEmits(['sendAddressInfo'])
 const updateAddressInfo = (): void => {
   emit('sendAddressInfo', addressArr)
 }
-onMounted((): void => {
+onMounted(() => {
   store.getAllAddressInfo()
 })
 

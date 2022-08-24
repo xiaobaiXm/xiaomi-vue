@@ -1,9 +1,9 @@
 <template>
   <!-- 侧边二级菜单 -->
   <div class="main">
-    <div class="type_nav" v-show="showFlag" :class="showFlag ? '' : 'site-category-list'">
+    <div class="type_nav" :class="showFlag ? '' : 'site-category-list'">
       <ul>
-        <li v-for="(item, index) in store.category" :key="index">
+        <li v-for="(item, index) in store.category"  :key="index">
           <a href="javascript:;">{{ item.categoryTitle }}<span class="iconfont icon-youjiantou"></span></a>
           <div class="secondary_menu">
             <a href="#" v-for="childItem in item.categoryChild" :key="childItem.id">
@@ -18,35 +18,28 @@
 </template>
 
 <script setup lang="ts">
-import { ref, getCurrentInstance } from 'vue'
 import { useCategory } from '@/store/Home/Category'
-import { useRouter } from 'vue-router'
-const router = useRouter()
-const currentRoute = router.currentRoute
 const store = useCategory()
-const instance = getCurrentInstance()
 
 store.getCategoryList()
 
-let showFlag = ref<boolean>()
-
-if (currentRoute.value.path === '/home') {
-  showFlag.value = true
-} else {
-  showFlag.value = false
-}
-
-instance?.proxy?.$Bus.on('categoryFlagChange', (flag): void => {
-  showFlag.value = flag as boolean
-})
-
+defineProps<{
+  showFlag : boolean
+}>()
 </script>
 
 <style lang="less" scoped>
 .site-category-list {
+  display: none;
   border: 1px solid #ff6700;
-  color: #424242 !important;
   background: #fff !important;
+  >ul {
+    >li {
+      >a {
+        color: #424242 !important;
+      }
+    }
+  }
 }
 
 .type_nav {
@@ -68,8 +61,8 @@ instance?.proxy?.$Bus.on('categoryFlagChange', (flag): void => {
         width: 204px;
         height: 42px;
         line-height: 42px;
-        padding: 0 0 0 30px;
         color: #fff;
+        padding: 0 0 0 30px;
         font-size: 14px;
 
         &:hover {

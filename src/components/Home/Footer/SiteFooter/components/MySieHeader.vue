@@ -2,7 +2,7 @@
   <div class="site_header">
     <ul>
       <li v-for="item in store.footerHelpList" :key="item.id">
-       <span class="iconfont" :class="item.icon"></span>{{ item.name }}
+      <router-link to=""> <span class="iconfont" :class="item.icon"></span>{{ item.name }}</router-link>
       </li>
     </ul>
   </div>
@@ -39,6 +39,7 @@ store.getFooterHelpInfo()
 
       a {
         color: #616161;
+        transition: color .2s;
 
         .iconfont {
           margin-right: 6px;

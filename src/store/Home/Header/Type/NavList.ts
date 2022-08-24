@@ -1,11 +1,13 @@
+/* eslint-disable camelcase */
+export interface INavChild {
+  id: number
+  product_id: number
+  name: string
+  price: number
+  img: string
+}
 export interface INavList {
   navTitle: string
   show: boolean
-  navChildren: Array<{
-    id: number
-    productId: number
-    name: string
-    price: number
-    img: string
-  }>
+  navChildren: INavChild[]
 }

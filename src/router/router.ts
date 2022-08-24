@@ -9,7 +9,7 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/home',
     name: 'Home',
-    component: import('@/views/Home/MyHome.vue'),
+    component: () => import('@/views/Home/MyHome.vue'),
     meta: { showTypeNav: true, HeaderShow: true, FooterShow: true, FixedSlideBar: true } as RouteMeta
   },
   {

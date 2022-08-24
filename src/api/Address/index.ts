@@ -7,9 +7,7 @@ export const reqUserAddressInfo = (data:IUserAddressInfo) => requests({
   url: '/address/userAddress',
   method: 'POST',
   data: JSON.stringify(data),
-  headers: {
-    'Content-Type': 'application/json'
-  }
+
 })
 
 // 获取全国地址信息

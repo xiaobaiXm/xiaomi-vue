@@ -3,28 +3,41 @@
     <MyBread></MyBread>
     <MySearchFilterVue></MySearchFilterVue>
     <keep-alive>
-      <MySearchResultVue :search="search"></MySearchResultVue>
+      <Suspense>
+        <template #default>
+          <MySearchResultVue :search="search"></MySearchResultVue>
+        </template>
+        <template #fallback>
+          <MyLoading></MyLoading>
+        </template>
+      </Suspense>
     </keep-alive>
-    <MyPagination @updateData="updateData" :total="101" :pageNo="1" :pageSize="20" :continues="5"></MyPagination>
+    <MyPagination v-if="total > 20" @updateData="updateData" :total="total" :pageNo="pageNo" :pageSize="pageSize"
+      :continues="5"></MyPagination>
     <MyGuessLike></MyGuessLike>
   </div>
 </template>
 
 <script setup lang="ts">
 import MySearchFilterVue from './components/SearchFilter/MySearchFilter.vue'
-import MySearchResultVue from './components/SearchResult/MySearchResult.vue'
 
-import { reactive, provide, getCurrentInstance, onBeforeMount } from 'vue'
+import { ref, reactive, watch, provide, getCurrentInstance, defineAsyncComponent, onBeforeMount } from 'vue'
 import { useRouter } from 'vue-router'
 import { useSearchStore } from '@/store/Search'
 import { ISearch } from '@/store/Search/Type/Search'
+
+const MySearchResultVue = defineAsyncComponent(() => import('./components/SearchResult/MySearchResult.vue'))
 const router = useRouter()
 const currentRoute = router.currentRoute
 const store = useSearchStore()
 const instance = getCurrentInstance()
+const { pageNo, pageSize, total } = store.searchProductInfo
+
+let key = ref<string>('')
+let ord = ref<string>('1:DESC')
 let search = reactive<ISearch>({
   keyword: '',
-  order: '1:DESC',
+  order: '',
   filterTag: [{
     promotion: false,
     installment: false,
@@ -34,40 +47,21 @@ let search = reactive<ISearch>({
   pageSize: 20
 })
 
-Object.assign(search, currentRoute.value.query)
+key.value = currentRoute.value.query.keyword as string
 provide('type', search.filterTag[0])
-provide('keyword', search.keyword)
-provide('order', search.order)
+provide('keyword', ref(key))
+provide('order', ref(ord))
 
-instance?.proxy?.$Bus.on('changeSearchFilterTag', (type): void => {
-  switch (type as string) {
-    case 'promotion':
-      search.filterTag[0].promotion = !search.filterTag[0].promotion
-      getData()
-      break
-    case 'installment':
-      search.filterTag[0].installment = !search.filterTag[0].installment
-      getData()
-      break
-    case 'available':
-      search.filterTag[0].available = !search.filterTag[0].available
-      getData()
-      break
-  }
-})
-
-instance?.proxy?.$Bus.on('changeSearchKeyword', (keyword): void => {
-  search.keyword = keyword as string
+watch(search, () => {
   getData()
 })
-
-instance?.proxy?.$Bus.on('changeSearchOrder', (order): void => {
-  search.order = order as string
+watch([key, ord], () => {
   getData()
 })
 
 instance?.proxy?.$Bus.on('resetSearchConditions', (): void => {
-  search.order = '1:DESC'
+  key.value = currentRoute.value.query.keyword as string
+  ord.value = '1:DESC'
   search.filterTag[0] = {
     promotion: false,
     installment: false,
@@ -79,10 +73,12 @@ instance?.proxy?.$Bus.on('resetSearchConditions', (): void => {
 })
 
 const getData = (): void => {
+  search.keyword = key.value
+  search.order = ord.value
   store.getSearchProductInfo(search)
 }
 
-const updateData = (pageNo:number): void => {
+const updateData = (pageNo: number): void => {
   search.pageNo = pageNo
 }
 

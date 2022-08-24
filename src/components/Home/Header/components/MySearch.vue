@@ -28,7 +28,7 @@ store.getSearchKeywordInfo()
 const keyword = ref<string>('小米手机')
 let keywordFlag = ref<boolean>(false)
 
-const submit = (keyword: string) => {
+const submit = (keyword: string): void => {
   const location = { name: 'Search', query: { keyword } }
   router.push(location)
 }

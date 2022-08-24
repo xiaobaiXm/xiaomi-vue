@@ -2,16 +2,16 @@
   <div class="cart-menu">
     <div class="menu-content">
       <ul class="cart-list" style="overflow: hidden scroll; max-height: 445.5px;">
-        <li>
+        <li v-for="item in cart.list" :key="item.id">
           <div class="cart-item clearfix">
-            <a href="#" class="thumb">
-              <img
-                src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-shopapi-pms/pms_1614755062.53172736.jpg?width=60&height=60"
-                alt="">
+            <a href="javascript" class="thumb" @click="productInfo(item.cart_product_info.id)">
+              <img v-lazy="item.cart_sku_info.img" alt="">
             </a>
-            <a href="#" class="name">米家随行便携榨汁杯 白色</a>
-            <span class="price">99元 × 1</span>
-            <a href="javascript:;" class="btn-del">
+            <a href="javascript:;" class="name" @click="productInfo(item.cart_product_info.id)">{{
+                item.cart_product_info.name
+            }} {{ item.cart_sku_info.color }}</a>
+            <span class="price">{{ item.cart_sku_info.price }}元 × {{ item.number }}</span>
+            <a href="javascript:;" class="btn-del" @click="removeCart(item.id)">
               <span class="iconfont icon-close"></span>
             </a>
           </div>
@@ -19,8 +19,8 @@
       </ul>
       <div class="cart-total clearfix">
         <span class="total">
-          共 <em>2</em> 件商品
-          <span class="price"><em>111</em>元
+          共 <em>{{ cart.count }}</em> 件商品
+          <span class="price"><em>{{ totalPrice }}</em>元
           </span>
         </span>
         <router-link to="/cart" class="btn btn-primary btn-cart">去购物车结算</router-link>
@@ -30,6 +30,37 @@
 </template>
 
 <script setup lang="ts">
+import { computed, onMounted } from 'vue'
+import { useCartsStore } from '@/store/Carts'
+import { ICartInfo } from '@/store/Carts/Type/CartsAllInfo'
+import { auth } from '@/hooks/User/auth'
+const store = useCartsStore()
+const cart = defineProps<{
+  list: ICartInfo[],
+  count: number
+}>()
+
+const productInfo = (productId: number): void => {
+  console.log(productId)
+}
+
+const removeCart = (id: number): void => {
+  store.removeUserShopCartInfo([id])
+}
+
+const totalPrice = computed<number>((): number => {
+  let total = 0
+  cart.list.forEach((item: ICartInfo) => {
+    total = item.number * item.cart_sku_info.price
+  })
+  return total
+})
+
+onMounted(() => {
+  if (auth()) {
+    store.getAllUserShopCartInfo()
+  }
+})
 </script>
 
 <style lang="less" scoped>
@@ -44,7 +75,7 @@
   background: #fff;
   box-shadow: 0 2px 10px rgb(0 0 0 / 15%);
   overflow: hidden;
-  transition: height .3s;
+  transition: all .3s;
 
   .menu-content {
     padding: 20px 0 0;
@@ -54,6 +85,7 @@
         position: relative;
         height: 80px;
         padding: 0 20px;
+
         .cart-item {
           position: relative;
           height: 60px;
@@ -75,7 +107,7 @@
             float: left;
             width: 95px;
             height: 40px;
-            line-height: 20px;
+            line-height: 40px;
             margin: 10px 0;
             color: #424242;
             overflow: hidden;
@@ -88,7 +120,7 @@
 
           .btn-del {
             position: absolute;
-            top: 25px;
+            top: 29px;
             right: 0;
             font-size: 16px;
             opacity: 0;

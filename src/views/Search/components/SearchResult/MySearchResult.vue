@@ -2,19 +2,12 @@
   <div class="search_result">
     <div class="result_order w">
       <div class="order_list_box">
-        <MyOrderListVue ></MyOrderListVue>
+        <MyOrderListVue></MyOrderListVue>
         <MyTypeListVue></MyTypeListVue>
       </div>
       <div class="goods_list_box">
-        <Suspense>
-          <template #default>
-            <MyGoodsListVue v-if="!store.searchError"></MyGoodsListVue>
-            <MyEmptyList v-else></MyEmptyList>
-          </template>
-          <template #fallback>
-            <MyLoading></MyLoading>
-          </template>
-        </Suspense>
+        <MyGoodsListVue v-if="!store.searchError"></MyGoodsListVue>
+        <MyEmptyList v-else></MyEmptyList>
       </div>
     </div>
   </div>
@@ -23,14 +16,12 @@
 <script setup lang="ts">
 import MyOrderListVue from './components/MyOrderList.vue'
 import MyTypeListVue from './components/MyTypeList.vue'
+import MyGoodsListVue from './components/MyGoodsList.vue'
 import MyEmptyList from './components/MyEmptyList.vue'
 
-import { defineAsyncComponent } from 'vue'
-
 import { useSearchStore } from '@/store/Search'
-const store = useSearchStore()
 
-const MyGoodsListVue = defineAsyncComponent(() => import('./components/MyGoodsList.vue'))
+const store = useSearchStore()
 
 </script>
 

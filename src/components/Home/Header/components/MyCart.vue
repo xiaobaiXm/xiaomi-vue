@@ -1,17 +1,16 @@
-<template>
-  <div class="cart-info">
-    <router-link to="/cart" :class="cart > 0 ? 'not_empty ' : ''">
-      <em class="iconfont" :class="cart < 0 ? 'icon-gouwuchekong' : 'icon-gouwucheman'"></em>
+em<template>
+  <div class="cart-info" @mouseenter="flag = !flag" @mouseleave="flag = !flag">
+    <router-link to="/cart" :class="store.count > 0 ? 'not_empty ' : ''">
+      <em class="iconfont" :class="store.count <= 0 ? 'icon-ic_gouwuchecopy' : 'icon-gouwucheman'"></em>
       <em>购物车</em>
-      <span>({{ cart }})</span>
+      <span>({{ store.count }})</span>
     </router-link>
-
-    <div class="cart_info" v-if="cart <= 0">
-      购物车中还没有商品，赶紧选购吧！
-    </div>
-    <Suspense v-else>
+    <Suspense v-if="flag">
       <template #default>
-        <MyCartMenuVue></MyCartMenuVue>
+        <div class="cart_info" v-if="store.count <= 0">
+          购物车中还没有商品，赶紧选购吧！
+        </div>
+        <MyCartMenuVue v-else :list="store.cart" :count="store.count"></MyCartMenuVue>
       </template>
       <template #fallback>
         <MyLoading></MyLoading>
@@ -21,11 +20,36 @@
 </template>
 
 <script setup lang="ts">
-import { ref, defineAsyncComponent } from 'vue'
+import { ref, watch, defineAsyncComponent, onMounted } from 'vue'
+import { useCartsStore } from '@/store/Carts'
+import { auth } from '@/hooks/User/auth'
 
+const store = useCartsStore()
 const MyCartMenuVue = defineAsyncComponent(() => import('./MyCartMenu.vue'))
 
-let cart = ref<number>(111)
+let flag = ref<boolean>(false)
+
+watch(flag, (newValue) => {
+  if (newValue) {
+    if (auth()) {
+      store.getAllUserShopCartInfo()
+    } else {
+      store.count = 0
+    }
+  } else {
+    store.cart = []
+  }
+})
+
+onMounted(() => {
+  if (auth()) {
+    if (!flag.value) {
+      store.getAllUserShopCartInfo()
+    }
+  } else {
+    store.count = 0
+  }
+})
 </script>
 
 <style lang="less" scoped>
@@ -40,7 +64,8 @@ let cart = ref<number>(111)
     transition: all .5s;
 
     .iconfont {
-      font-size: 18px;
+      font-size: 16px;
+      margin-right: 5px;
     }
 
     &:hover {

@@ -1,11 +1,10 @@
 <template>
   <div class="accept-terms">
-    <Form :validation-schema="VeeValidate" class="from">
+    <Form :validation-schema="VeeValidateAgree" ref="agreeFromCom">
       <div class="ant-checkbox-wrapper">
         <span class="ant-checkbox" @click="changeChecked">
-          <Field type="checkbox" name="isAgree" v-model="from.isAgree" class="ant-checkbox-input"/>
-          <!-- <input type="checkbox" name="isAgree" class="ant-checkbox-input"/> -->
-          <div class="ant-checkbox-inner" :class="from.isAgree ? 'ant-checkbox-inner-active' : ''">
+          <Field type="checkbox" name="isAgree" v-model="isAgree" class="ant-checkbox-input"/>
+          <div class="ant-checkbox-inner" :class="isAgree ? 'ant-checkbox-inner-active' : ''">
             <span class="iconfont icon-a-Frame3163"></span>
           </div>
         </span>
@@ -16,11 +15,11 @@
 </template>
 
 <script setup lang="ts">
-import { from, changeChecked } from '@/hooks/User'
+import { isAgree, changeChecked } from '@/hooks/User'
 
 import { Form, Field } from 'vee-validate'
 
-import VeeValidate from '@/utils/validate'
+import { VeeValidateAgree } from '@/utils/validate'
 
 </script>
 

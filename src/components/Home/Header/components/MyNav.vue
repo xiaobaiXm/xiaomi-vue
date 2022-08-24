@@ -4,27 +4,15 @@
       <li class="category">
         <router-link to="/category" :class="showFlag ? 'category_hide' : ''"><span class="text">全部商品分类</span>
         </router-link>
-        <MyTypeNavVue></MyTypeNavVue>
+        <MyTypeNavVue :showFlag="showFlag"></MyTypeNavVue>
       </li>
       <li class="nav-item nav-item-active" v-for="(item, index ) in store.navList" :key="index">
         <a href="javascript:;" class="nav-title">
           <span class="text">{{ item.navTitle }}</span>
         </a>
-        <div class="nav-info">
-          <div class="container">
-            <ul>
-              <li>
-                <a href="javascript:;" @click="productDetail(1)">
-                  <div class="imgUrl">
-                    <!-- <img v-lazy="item.img" alt=""> -->
-                  </div>
-                  <!-- <div class="text">{{ item.name }}</div> -->
-                  <!-- <p class="price">{{ item.price }}</p> -->
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
+        <teleport to="body">
+          <MyNavInfoVue :list="item"></MyNavInfoVue>
+        </teleport>
       </li>
       <li class="nav-item nav-item-active">
         <router-link to=""><span class="text">服务中心</span></router-link>
@@ -38,39 +26,33 @@
 
 <script setup lang="ts">
 import MyTypeNavVue from '@/components/Home/MyTypeNav.vue'
+import MyNavInfoVue from './MyNavInfo.vue'
 
-import { ref, computed, getCurrentInstance } from 'vue'
+import { ref, watch, computed, getCurrentInstance } from 'vue'
 import { useRouter } from 'vue-router'
 import { useHeaderStore } from '@/store/Home/Header/index'
 const router = useRouter()
 const currentRoute = router.currentRoute
 const instance = getCurrentInstance()
 
-let showFlag = ref<boolean>()
-
-if (currentRoute.value.path === '/home') {
-  showFlag.value = true
-} else {
-  showFlag.value = false
-}
+let showFlag = ref<boolean>(false)
+watch(() => currentRoute.value.path, (newPath) => {
+  if (newPath === '/home') {
+    showFlag.value = true
+  } else {
+    showFlag.value = false
+  }
+}, { immediate: true })
 
 const store = useHeaderStore()
 
 store.getHeaderNav()
-
-const productDetail = (productId: number | null): void => {
-  console.log(productId)
-}
 
 const show = computed(() => {
   return store.navList.filter(item => {
     return item.show === true
   })
 })
-
-const categoryFlagChange = (flag: boolean) => {
-  instance?.proxy?.$Bus.emit('categoryFlagChange', flag)
-}
 
 </script>
 
@@ -84,6 +66,7 @@ const categoryFlagChange = (flag: boolean) => {
 
   ul {
     position: relative;
+
     .category {
       position: relative;
       float: left;
@@ -98,11 +81,11 @@ const categoryFlagChange = (flag: boolean) => {
         color: #333;
         font-size: 16px;
 
-        &:hover {
-          color: #333 !important;
+        &:hover ::v-deep {
+          color: #ff6700 !important;
 
-          ::v-deep .type_nav {
-            display: block;
+          .site-category-list {
+            display: block !important;
           }
         }
       }
@@ -144,72 +127,10 @@ const categoryFlagChange = (flag: boolean) => {
         height: 229px;
       }
 
-      .nav-info {
-        width: 100%;
-        // height: 229px;
-        // height: 0;
-        background-color: #fff;
-        border-top: 1px solid #e0e0e0;
-        box-shadow: 0 3px 4px rgba(0, 0, 0, .18);
-        position: absolute;
-        left: 0;
-        top: 100px;
-        display: none;
-        z-index: 300;
-        transition: all .3s;
-
-        .container {
-          ul {
-            li {
-              width: 204px;
-              height: 201px;
-              padding: 35px 12px 0;
-              float: left;
-              text-align: center;
-
-              a {
-                float: left;
-                width: 180px;
-                height: 166px;
-
-                .imgUrl {
-                  width: 160px;
-                  height: 110px;
-                  margin: 0 auto 16px;
-
-                  img {
-                    width: 100%;
-                    height: 100%;
-                  }
-                }
-
-                .text {
-                  width: 180px;
-                  height: 20px;
-                  color: #333;
-                }
-
-                p {
-                  height: 20px;
-                  color: #ff6700;
-                }
-              }
-
-              &::after {
-                content: '';
-                display: block;
-                width: 1px;
-                height: 100px;
-                background-color: #e0e0e0;
-              }
-
-              &:nth-child(1) {
-                &::after {
-                  content: none;
-                }
-              }
-            }
-          }
+      &:hover ::v-deep {
+        .nav-info {
+          display: block;
+          height: 201px;
         }
       }
     }

@@ -11,6 +11,7 @@ import '@/assets/style/base.css'
 
 // 全局组件
 import MyLoading from '@/components/Loading/MyLoading.vue'
+import MyLoopsLoading from '@/components/Loading/MyLoopsLoading.vue'
 import MyFixedSlideBar from '@/components/Home/MyFixedSlideBar.vue'
 import MyBread from '@/components/Bread/MyBread.vue'
 import MyGuessLike from '@/components/GuessLike/MyGuessLike.vue'
@@ -34,6 +35,7 @@ app.component('MyFixedSlideBar', MyFixedSlideBar)
 app.component('MyBread', MyBread)
 app.component('MyGuessLike', MyGuessLike)
 app.component('MyLoading', MyLoading)
+app.component('MyLoopsLoading', MyLoopsLoading)
 app.component('MyPagination', MyPagination)
 app.component('MyAddress', MyAddress)
 

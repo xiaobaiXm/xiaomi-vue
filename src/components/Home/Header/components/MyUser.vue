@@ -1,25 +1,25 @@
 <template>
   <div class="top_bar_info">
     <span class="user">
-      <router-link to="/" class="user-name">
-        <span class="name">青菜</span>
+      <router-link to="/home" class="user-name">
+        <span class="name">{{ store.userInfo.username }}</span>
         <span class="iconfont icon-downforward"></span>
         <div class="user-menu-wrapper">
           <ul class="user-menu">
             <li>
-              <router to="" class="user_menu_info">个人中心</router>
+              <router-link to="/home" class="user_menu_info">个人中心</router-link>
             </li>
             <li>
-              <router to="" class="user_menu_info">评价晒单</router>
+              <router-link to="/home" class="user_menu_info">评价晒单</router-link>
             </li>
             <li>
-              <router to="" class="user_menu_info">我的喜欢</router>
+              <router-link to="/home" class="user_menu_info">我的喜欢</router-link>
             </li>
             <li>
-              <router to="" class="user_menu_info">小米账户</router>
+              <router-link to="/home" class="user_menu_info">小米账户</router-link>
             </li>
             <li>
-              <router to="/" class="user_menu_info">退出登录</router>
+              <router-link to="/home" class="user_menu_info" @click="logout">退出登录</router-link>
             </li>
           </ul>
         </div>
@@ -28,13 +28,21 @@
     <span class="sep"></span>
     <span class="message"><a href="#">消息通知</a></span>
     <span class="sep"></span>
-    <router-link to="" class="link-order">我的订单</router-link>
+    <router-link to="/home" class="link-order">我的订单</router-link>
   </div>
 </template>
 
 <script setup lang="ts">
-import '@/style/Home/Header.user.less'
+import { useRouter } from 'vue-router'
+import { useUserStore } from '@/store/User/LoginOrRegister'
 
+const router = useRouter()
+const store = useUserStore()
+
+const logout = ():void => {
+  store.logout()
+  router.push('/home')
+}
 </script>
 
 <style lang="less" scoped>

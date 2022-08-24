@@ -1,6 +1,6 @@
 <template>
-  <div class="from-login" @click="onSubmit">
-    <Form :validation-schema="VeeValidate" @submit="onSubmit" v-slot="{ errors }" class="from" autocomplete="off" ref="formCom">
+  <div class="from-login">
+    <Form :validation-schema="VeeValidateLogin" v-slot="{ errors }" class="from" autocomplete="off" ref="loginFormCom">
       <div class="ant-col ant-col-xs-24">
         <div class="text_field">
           <div class="form-field-field" :class="{ 'field-active': userName == 1, 'field-error': userName == 2 }">
@@ -23,7 +23,7 @@
               <Field :type="showPwd ? 'password' : 'text'" name="passwordFn" v-model="from.password" class="from-inp"
                 @focus="userPwdFocusInp" @focusout="userPwdFocusOutInp" />
               <label class="floating-label"
-                :class="{ 'floating-label-active': userPwdFloating == 1, 'floating-label-error':  errors.passwordFn }">密码</label>
+                :class="{ 'floating-label-active': userPwdFloating == 1, 'floating-label-error': errors.passwordFn }">密码</label>
             </div>
           </div>
           <div class="password-field-adornment">
@@ -32,14 +32,14 @@
           </div>
         </div>
         <div class="form-helper-text-error" v-if="errors.passwordFn">{{ errors.passwordFn }}</div>
-        <div class="form-helper-text-error" v-show="loginError">用户名或密码不正确</div>
+        <div class="form-helper-text-error" v-if="loginError">用户名或密码不正确</div>
       </div>
     </Form>
   </div>
 </template>
 
 <script setup lang="ts">
-import { from, changePasswordView, showPwd, formCom, login } from '@/hooks/User'
+import { from, changePasswordView, showPwd } from '@/hooks/User'
 import {
   loginError,
   userName,
@@ -54,11 +54,7 @@ import {
 
 import { Form, Field } from 'vee-validate'
 
-import VeeValidate from '@/utils/validate'
-
-const onSubmit = (value:any) => {
-  console.log(value)
-}
+import { VeeValidateLogin } from '@/utils/validate'
 
 </script>
 

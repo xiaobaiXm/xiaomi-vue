@@ -15,13 +15,11 @@
 </template>
 
 <script setup lang="ts">
-import { ref, Ref, inject, getCurrentInstance } from 'vue'
-
+import { ref, Ref, inject } from 'vue'
 import { useSearchStore } from '@/store/Search'
 
-const keyword = inject<Ref<string>>('keyword', ref(''))
+let keyword = inject<Ref<string>>('keyword', ref(''))
 
-const instance = getCurrentInstance()
 const store = useSearchStore()
 let labelFlag = ref<boolean>(false)
 
@@ -29,8 +27,8 @@ const showLabel = () => {
   labelFlag.value = !labelFlag.value
 }
 
-const updateKeyword = (keyword: string): void => {
-  instance?.proxy?.$Bus.emit('changeSearchKeyword', keyword)
+const updateKeyword = (newKeyword: string): void => {
+  keyword.value = newKeyword
 }
 </script>
 

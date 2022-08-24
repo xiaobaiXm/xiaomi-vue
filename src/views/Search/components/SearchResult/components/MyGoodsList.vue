@@ -6,7 +6,7 @@
         <template v-for="item in goods.productInfo" :key="item.infoId">
           <div v-show="item.isCheck">
             <div class="figure_img">
-              <img v-lazy="item.img" alt="">
+              <img :src="item.img" alt="">
             </div>
             <h2 class="title">{{ goods.productName }} {{ item.version }}</h2>
             <p class="price"><span>{{ item.price }}元</span>
@@ -64,7 +64,7 @@ const updateActive = (productInfo: IProductInfo[], item: IProductInfo): void => 
     margin: 0 27px 14px 0;
     text-align: center;
     background-color: #fff;
-    transition: all .3s linear;
+    transition: box-shadow .5s linear;
 
     .goods_info {
       display: block;
@@ -155,7 +155,6 @@ const updateActive = (productInfo: IProductInfo[], item: IProductInfo): void => 
 
     &:hover {
       box-shadow: 0 0 10px rgb(0 0 0 / 25%) !important;
-      transform: translateY(-1px);
 
       .title {
         color: #ff6700;

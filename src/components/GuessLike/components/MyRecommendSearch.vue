@@ -40,7 +40,7 @@ const modules = [Pagination, Autoplay]
 
 let flag = ref<number>(1)
 // eslint-disable-next-line no-undef
-let timer: null| NodeJS.Timeout = null
+let timer: null | NodeJS.Timeout = null
 
 const joinCart = (): void => {
   flag.value = 0
