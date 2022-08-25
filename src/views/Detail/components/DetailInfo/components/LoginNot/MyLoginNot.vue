@@ -1,14 +1,22 @@
 <template>
-  <div class="login_notic">
+  <div class="login_notic" v-if="flag">
     <div class="content w">
       为方便您购买，请提前登录
-      <a href="#" class="login">立即登录</a>
-      <a href="#" class="shut_down"><span class="iconfont icon-close"></span></a>
+      <router-link to="/user/service/login" class="login">立即登录</router-link>
+      <a href="javascript:;" @click="flag=false" class="shut_down"><span class="iconfont icon-close"></span></a>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
+import { ref } from 'vue'
+import { auth } from '@/hooks/User/auth'
+
+let flag = ref<boolean>(true)
+
+if (auth()) {
+  flag.value = false
+}
 </script>
 
 <style lang="less" scoped>

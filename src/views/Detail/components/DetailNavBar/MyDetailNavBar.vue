@@ -1,13 +1,13 @@
 <template>
   <div>
-    <div class="xm_product_box">
+    <div class="xm_product_box" :class="{ 'xm_product_box_active': flag }">
       <div class="nav_bar">
         <div class="container w">
           <h2>Note 11 Pro系列</h2>
           <div class="con">
             <div class="left">
-              <span>|</span>
-              <a href="#">Note 10 Pro</a>
+              <!-- <span>|</span>
+              <a href="#">Note 10 Pro</a> -->
             </div>
             <div class="right">
               <a href="#">概述页</a>
@@ -24,10 +24,31 @@
 </template>
 
 <script setup lang="ts">
+import { ref, onUnmounted } from 'vue'
+
+let flag = ref<boolean>(false)
+
+const handleScroll = (): void => {
+  flag.value = !(document.documentElement.scrollTop < 140)
+}
+
+window.addEventListener('scroll', handleScroll)
+onUnmounted(() => {
+  window.removeEventListener('scroll', handleScroll)
+})
 </script>
 
 <style lang="less" scoped>
+.xm_product_box_active {
+  position: fixed !important;
+  z-index: 120;
+  top: 0px;
+  left: 50%;
+  transform: translate(-50%);
+}
+
 .xm_product_box {
+  width: 100%;
   position: relative;
   box-shadow: 0 5px 5px rgb(0 0 0 / 7%);
   border-top: 1px solid #e0e0e0;
@@ -55,7 +76,7 @@
           float: left;
           margin: 21px 0 0 5px;
 
-          .span {
+          span {
             margin: 0 6px;
           }
 

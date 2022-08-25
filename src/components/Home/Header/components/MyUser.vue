@@ -43,6 +43,7 @@ const logout = ():void => {
   store.logout()
   router.push('/home')
 }
+
 </script>
 
 <style lang="less" scoped>

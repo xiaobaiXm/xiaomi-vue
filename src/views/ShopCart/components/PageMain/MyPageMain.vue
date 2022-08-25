@@ -4,14 +4,14 @@
       <div class="cart-container">
         <div class="container-main">
           <!-- 未登录 -->
-          <MyEmptyCartTopVue></MyEmptyCartTopVue>
+          <MyEmptyCartTopVue v-if="!loginFlag"></MyEmptyCartTopVue>
           <!-- 购物车 -->
-          <MyCartWrap></MyCartWrap>
+          <MyCartWrap v-else></MyCartWrap>
           <div class="placeholder-div"></div>
           <!-- cart bar -->
           <MyCartBar></MyCartBar>
           <!-- 推荐 -->
-        <MyGuessLike></MyGuessLike>
+          <MyGuessLike></MyGuessLike>
         </div>
       </div>
     </div>
@@ -23,6 +23,19 @@
 import MyEmptyCartTopVue from './components/MyEmptyCartTop.vue'
 import MyCartWrap from './components/CartWrap/MyCartWrap.vue'
 import MyCartBar from './components/CartBar/MyCartBar.vue'
+
+import { ref } from 'vue'
+import { useCartsStore } from '@/store/Carts'
+import { auth } from '@/hooks/User/auth'
+
+const store = useCartsStore()
+let loginFlag = ref<boolean>(false)
+
+if (auth()) {
+  loginFlag.value = true
+}
+
+store.getAllUserShopCartInfo()
 </script>
 
 <style lang="less" scoped>

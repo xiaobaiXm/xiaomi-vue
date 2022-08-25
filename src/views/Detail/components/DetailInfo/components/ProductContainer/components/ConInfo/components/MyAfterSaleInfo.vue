@@ -9,25 +9,25 @@
     <span>
       <a href="#" class="support">
         <span class="iconfont icon-gouxuan"></span>
-        <em class="text" title="">小米自营</em>
+        <em class="text" title="">小米发货</em>
       </a>
     </span>
     <span>
       <a href="#" class="support">
         <span class="iconfont icon-gouxuan"></span>
-        <em class="text" title="">7天无理由退货</em>
+        <em class="text" title="">15天无理由退货</em>
       </a>
     </span>
     <span>
       <a href="#" class="support">
         <span class="iconfont icon-gouxuan"></span>
-        <em class="text" title="">小米自营</em>
+        <em class="text" title="">运费说明</em>
       </a>
     </span>
     <span>
       <a href="#" class="support">
         <span class="iconfont icon-gouxuan"></span>
-        <em class="text" title="">小米自营</em>
+        <em class="text" title="">企业信息</em>
       </a>
     </span>
     <span>

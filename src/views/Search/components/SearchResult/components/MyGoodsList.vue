@@ -35,13 +35,15 @@
 </template>
 
 <script setup lang="ts">
+import { useRouter } from 'vue-router'
 import { useSearchStore } from '@/store/Search'
 import { IProductInfo } from '@/store/Search/Type/SearchProduct'
-
+const router = useRouter()
 const store = useSearchStore()
 
 const product = (productId: number): void => {
-  console.log(productId)
+  const location = { name: 'Detail', query: { productId } }
+  router.push(location)
 }
 
 const updateActive = (productInfo: IProductInfo[], item: IProductInfo): void => {

@@ -12,7 +12,7 @@
 .selection-left {
   float: left;
   line-height: 50px;
-
+  font-size: 14px;
   .back-shoppinp {
     margin-left: 32px;
     transition: color .3s;

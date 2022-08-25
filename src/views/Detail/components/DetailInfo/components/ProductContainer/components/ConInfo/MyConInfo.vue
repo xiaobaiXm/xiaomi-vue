@@ -2,29 +2,23 @@
   <div class="con_detail_info">
     <MyTitle></MyTitle>
     <div class="line"></div>
-    <!-- activity -->
-    <MyActivity></MyActivity>
-    <!-- address -->
+    <!-- <MyActivity></MyActivity> -->
     <MyAddressBox></MyAddressBox>
-    <!-- buy option -->
     <MyBuyOption></MyBuyOption>
-    <!-- select -->
     <MySelectList></MySelectList>
-    <!-- btn -->
     <MyBtnBox></MyBtnBox>
-    <!-- after -->
     <MyAfterSaleInfoVue></MyAfterSaleInfoVue>
   </div>
 </template>
 
 <script setup lang="ts">
-import MyTitle from './components/Title/MyTitle.vue'
-import MyActivity from './components/Activity/MyActivity.vue'
-import MyAddressBox from './components/AddressBox/MyAddressBox.vue'
-import MyBuyOption from './components/BuyOption/MyBuyOption.vue'
-import MySelectList from './components/SelectList/MySelectList.vue'
-import MyBtnBox from './components/BtnBox/MyBtnBox.vue'
-import MyAfterSaleInfoVue from './components/AfterSaleInfo/MyAfterSaleInfo.vue'
+import MyTitle from './components/MyTitle.vue'
+// import MyActivity from './components/MyActivity.vue'
+import MyAddressBox from './components/MyAddressBox.vue'
+import MyBuyOption from './components/MyBuyOption.vue'
+import MySelectList from './components/MySelectList.vue'
+import MyBtnBox from './components/MyBtnBox.vue'
+import MyAfterSaleInfoVue from './components/MyAfterSaleInfo.vue'
 </script>
 
 <style lang="less" scoped>

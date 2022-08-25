@@ -1,8 +1,6 @@
 <template>
   <div class="total-price">
-    合计：
-    <em>66</em>
-    元
+    合计：<em>66</em>元
     <a href="javascript:;" class="btn-primary btn-disabled">去结算</a>
   </div>
 </template>
@@ -12,9 +10,11 @@
 
 <style lang="less" scoped>
 .total-price {
-  line-height: 50px;
+  height: 48px;
+  line-height: 48px;
   padding-left: 13px;
   color: #ff6700;
+  font-size: 14px;
 
   em {
     font-size: 30px;
@@ -23,7 +23,7 @@
   .btn-primary {
     display: inline-block;
     width: 202px;
-    height: 48px;
+    height: 50px;
     margin-left: 50px;
     line-height: 48px;
     text-align: center;
@@ -33,6 +33,7 @@
     border: 1px solid #b0b0b0;
     transition: color .3s;
     box-sizing: border-box;
+    vertical-align: top;
 
     &:hover {
       color: #fff !important;

@@ -10,7 +10,7 @@
             }}</span>
           </a>
           <keep-alive>
-            <MyAddress @sendAddressInfo="sendAddressInfo"></MyAddress>
+            <MyAddress @sendAddressInfo="sendAddressInfo" :top="'28px'" :right="'0'"></MyAddress>
           </keep-alive>
         </div>
       </li>
@@ -135,7 +135,7 @@ const sendAddressInfo = (address: string[]): void => {
 
         &:hover ::v-deep {
           .address_box_big {
-            display: block;
+            display: block !important;
           }
         }
       }

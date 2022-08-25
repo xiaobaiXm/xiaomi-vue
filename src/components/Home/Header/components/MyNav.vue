@@ -6,13 +6,14 @@
         </router-link>
         <MyTypeNavVue :showFlag="showFlag"></MyTypeNavVue>
       </li>
-      <li class="nav-item nav-item-active" v-for="(item, index ) in store.navList" :key="index">
+      <li class="nav-item nav-item-active" @mouseenter="item.show = !item.show" @mouseleave="item.show = !item.show"
+        v-for="(item, index ) in store.navList" :key="index">
         <a href="javascript:;" class="nav-title">
           <span class="text">{{ item.navTitle }}</span>
+          <teleport to='body'>
+            <MyNavInfoVue :list="item.navChildren" :flag="item.show"></MyNavInfoVue>
+          </teleport>
         </a>
-        <teleport to="body">
-          <MyNavInfoVue :list="item"></MyNavInfoVue>
-        </teleport>
       </li>
       <li class="nav-item nav-item-active">
         <router-link to=""><span class="text">服务中心</span></router-link>
@@ -28,7 +29,7 @@
 import MyTypeNavVue from '@/components/Home/MyTypeNav.vue'
 import MyNavInfoVue from './MyNavInfo.vue'
 
-import { ref, watch, computed, getCurrentInstance } from 'vue'
+import { ref, watch, getCurrentInstance } from 'vue'
 import { useRouter } from 'vue-router'
 import { useHeaderStore } from '@/store/Home/Header/index'
 const router = useRouter()
@@ -48,11 +49,13 @@ const store = useHeaderStore()
 
 store.getHeaderNav()
 
-const show = computed(() => {
-  return store.navList.filter(item => {
-    return item.show === true
-  })
-})
+// const show = (index: number): void => {
+//   instance?.proxy?.$Bus.emit('changeNavInfoShowFlag', index)
+// }
+
+// const hide = (): void => {
+//   console.log('hide')
+// }
 
 </script>
 
@@ -65,7 +68,7 @@ const show = computed(() => {
   height: 100px;
 
   ul {
-    position: relative;
+    // position: relative;
 
     .category {
       position: relative;
@@ -83,10 +86,13 @@ const show = computed(() => {
 
         &:hover ::v-deep {
           color: #ff6700 !important;
+        }
+      }
 
-          .site-category-list {
-            display: block !important;
-          }
+      &:hover ::v-deep {
+
+        .site-category-list {
+          display: inline-block !important;
         }
       }
     }
@@ -105,16 +111,7 @@ const show = computed(() => {
 
         &:hover {
           color: #ff6a00;
-
-          .nav-info {
-            height: 229px;
-          }
         }
-      }
-
-      .nav-info-active {
-        box-shadow: 0 3px 4px rgb(0 0 0 / 18%);
-        transition: box-shadow .3s, height .3s;
       }
 
       .nav-info-up {
@@ -129,14 +126,10 @@ const show = computed(() => {
 
       &:hover ::v-deep {
         .nav-info {
-          display: block;
-          height: 201px;
+          display: block !important;
+          height: 201px !important;
         }
       }
-    }
-
-    .nav-item-active {
-      position: relative;
     }
 
     .category_hide {

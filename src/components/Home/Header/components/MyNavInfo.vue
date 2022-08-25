@@ -1,8 +1,8 @@
 <template>
-  <div class="nav-info">
-    <div class="container">
-      <ul v-for="item in list.navChildren" :key="item.id">
-        <li>
+  <div class="nav-info" v-if="flag" :class="{ flag: 'nav-info-slide-active' }">
+    <div class="container w">
+      <ul v-show="flag">
+        <li v-for="(item, index ) in list" :key="index">
           <a href="javascript:;" @click="productDetail(1)">
             <div class="imgUrl">
               <img v-lazy="item.img" alt="">
@@ -17,29 +17,39 @@
 </template>
 
 <script setup lang="ts">
-import { INavList } from '@/store/Home/Header/Type/NavList'
+import { ref, getCurrentInstance } from 'vue'
+import { INavChild } from '@/store/Home/Header/Type/NavList'
 defineProps<{
-  list: INavList[]
+  list: INavChild[],
+  flag: boolean
 }>()
+
+const instance = getCurrentInstance()
+let showIndex = ref<number>(-1)
 
 const productDetail = (productId: number | null): void => {
   console.log(productId)
 }
+instance?.proxy?.$Bus.on('changeNavInfoShowFlag', (index): void => {
+  showIndex.value = index as number
+})
 </script>
 
 <style lang="less" scoped>
+.nav-info-slide-active {
+  box-shadow: 0 3px 4px rgb(0 0 0 / 18%);
+  transition: box-shadow .3s, height .3s;
+}
+
 .nav-info {
   width: 100%;
-  background-color: #fff;
-  border-top: 1px solid #e0e0e0;
-  box-shadow: 0 3px 4px rgba(0, 0, 0, .18);
   position: absolute;
   left: 0;
   top: 140px;
   height: 0;
-  display: none;
-  z-index: 300;
-  transition: all .3s;
+  background-color: #fff;
+  border-top: 1px solid #e0e0e0;
+  z-index: 1111100;
 
   .container {
     ul {

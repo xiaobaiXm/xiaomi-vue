@@ -1,10 +1,10 @@
 <template>
   <div class="btn_box">
-    <div class="sele_btn">
+    <div class="select_btn">
       <a href="javascript:;" class="btn_primary">加入购物车</a>
     </div>
     <div class="btn_favorite">
-      <a href="#" class="like"><span class="iconfont icon-aixin"></span>喜欢</a>
+      <a href="javascript" class="like"><span class="iconfont icon-aixin"></span>喜欢</a>
     </div>
   </div>
 </template>
@@ -17,7 +17,7 @@
   height: 54px;
   margin: 10px 0 20px 0;
 
-  .sele_btn {
+  .select_btn {
     display: inline-block;
     margin-right: 10px;
 

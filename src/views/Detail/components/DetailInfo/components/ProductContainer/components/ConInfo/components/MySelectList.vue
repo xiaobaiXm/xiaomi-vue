@@ -4,7 +4,7 @@
       <li>
         <span class="good_info">Redmi Note 11 Pro
           <span class="good_info">8GB+256GB</span>
-          <span class="good_info">神秘黑境</span>
+          <span class="good_info"> 神秘黑境</span>
         </span>
         <span class="price">2099元<del class="old_price">2199元</del></span>
       </li>
@@ -22,6 +22,7 @@
   height: 146px;
   padding: 30px;
   margin-bottom: 30px;
+  background: #f9f9fa;
 
   ul {
     position: relative;

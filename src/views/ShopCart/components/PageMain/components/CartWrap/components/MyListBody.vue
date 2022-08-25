@@ -1,38 +1,36 @@
 <template>
   <div class="list-body">
-    <div class="list-item">
+    <div class="list-item" v-for="(item, index) in store.cart" :key="index">
       <div class="item-box">
         <div class="item-table">
           <div class="item-row clearfix">
             <div class="col col-check">
-              <i class="iconfont icon-a-Frame3163 icon-checkbox"></i>
+              <i @click="update(item)" :class="item.selected ? 'check-active' : ''" class="iconfont icon-a-Frame3163 icon-checkbox"></i>
             </div>
             <div class="col col-img">
               <a href="#">
-                <img
-                  src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-shopapi-pms/pms_1618382698.96755128.jpg?thumb=1&w=100&h=100"
-                  alt="">
+                <img v-lazy="item.cart_sku_info.img" alt="">
               </a>
             </div>
             <div class="col col-name">
               <div class="tags"></div>
               <h3 class="name">
-                <a href="javascript:;">定制不锈钢马克杯 白色</a>
+                <a href="javascript:;">{{ item.cart_product_info.name }} {{ item.cart_sku_info.color }}</a>
               </h3>
             </div>
-            <div class="col col-price">39元</div>
+            <div class="col col-price">{{ item.cart_sku_info.price }}元</div>
             <div class="col col-num">
               <div class="change-goods-num">
                 <a href="javascript:;" class="red">
                   <span class="iconfont icon-jianhao"></span>
                 </a>
-                <input type="text" autocomplete="off" class="goods-num" value="1">
+                <input type="text" autocomplete="off" class="goods-num" :value="item.number">
                 <a href="javascript:;" class="add">
                   <span class="iconfont icon-jiahaocu"></span>
                 </a>
               </div>
             </div>
-            <div class="col col-total">39元</div>
+            <div class="col col-total">{{ item.number * item.cart_sku_info.price }}元</div>
             <div class="col col-action">
               <a href="javascript:;" class="del">
                 <span class="iconfont icon-close"></span>
@@ -46,6 +44,15 @@
 </template>
 
 <script setup lang="ts">
+import { reactive } from 'vue'
+import { useCartsStore } from '@/store/Carts'
+import { ICartInfo } from '@/store/Carts/Type/CartsAllInfo'
+
+const store = useCartsStore()
+
+const update = (item :ICartInfo):void => {
+  console.log(item)
+}
 </script>
 
 <style lang="less" scoped>
@@ -64,6 +71,12 @@
 
         .item-row {
           display: table-row;
+
+          .check-active {
+            color: #fff;
+            border-color: #ff6700;
+            background-color: #ff6700;
+          }
         }
       }
     }

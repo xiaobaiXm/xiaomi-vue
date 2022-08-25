@@ -24,6 +24,12 @@
 
   .col {
     float: left;
+
+    .check-active {
+      color: #fff;
+      border-color: #ff6700;
+      background-color: #ff6700;
+    }
   }
 }
 </style>

@@ -2,9 +2,8 @@
   <div class="empty-cart-top hide">
     <h2 class="title">您的购物车还是空的！</h2>
     <p class="login-desc">登录后将显示您之前加入的商品</p>
-    <!-- 登录后移除 -->
-    <a href="javascript:;" class="btn-primary btn-login">立即登录</a>
-    <a href="#" class="btn-primary btn-shoping-nologin">马上去购物</a>
+    <router-link to="/user/service/login" class="btn-primary btn-login">立即登录</router-link>
+    <router-link to="/home" class="btn-primary btn-shoping-nologin">马上去购物</router-link>
   </div>
 </template>
 

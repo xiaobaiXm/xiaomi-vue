@@ -1,6 +1,12 @@
 <template>
-  <div class="address_box_big">
-        {{ addressArr }}
+  <div class="address_box_big" v-show="props.bigFlag" :style="{
+    top: props.top,
+    right: props.right,
+    left: props.left,
+    bottom: props.bottom,
+    transform: props.transform,
+  }">
+    {{ addressArr }}
     <div class="address_select_title" v-show="addressFlag">
       <span v-if="addressArr[0]" @click="goBack(0)">{{ addressArr[0] }}</span>
       <span v-if="addressArr[1]" @click="goBack(1)">{{ addressArr[1] }}</span>
@@ -75,6 +81,9 @@
         </div>
       </div>
     </div>
+    <a href="javascript:;" class="shut-btn" v-if="props.bigFlag" @click="shut">
+      <i class="btn iconfont icon-close"></i>
+    </a>
   </div>
 </template>
 
@@ -114,39 +123,26 @@ if (auth()) {
   store.getUserAddressInfo(page)
 }
 
-watch(chooseIndex, (newValue) => {
-  switch (newValue) {
-    case 0:
-      addressInfoFlag.provinces = true
-      addressInfoFlag.city = false
-      addressInfoFlag.area = false
-      addressInfoFlag.address = false
-      break
-    case 1:
-      addressInfoFlag.provinces = false
-      addressInfoFlag.city = true
-      addressInfoFlag.area = false
-      addressInfoFlag.address = false
-      break
-    case 2:
-      addressInfoFlag.provinces = false
-      addressInfoFlag.city = false
-      addressInfoFlag.area = true
-      addressInfoFlag.address = false
-      break
-    case 3:
-      addressInfoFlag.provinces = false
-      addressInfoFlag.city = false
-      addressInfoFlag.area = false
-      addressInfoFlag.address = true
-      break
-  }
-}, {
-  immediate: true
+type IProps = {
+  left?: string
+  right?: string
+  top?: string
+  bottom?: string
+  transform?: string
+  bigFlag?: boolean
+}
+
+const props = withDefaults(defineProps<IProps>(), {
+  left: '',
+  right: '',
+  top: '',
+  bottom: '',
+  transform: '',
+  bigFlag: false
 })
 
 watch(addressFlag, (newValue) => {
-  if (newValue === true) {
+  if (newValue !== true) {
     chooseIndex.value = 0
     addressArr = []
   }
@@ -176,7 +172,9 @@ const choice = (name: string, v: number): void => {
   console.log(addressArr)
   if (chooseIndex.value === 3) {
     addressFlag.value = false
-    return updateAddressInfo()
+    updateAddressInfo()
+    shut()
+    return
   }
   chooseIndex.value = chooseIndex.value !== 3 ? ++chooseIndex.value : 3
   index[chooseIndex.value - 1] = v
@@ -213,13 +211,19 @@ const next = (): void => {
 const changeUserAddressInfo = (address: IAddressInfoList): void => {
   addressArr[0] = address.provinces
   addressArr[1] = address.city
+  addressArr[2] = address.area
+  addressArr[3] = address.address
   updateAddressInfo()
+  shut()
 }
 
-const emit = defineEmits(['sendAddressInfo'])
+const emit = defineEmits(['sendAddressInfo', 'shutAddress'])
 
 const updateAddressInfo = (): void => {
   emit('sendAddressInfo', addressArr)
+}
+const shut = ():void => {
+  emit('shutAddress')
 }
 onMounted(() => {
   store.getAllAddressInfo()
@@ -229,13 +233,11 @@ onMounted(() => {
 
 <style lang="less" scoped>
 .address_box_big {
-  display: none;
+  position: relative;
   position: absolute;
   padding: 42px 20px 0 20px;
-  top: 28px;
-  right: 0;
   background: #fff;
-  z-index: 99;
+  z-index: 99999;
   width: 624px;
   box-shadow: 0 6px 12px 0 rgb(0 0 0 / 15%);
 
@@ -407,6 +409,36 @@ onMounted(() => {
             }
           }
         }
+      }
+    }
+  }
+
+  .shut-btn {
+    position: absolute;
+    right: 14px;
+    top: 14px;
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    line-height: 30px;
+    text-align: center;
+    color: #757575;
+    cursor: pointer;
+    transition: all .2s;
+    z-index: 10;
+    border-radius: 15px;
+
+    .btn {
+      font-size: 16px;
+      font-weight: 500;
+      margin-top: -10px;
+    }
+
+    &:hover {
+      background-color: rgb(229, 57, 53);
+
+      .bnt {
+        color: #fff !important;
       }
     }
   }

@@ -1,8 +1,6 @@
 <template>
   <div class="product_container w">
-    <!-- banner -->
   <MyConBannerVue></MyConBannerVue>
-    <!-- info -->
   <MyConInfoVue></MyConInfoVue>
   </div>
 </template>

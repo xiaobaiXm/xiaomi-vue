@@ -25,7 +25,7 @@ const routes: Array<RouteRecordRaw> = [
     meta: { HeaderShow: true, FooterShow: true, FixedSlideBar: true } as RouteMeta
   },
   {
-    path: '/detail',
+    path: '/detail:productId?',
     name: 'Detail',
     component: () => import('@/views/Detail/MyDetail.vue'),
     meta: { HeaderShow: true, FooterShow: true, FixedSlideBar: true } as RouteMeta

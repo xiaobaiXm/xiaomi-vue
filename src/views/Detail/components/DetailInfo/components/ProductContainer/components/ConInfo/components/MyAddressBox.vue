@@ -4,21 +4,34 @@
       <span class="iconfont icon-dizhi"></span>
       <div class="address_con">
         <div class="address">
-          <span>北京</span>
-          <span>北京市</span>
-          <span>海淀区</span>
-          <span>清河街道</span>
-          <a href="#" class="modify">修改</a>
+          <span>{{ addressInfo[0]? addressInfo[0]: "北京" }}</span>
+          <span>{{ addressInfo[1]? addressInfo[1]: "北京市" }}</span>
+          <span>{{ addressInfo[2]? addressInfo[2]: "海淀区" }}</span>
+          <span>{{ addressInfo[3]? addressInfo[3]: "清河街道" }}</span>
+          <a href="JavaScript:;" class="modify" @click="addressFlag = true">修改</a>
         </div>
         <div class="spot">
           <span>有现货</span>
         </div>
       </div>
     </div>
+    <teleport to='body'>
+      <MyAddress @sendAddressInfo="getAddressInfo" @shutAddress="addressFlag = false" :bigFlag="addressFlag" :top="'50%'" :left="'50%'" :transform="'translate(-50%, -50%)'"></MyAddress>
+    </teleport>
   </div>
 </template>
 
 <script setup lang="ts">
+import { ref, reactive } from 'vue'
+
+let addressFlag = ref<boolean>(false)
+let addressInfo = reactive<string[]>([])
+
+const getAddressInfo = (addressInfos:string[]):void => {
+  addressInfos.forEach((item, index):void => {
+    addressInfo[index] = item
+  })
+}
 </script>
 
 <style lang="less" scoped>

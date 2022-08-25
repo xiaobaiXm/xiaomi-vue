@@ -12,14 +12,19 @@ import MyTotalPrice from './components/MyTotalPrice.vue'
 import MyNoSelectTipVue from './components/MyNoSelectTip.vue'
 
 const noSelectTipShow = false
+
 </script>
 
 <style lang="less" scoped>
 .cart-bar {
   position: relative;
+  position: sticky;
+  bottom: 0;
+  left: 0;
   height: 50px;
   text-align: right;
   background-color: #fff;
   transition: background .3s ease, top .3s ease;
+  box-shadow: 0 -3px 1px rgb(0 0 0 / 5%);
 }
 </style>

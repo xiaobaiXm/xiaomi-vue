@@ -1,11 +1,16 @@
 <template>
   <div class="main">
     <div class="cart-header-box">
-      <!-- header -->
       <MyCartHeader></MyCartHeader>
     </div>
-    <!-- main -->
-    <MyPageMainVue></MyPageMainVue>
+    <Suspense>
+      <template #default>
+        <MyPageMainVue></MyPageMainVue>
+      </template>
+      <template #fallback>
+        <MyLoading></MyLoading>
+      </template>
+    </Suspense>
   </div>
 </template>
 
@@ -14,7 +19,10 @@ import '@/style/ShopCart/Col.less'
 import '@/style/ShopCart/BodyCol.less'
 
 import MyCartHeader from './components/CartHeader/MyCartHeader.vue'
-import MyPageMainVue from './components/PageMain/MyPageMain.vue'
+import { defineAsyncComponent } from 'vue'
+
+const MyPageMainVue = defineAsyncComponent(() => import('./components/PageMain/MyPageMain.vue'))
+
 </script>
 
 <style lang="less" scoped>

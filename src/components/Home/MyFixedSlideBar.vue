@@ -53,10 +53,10 @@ const handleScroll = (): void => {
   }
 }
 
-onMounted((): void => {
+onMounted(() => {
   window.addEventListener('scroll', handleScroll)
 })
-onUnmounted((): void => {
+onUnmounted(() => {
   window.removeEventListener('scroll', handleScroll)
 })
 </script>

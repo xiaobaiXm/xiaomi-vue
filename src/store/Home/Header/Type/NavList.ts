@@ -6,6 +6,7 @@ export interface INavChild {
   price: number
   img: string
 }
+
 export interface INavList {
   navTitle: string
   show: boolean
