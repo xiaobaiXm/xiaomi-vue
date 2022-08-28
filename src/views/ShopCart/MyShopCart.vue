@@ -8,9 +8,10 @@
         <MyPageMainVue></MyPageMainVue>
       </template>
       <template #fallback>
-        <MyLoading></MyLoading>
+        <MyLoading :padding="'50px 0'"></MyLoading>
       </template>
     </Suspense>
+
   </div>
 </template>
 

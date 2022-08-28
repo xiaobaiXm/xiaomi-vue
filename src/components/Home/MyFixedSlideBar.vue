@@ -31,20 +31,12 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
 import { useCartsStore } from '@/store/Carts'
+import { goBack } from '@/hooks/BackTop'
 
 const store = useCartsStore()
 
 let goBackTopFlag = ref<boolean>(false)
 
-const goBack = (): void => {
-  let top = document.documentElement.scrollTop
-  const timeGoBack = setInterval(() => {
-    document.documentElement.scrollTop = top -= 50
-    if (top <= 0) {
-      clearInterval(timeGoBack)
-    }
-  }, 5)
-}
 const handleScroll = (): void => {
   if (document.documentElement.scrollTop > 800) {
     goBackTopFlag.value = true

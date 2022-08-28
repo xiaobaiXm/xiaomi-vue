@@ -1,13 +1,16 @@
 <template>
   <div class="handle-action">
     <div class="operating-button">
-      <a href="javaceript:;" class="btn btn-primary">立即下单</a>
-      <a href="javaceript:;" class="btn btn-return">返回购物车</a>
+      <a href="javaceript:;" @click="settlement" class="btn btn-primary">立即下单</a>
+      <router-link to="/cart" class="btn btn-return">返回购物车</router-link>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
+const settlement = ():void => {
+  console.log('ok')
+}
 </script>
 
 <style lang="less" scoped>
@@ -47,6 +50,7 @@
     .btn-return {
       &:hover {
         color: #b0b0b0 !important;
+        background-color: #fff;
       }
     }
   }

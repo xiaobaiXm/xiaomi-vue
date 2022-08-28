@@ -3,7 +3,7 @@ import { Category } from '@/enums/store/home_store_name'
 
 import { reqGetCategoryList } from '@/api/Home/index'
 
-import { ICategory } from './Type/Category'
+import { ICategory } from '@/model/Category'
 
 export const useCategory = defineStore(Category.Test, {
   state: () => {

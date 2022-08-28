@@ -11,7 +11,7 @@
 import MyCategoryTab from './components/CateGoryTab.vue'
 import MyCateGoryList from './components/CateGoryList.vue'
 
-import { ICategory } from '@/store/Home/Category/Type/Category'
+import { ICategory } from '@/model/Category'
 
 defineProps<{
 list : ICategory

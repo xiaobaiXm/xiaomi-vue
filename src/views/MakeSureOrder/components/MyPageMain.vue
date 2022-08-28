@@ -22,7 +22,6 @@ import MyCheckoutMainVue from './components/MyCheckoutMain.vue'
 
   .container {
     background-color: #fff;
-
   }
 }
 </style>

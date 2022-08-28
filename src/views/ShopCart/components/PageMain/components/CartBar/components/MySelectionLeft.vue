@@ -1,11 +1,14 @@
 <template>
   <div class="selection-left">
     <a href="#" class="back-shoppinp">继续购物</a>
-    <span class="cart-total">已选择<i>1</i>件</span>
+    <span class="cart-total">已选择<i>{{ store.selectCount }}</i>件</span>
   </div>
 </template>
 
 <script setup lang="ts">
+import { useCartsStore } from '@/store/Carts'
+
+const store = useCartsStore()
 </script>
 
 <style lang="less" scoped>
@@ -13,6 +16,7 @@
   float: left;
   line-height: 50px;
   font-size: 14px;
+
   .back-shoppinp {
     margin-left: 32px;
     transition: color .3s;

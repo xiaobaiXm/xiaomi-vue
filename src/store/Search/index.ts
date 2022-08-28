@@ -3,9 +3,9 @@ import { SearchName } from '@/enums/store/search_store_name'
 
 import { reqGetSearchKeywordInfo, reqGetSearchProductInfo } from '@/api/Search'
 
-import { ISearch } from './Type/Search'
-import { ISearchProductInfo } from './Type/SearchProduct'
-import { ISearchKeyword } from './Type/keyword'
+import { ISearch } from '@/model/Search'
+import { ISearchProductInfo } from '@/model/SearchProduct'
+import { ISearchKeyword } from '@/model/keyword'
 
 export const useSearchStore = defineStore(SearchName.Test, {
   state: () => {

@@ -19,3 +19,12 @@ export interface ICartInfo {
   cart_product_info: IProductInfo
   cart_sku_info: ISkuInfo
 }
+
+export interface ICartAllAxiosResponse {
+  code: number
+  message: string
+  data: {
+    list: ICartInfo[]
+    count: number
+  }
+}

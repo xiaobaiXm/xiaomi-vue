@@ -3,8 +3,8 @@ import { HeaderName } from '@/enums/store/home_store_name'
 
 import { reqGetHeaderNavList, reqGetHeaderNavBarList } from '@/api/Home/index'
 
-import { INavBarList } from './Type/NavBarList'
-import { INavList } from './Type/NavList'
+import { INavBarList } from '@/model/NavBarList'
+import { INavList } from '@/model/NavList'
 
 export const useHeaderStore = defineStore(HeaderName.Test, {
   state: () => {

@@ -91,8 +91,8 @@
 import { ref, reactive, computed, watch, onMounted } from 'vue'
 import { useUserAddressStore } from '@/store/User/Address'
 import { IAddressInfoFlag, IPage } from './Type'
-import { IAddressInfo, ICity, IArea, IAddress } from '@/store/User/Address/Type/AddressInfo'
-import { IAddressInfoList } from '@/store/User/Address/Type/UserAddressInfo'
+import { IAddressInfo, ICity, IArea, IAddress } from '@/model/AddressInfo'
+import { IAddressInfoList } from '@/model/UserAddressInfo'
 
 import { auth } from '@/hooks/User/auth'
 

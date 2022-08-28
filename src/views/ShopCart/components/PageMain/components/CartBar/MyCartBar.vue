@@ -2,7 +2,7 @@
   <div class="cart-bar clearfix">
     <MySelectionLeft></MySelectionLeft>
     <MyTotalPrice></MyTotalPrice>
-    <MyNoSelectTipVue v-if="noSelectTipShow"></MyNoSelectTipVue>
+    <MyNoSelectTipVue v-if="store.selectCount <= 0"></MyNoSelectTipVue>
   </div>
 </template>
 
@@ -11,7 +11,9 @@ import MySelectionLeft from './components/MySelectionLeft.vue'
 import MyTotalPrice from './components/MyTotalPrice.vue'
 import MyNoSelectTipVue from './components/MyNoSelectTip.vue'
 
-const noSelectTipShow = false
+import { useCartsStore } from '@/store/Carts'
+
+const store = useCartsStore()
 
 </script>
 

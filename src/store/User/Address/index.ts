@@ -1,24 +1,26 @@
 import { defineStore } from 'pinia'
 import { UserAddress } from '@/enums/store/user_store_name'
 
-import { reqGetAllAddressInfo, reqUserAddressInfo } from '@/api/Address'
+import { reqGetAllAddressInfo, reqUserAddressInfo, reqUserPageAddressInfo } from '@/api/Address'
 
-import { IAddressInfo } from './Type/AddressInfo'
-import { IUserAddressInfo, IAddressPrams } from './Type/UserAddressInfo'
+import { IAddressInfo } from '@/model/AddressInfo'
+import { IUserAddressInfo, IAddressPrams, IAddressInfoList } from '@/model/UserAddressInfo'
 
 export const useUserAddressStore = defineStore(UserAddress.Test, {
   state: () => {
     return {
       addressInfo: [] as IAddressInfo[],
-      userAddressInfo: {} as IUserAddressInfo
+      userAddressInfo: {} as IUserAddressInfo,
+      address: [] as IAddressInfoList[]
     }
   },
   actions: {
     // get all address info
     async getAllAddressInfo ():Promise<void> {
       const res = await reqGetAllAddressInfo()
+      console.log(res)
       if (res.code === 200) {
-        const map = res.data.reduce((pre: { [x: string]: unknown }, cur: { id: number; children: never[] }) => {
+        const map = res.data.reduce((pre: { [x: number]: unknown }, cur: { id: number; children: never[] }) => {
           pre[cur.id] = cur
           cur.children = []
           return pre
@@ -35,11 +37,20 @@ export const useUserAddressStore = defineStore(UserAddress.Test, {
         return Promise.reject(new Error('false'))
       }
     },
-    // get user all address info
-    async getUserAddressInfo (params: IAddressPrams): Promise<void> {
-      const res = await reqUserAddressInfo(params)
+    // get user page address info
+    async getUserPageAddressInfo (params: IAddressPrams): Promise<void> {
+      const res = await reqUserPageAddressInfo(params)
       if (res.code === 200) {
         this.userAddressInfo = res.data
+      } else {
+        return Promise.reject(new Error('false'))
+      }
+    },
+    // get user all user address info
+    async getUserAddressInfo (): Promise<void> {
+      const res = await reqUserAddressInfo()
+      if (res.code === 200) {
+        this.address = res.data
       } else {
         return Promise.reject(new Error('false'))
       }

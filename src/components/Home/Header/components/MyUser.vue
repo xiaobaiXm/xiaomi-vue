@@ -39,7 +39,7 @@ import { useUserStore } from '@/store/User/LoginOrRegister'
 const router = useRouter()
 const store = useUserStore()
 
-const logout = ():void => {
+const logout = (): void => {
   store.logout()
   router.push('/home')
 }
@@ -82,6 +82,7 @@ const logout = ():void => {
       height: 40px;
       text-align: center;
       transition: all .3s;
+      color: #757575;
 
       .iconfont {
         font-size: 16px;
@@ -119,7 +120,6 @@ const logout = ():void => {
             padding: 3px 30px;
             line-height: 2;
             transition: all .2s;
-            color: #424242;
 
             &:hover {
               background-color: #e0e0e0;

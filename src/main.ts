@@ -17,6 +17,7 @@ import MyBread from '@/components/Bread/MyBread.vue'
 import MyGuessLike from '@/components/GuessLike/MyGuessLike.vue'
 import MyPagination from '@/components/Pagination/MyPagination.vue'
 import MyAddress from './components/Address/MyAddress.vue'
+import MyMessageBox from './components/MessageBox/MyMessageBox.vue'
 
 const pinia = createPinia()
 pinia.use(createPersistedState())
@@ -38,6 +39,7 @@ app.component('MyLoading', MyLoading)
 app.component('MyLoopsLoading', MyLoopsLoading)
 app.component('MyPagination', MyPagination)
 app.component('MyAddress', MyAddress)
+app.component('MyMessageBox', MyMessageBox)
 
 // 图片懒加载
 app.use(lazyPlugin, {

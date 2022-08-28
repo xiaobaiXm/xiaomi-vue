@@ -8,9 +8,7 @@
       <MyDetailInfoVue></MyDetailInfoVue>
       <!-- other -->
       <MyOtherVue></MyOtherVue>
-      <!-- count -->
       <MyCountDetailVue></MyCountDetailVue>
-      <!-- footer -->
       <MyFooterDetailVue></MyFooterDetailVue>
     </div>
   </div>

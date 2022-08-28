@@ -1,10 +1,18 @@
 <template>
-  <div class="loading">
+  <div class="loading" :style="{
+    padding: padding
+  }">
     <div class="loader"></div>
   </div>
 </template>
 
 <script setup lang="ts">
+type IProps = {
+  padding?: string
+}
+withDefaults(defineProps<IProps>(), {
+  padding: ''
+})
 </script>
 
 <style lang="less" scoped>

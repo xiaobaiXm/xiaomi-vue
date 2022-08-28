@@ -26,6 +26,14 @@
 
 <script setup lang="ts">
 import MyPageMainVue from './components/MyPageMain.vue'
+
+import { useUserOrderStore } from '@/store/User/Order'
+import { useUserAddressStore } from '@/store/User/Address'
+const OrderStore = useUserOrderStore()
+const AddressStore = useUserAddressStore()
+
+OrderStore.getUserSelectProductInfo()
+AddressStore.getUserAddressInfo()
 </script>
 
 <style lang="less" scoped>

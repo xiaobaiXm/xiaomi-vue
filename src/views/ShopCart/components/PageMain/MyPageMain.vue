@@ -3,26 +3,24 @@
     <div class="container w">
       <div class="cart-container">
         <div class="container-main">
-          <!-- 未登录 -->
           <MyEmptyCartTopVue v-if="!loginFlag"></MyEmptyCartTopVue>
-          <!-- 购物车 -->
-          <MyCartWrap v-else></MyCartWrap>
-          <div class="placeholder-div"></div>
-          <!-- cart bar -->
-          <MyCartBar></MyCartBar>
-          <!-- 推荐 -->
+          <template v-else>
+            <MyEmptyCartsVue v-if="store.count <= 0"></MyEmptyCartsVue>
+            <MyCartWrap v-else></MyCartWrap>
+          </template>
+          <div class="placeholder-div" v-if="store.count > 0"></div>
+          <MyCartBar v-if="store.count > 0"></MyCartBar>
           <MyGuessLike></MyGuessLike>
         </div>
       </div>
     </div>
   </div>
-
 </template>
-
 <script setup lang="ts">
 import MyEmptyCartTopVue from './components/MyEmptyCartTop.vue'
 import MyCartWrap from './components/CartWrap/MyCartWrap.vue'
 import MyCartBar from './components/CartBar/MyCartBar.vue'
+import MyEmptyCartsVue from './components/EmptyCarts/MyEmptyCarts.vue'
 
 import { ref } from 'vue'
 import { useCartsStore } from '@/store/Carts'

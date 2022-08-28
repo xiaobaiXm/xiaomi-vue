@@ -3,9 +3,9 @@ import { HeaderMain } from '@/enums/store/home_store_name'
 
 import { reqGetBannerList, reqGetHeroListInfo, reqGetHeroBannerInfo } from '@/api/Home/index'
 
-import { IBanner } from './Type/Banner'
-import { IHeroBanner } from './Type/HeroBanner'
-import { IHeroList } from './Type/HeroList'
+import { IBanner } from '@/model/Banner'
+import { IHeroBanner } from '@/model/HeroBanner'
+import { IHeroList } from '@/model/HeroList'
 
 export const useHeaderMainStore = defineStore(HeaderMain.Test, {
   state: () => {

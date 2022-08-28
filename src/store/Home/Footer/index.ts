@@ -3,8 +3,8 @@ import { Footer } from '@/enums/store/home_store_name'
 
 import { reqGetFooterHelpOInfo, reqGetFooterNavInfo } from '@/api/Home/index'
 
-import { FooterHelp } from './Type/FooterHelp'
-import { IFooterNav } from './Type/FooterNav'
+import { FooterHelp } from '@/model/FooterHelp'
+import { IFooterNav } from '@/model/FooterNav'
 
 export const useFooter = defineStore(Footer.Test, {
   state: () => {

@@ -1,11 +1,24 @@
 <template>
   <div class="addonitems-tips">
-    <div class="tip">还需 ？？ 元可免运费</div>
-    <a href="javascript:;">去凑单<span class="iconfont icon-youjiantou"></span> </a>
+    <div class="tip">还需 {{ store.difference }} 元可免运费</div>
+    <a href="javascript:;" @click="flag= true">去凑单<span class="iconfont icon-youjiantou"></span> </a>
   </div>
+  <teleport to='body'>
+    <MyGatherSingle></MyGatherSingle>
+  </teleport>
 </template>
 
 <script setup lang="ts">
+import MyGatherSingle from '@/components/GatherSingle/MyGatherSingle.vue'
+
+import { ref, provide } from 'vue'
+import { useCartsStore } from '@/store/Carts'
+
+const store = useCartsStore()
+let flag = ref<boolean>(false)
+
+provide('gatherSingleFlag', ref(flag))
+
 </script>
 
 <style lang="less" scoped>

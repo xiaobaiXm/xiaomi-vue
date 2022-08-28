@@ -1,9 +1,9 @@
 import { defineStore } from 'pinia'
 import { UserLoginOrRegister } from '@/enums/store/user_store_name'
 import { reqLogin, reqRegister, reqUserInfo, reqVerifyName } from '@/api/User'
-import { IRegisterOrLogin } from './Type/RegisterOrLogin'
 import { getToken, setToken, removeToken } from '@/utils/token'
-import { IUserInfo } from './Type/UserInfo'
+import { IUserInfo } from '@/model/UserInfo'
+import { IRegisterOrLogin } from '@/model/RegisterOrLogin'
 
 export const useUserStore = defineStore(UserLoginOrRegister.Test, {
   state: () => {

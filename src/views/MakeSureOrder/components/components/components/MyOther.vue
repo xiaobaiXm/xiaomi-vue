@@ -6,34 +6,36 @@
       </div>
       <div class="options-desc options-body">
         <div class="options-list">
-          <div class="options-item selected">包邮</div>
+          <div class="options-item selected">{{ store.freight ===0  ? '包邮' : '快递配送（运费 10 元）' }}</div>
+          </div>
+        </div>
+      </div>
+      <div class="section-options section-invoice">
+        <div class="options-desc options-header">
+          <div class="title">发票</div>
+        </div>
+        <div class="options-desc options-body">
+          <div class="options-list">
+            <div class="options-item selected">电子普通发票</div>
+            <div class="options-item selected">个人</div>
+            <div class="options-item selected">商品明细</div>
+            <a href="javascript:;" class="options-item selected">修改<span class="iconfont icon-youjiantou"></span></a>
+          </div>
         </div>
       </div>
     </div>
-    <div class="section-options section-invoice">
-      <div class="options-desc options-header">
-        <div class="title">发票</div>
-      </div>
-      <div class="options-desc options-body">
-        <div class="options-list">
-          <div class="options-item selected">电子普通发票</div>
-          <div class="options-item selected">个人</div>
-          <div class="options-item selected">商品明细</div>
-          <a href="javascript:;" class="options-item selected">修改<span class="iconfont icon-youjiantou"></span></a>
-        </div>
-      </div>
-    </div>
-  </div>
 </template>
 
 <script setup lang="ts">
+import { useUserOrderStore } from '@/store/User/Order'
+
+const store = useUserOrderStore()
 </script>
 
 <style lang="less" scoped>
 .other {
   .section-options {
     padding: 25px 0;
-    border-bottom: 1px solid #e0e0e0;
 
     .options-desc {
       display: inline-block;
@@ -75,6 +77,10 @@
           color: #ff6700;
         }
       }
+    }
+
+    &:nth-child(1) {
+      border-bottom: 1px solid #e0e0e0;
     }
   }
 }

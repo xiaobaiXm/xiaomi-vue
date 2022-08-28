@@ -2,20 +2,20 @@
   <div class="detail-section detail-info">
     <div class="detail-header">商品及优惠券</div>
     <div class="goods-list">
-      <div class="goods-item">
+      <div class="goods-item" v-for="item in store.orderProductInfo" :key="item.id">
         <div class="item-desc good-img">
-          <img src="//cdn.cnbj0.fds.api.mi-img.com/b2c-shopapi-pms/pms_1614755062.53172736.jpg?thumb=1&w=30&h=30"
-            alt="">
+          <img v-lazy="item.cart_sku_info.img" alt="">
         </div>
         <div class="item-desc good-name">
-          <a href="#">
-            <span class="text">米家随行便携榨汁杯 白色</span>
+          <a href="javascript:;" @click="productDetail(item.cart_product_info.id)">
+            <span class="text">{{ item.cart_product_info.name }} {{ item.cart_sku_info.version }}
+              {{ item.cart_sku_info.color }}</span>
           </a>
         </div>
         <div class="item-desc price-box">
-          <div class="item-desc good-price">99元 x 1</div>
+          <div class="item-desc good-price">{{ item.cart_sku_info.price }}元 x {{ item.number }}</div>
           <div class="item-desc good-status"></div>
-          <div class="item-desc good-total">99元</div>
+          <div class="item-desc good-total">{{ item.cart_sku_info.price * item.number }}元</div>
         </div>
       </div>
     </div>
@@ -23,6 +23,10 @@
 </template>
 
 <script setup lang="ts">
+import { useUserOrderStore } from '@/store/User/Order'
+import { productDetail } from '@/hooks/Detail'
+
+const store = useUserOrderStore()
 </script>
 
 <style lang="less" scoped>

@@ -32,7 +32,7 @@
 <script setup lang="ts">
 import { computed, onMounted } from 'vue'
 import { useCartsStore } from '@/store/Carts'
-import { ICartInfo } from '@/store/Carts/Type/CartsAllInfo'
+import { ICartInfo } from '@/model/CartsAllInfo'
 import { auth } from '@/hooks/User/auth'
 const store = useCartsStore()
 const cart = defineProps<{

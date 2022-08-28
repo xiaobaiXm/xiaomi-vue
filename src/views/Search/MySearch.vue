@@ -24,7 +24,7 @@ import MySearchFilterVue from './components/SearchFilter/MySearchFilter.vue'
 import { ref, reactive, watch, provide, getCurrentInstance, defineAsyncComponent, onBeforeMount } from 'vue'
 import { useRouter } from 'vue-router'
 import { useSearchStore } from '@/store/Search'
-import { ISearch } from '@/store/Search/Type/Search'
+import { ISearch } from '@/model/Search'
 
 const MySearchResultVue = defineAsyncComponent(() => import('./components/SearchResult/MySearchResult.vue'))
 const router = useRouter()

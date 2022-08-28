@@ -3,10 +3,10 @@ import { Container } from '@/enums/store/home_store_name'
 
 import { reqGetBigBannerList, reqGetContainerList, reqGetPhoneListInfo, reqGetVideoInfo } from '@/api/Home/index'
 
-import { IBigBanner } from './Type/BigBanner'
-import { IContainer } from './Type/Container'
-import { IPhone } from './Type/Phone'
-import { IVideo } from './Type/Video'
+import { IBigBanner } from '@/model/BigBanner'
+import { IContainer } from '@/model/Container'
+import { IPhone } from '@/model/Phone'
+import { IVideo } from '@/model/Video'
 
 export const useContainerStore = defineStore(Container.Test, {
   state: () => {

@@ -1,42 +1,38 @@
 <template>
   <div class="detail-section address-detail">
+    <div class="fixed-header" v-show="fixedFlag">
+      <div class="fixed-address-choose w">
+        <a href="javascript:;" @click="choose" class="btn btn-primary choose-btn">选择该收货地址</a>
+        <div class="address-title">
+          <span class="address-desc">{{ store.address[0].consignee }}</span>
+          <span class="address-desc">{{ store.address[0].phone }}</span>
+          <span class="address-desc">{{ store.address[0].provinces }} {{ store.address[0].city }} {{
+              store.address[0].area
+          }}
+            {{ store.address[0].address_detail }}</span>
+        </div>
+      </div>
+    </div>
     <div class="address-header">
       <span class="text">收货地址</span>
     </div>
     <div class="address-list">
-      <div class="address-item active">
+      <div class="address-item" @click="chooseAddress(item, index)" :class="active === index ? 'active' : ''"
+        v-for="(item, index) in store.address" :key="item.id">
         <div class="address-info">
-          <div class="name">潘贵会</div>
+          <div class="name">{{ item.consignee }}</div>
           <div class="tel">131****3587</div>
           <div class="address-con">
-            <span>广西</span>
-            <span>柳州市</span>
-            <span>鱼峰区</span>
-            <span>麒麟街道</span>
-            <span class="info">柳州职业技术学院</span>
+            <span>{{ item.provinces }}</span>
+            <span>{{ item.city }}</span>
+            <span>{{ item.area }}</span>
+            <span>{{ item.address }}</span>
+            <span class="info">{{ item.address_detail }}</span>
           </div>
           <div class="address-action">
             <span class="modify">修改</span>
           </div>
         </div>
-        <div class="address-info-solt"></div>
-      </div>
-      <div class="address-item">
-        <div class="address-info">
-          <div class="name">潘贵会</div>
-          <div class="tel">131****3587</div>
-          <div class="address-con">
-            <span>广西</span>
-            <span>柳州市</span>
-            <span>鱼峰区</span>
-            <span>麒麟街道</span>
-            <span class="info">柳州职业技术学院</span>
-          </div>
-          <div class="address-action">
-            <span class="modify">修改</span>
-          </div>
-        </div>
-        <div class="address-info-solt"></div>
       </div>
       <div class="address-item">
         <div class="add-desc">
@@ -44,15 +40,88 @@
           <span class="text">添加新地址</span>
         </div>
       </div>
+      <div class="more-btn" @click="moreFlag = !moreFlag" v-if="store.address.length > 3">
+        <span>{{ moreFlag ? '收起' : '显示' }}更多地址<span class="iconfont"
+            :class="moreFlag ? 'icon-upforward' : 'icon-downforward'"></span></span>
+      </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
+import { ref, getCurrentInstance, onMounted, onUnmounted } from 'vue'
+import { useUserAddressStore } from '@/store/User/Address'
+import { IAddressInfoList } from '@/model/UserAddressInfo'
+import { goBack } from '@/hooks/BackTop'
+
+const instance = getCurrentInstance()
+const store = useUserAddressStore()
+let moreFlag = ref<boolean>(false)
+let fixedFlag = ref<boolean>(false)
+let active = ref<number>(-1)
+
+const chooseAddress = (item: IAddressInfoList, index: number): void => {
+  instance?.proxy?.$Bus.emit('activeOrderAddressInfo', item)
+  active.value = index
+}
+
+const choose = (): void => {
+  goBack()
+  instance?.proxy?.$Bus.emit('activeOrderAddressInfo', store.address[0])
+  active.value = 0
+}
+
+const handleScroll = (): void => {
+  if (document.documentElement.scrollTop > 500) {
+    fixedFlag.value = true
+  } else {
+    fixedFlag.value = false
+  }
+}
+
+onMounted(() => {
+  window.addEventListener('scroll', handleScroll)
+})
+onUnmounted(() => {
+  window.removeEventListener('scroll', handleScroll)
+})
 </script>
 
 <style lang="less" scoped>
 .address-detail {
+  .fixed-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 70px;
+    border-top: 1px solid #e0e0e0;
+    background-color: #fff;
+    box-shadow: 0 3px 6px rgb(0 0 0 / 10%);
+    z-index: 2;
+    transition: all .3s;
+
+    .fixed-address-choose {
+      position: relative;
+
+      .choose-btn {
+        float: right;
+      }
+
+      .address-title {
+        margin: 15px 0 0;
+        line-height: 40px;
+        color: #757575;
+
+        .address-desc {
+          display: inline-block;
+          margin-right: 25px;
+        }
+      }
+    }
+  }
+
   .address-header {
     margin-bottom: 20px;
 
@@ -149,8 +218,6 @@
         }
       }
 
-      // .address-info-solt {}
-
       &:hover {
         border-color: #b0b0b0;
 
@@ -162,6 +229,17 @@
           color: #b0b0b0;
         }
       }
+    }
+
+    .more-btn {
+      margin-bottom: 30px;
+      height: 50px;
+      line-height: 50px;
+      background-color: #eee;
+      color: #424242;
+      text-align: center;
+      cursor: pointer;
+      font-size: 14px;
     }
 
     .active {

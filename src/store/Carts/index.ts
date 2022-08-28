@@ -1,8 +1,8 @@
 import { defineStore } from 'pinia'
 import { Carts } from '@/enums/store/cart_store_name'
-import { reqGetAllUserShopCartInfo, reqCreateOrUpdateUserCartInfo, reqUpdateUserCartInfo, reqRemoveUserShopCartInfo } from '@/api/Carts'
-import { ICartInfo } from './Type/CartsAllInfo'
-import { ICreateOrUpdate, IUpdate } from '@/api/Carts/Type'
+import { reqGetAllUserShopCartInfo, reqCreateOrUpdateUserCartInfo, reqUpdateUserCartInfo, reqRemoveUserShopCartInfo, reqSelectAllUserCart } from '@/api/Carts'
+import { ICartInfo } from '@/model/CartsAllInfo'
+import { ICreateOrUpdate, IUpdate } from '@/model/Carts'
 
 export const useCartsStore = defineStore(Carts.Test, {
   state: () => {
@@ -23,7 +23,7 @@ export const useCartsStore = defineStore(Carts.Test, {
       }
     },
     // create or update user cart info
-    async createOrUpdateUserCartInfo (cartInfo:ICreateOrUpdate):Promise<void> {
+    async createOrUpdateUserCartInfo (cartInfo: ICreateOrUpdate): Promise<void> {
       const res = await reqCreateOrUpdateUserCartInfo(cartInfo)
       if (res.code === 200) {
         console.log(res)
@@ -32,10 +32,10 @@ export const useCartsStore = defineStore(Carts.Test, {
       }
     },
     // update user cart info
-    async updateUserCartInfo (productId : number, cartInfo :IUpdate):Promise<void> {
-      const res = await reqUpdateUserCartInfo(productId, cartInfo)
+    async updateUserCartInfo (id: number, cartInfo: IUpdate): Promise<void> {
+      const res = await reqUpdateUserCartInfo(id, cartInfo)
       if (res.code === 200) {
-        console.log(res)
+        this.getAllUserShopCartInfo()
       } else {
         return Promise.reject(new Error('false'))
       }
@@ -48,7 +48,36 @@ export const useCartsStore = defineStore(Carts.Test, {
       } else {
         return Promise.reject(new Error('false'))
       }
+    },
+    // select all user cart
+    async selectAllUserCart (selected: boolean): Promise<void> {
+      const res = await reqSelectAllUserCart({ selected })
+      if (res.code === 200) {
+        this.getAllUserShopCartInfo()
+      } else {
+        return Promise.reject(new Error('false'))
+      }
     }
   },
-  getters: {}
+  getters: {
+    selectCount (): number {
+      let count = 0
+      this.cart.forEach(item => {
+        if (item.selected) count++
+      })
+      return count
+    },
+    totalPrice (): number {
+      let price = 0
+      this.cart.forEach(item => {
+        if (item.selected) price += item.number * item.cart_sku_info.price
+      })
+      return price
+    },
+    difference (): number {
+      let count = 0
+      if (this.totalPrice < 70) count = 70 - this.totalPrice
+      return count
+    }
+  }
 })

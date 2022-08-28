@@ -1,11 +1,16 @@
 <template>
   <div class="total-price">
-    合计：<em>66</em>元
-    <a href="javascript:;" class="btn-primary btn-disabled">去结算</a>
+    合计：<em>{{ store.totalPrice }}</em>元
+    <a href="javascript:;" v-if="store.selectCount <= 0" class="btn-primary btn-disabled">去结算</a>
+    <router-link to="/make" v-else class="btn-primary">去结算</router-link>
   </div>
 </template>
 
 <script setup lang="ts">
+import { useCartsStore } from '@/store/Carts'
+
+const store = useCartsStore()
+
 </script>
 
 <style lang="less" scoped>

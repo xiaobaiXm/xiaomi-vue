@@ -1,8 +1,7 @@
 <template>
   <div class="goods_list">
-    <div class="goods_item">
-      <a href="javascript:;" @click="product(goods.productId)" class="goods_info"
-        v-for="goods in store.searchProductInfo.list" :key="goods.productId">
+    <div class="goods_item" v-for="goods in store.searchProductInfo.list" :key="goods.productId">
+      <a href="javascript:;" @click="product(goods.productId)" class="goods_info">
         <template v-for="item in goods.productInfo" :key="item.infoId">
           <div v-show="item.isCheck">
             <div class="figure_img">
@@ -37,7 +36,7 @@
 <script setup lang="ts">
 import { useRouter } from 'vue-router'
 import { useSearchStore } from '@/store/Search'
-import { IProductInfo } from '@/store/Search/Type/SearchProduct'
+import { IProductInfo } from '@/model/SearchProduct'
 const router = useRouter()
 const store = useSearchStore()
 

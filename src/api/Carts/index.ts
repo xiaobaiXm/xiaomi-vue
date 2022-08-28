@@ -1,9 +1,10 @@
 import requests from '@/utils/requests'
 
-import { ICreateOrUpdate, IUpdate } from './Type'
+import { ICartAllAxiosResponse } from '@/model/CartsAllInfo'
+import { ICreateOrUpdate, IUpdate, ISelected, ICartUpdateAxiosResponse, ICartSelectAllAxiosResponse } from '@/model/Carts'
 
 // 用户全部购物车接口
-export const reqGetAllUserShopCartInfo = () => requests({
+export const reqGetAllUserShopCartInfo = ():Promise<ICartAllAxiosResponse> => requests({
   url: '/cart/',
   method: 'GET'
 })
@@ -16,8 +17,8 @@ export const reqCreateOrUpdateUserCartInfo = (cartInfo:ICreateOrUpdate) => reque
 })
 
 // 更新用户购物车接口
-export const reqUpdateUserCartInfo = (productId : number, cartInfo: IUpdate) => requests({
-  url: `/cart/${productId}`,
+export const reqUpdateUserCartInfo = (id : number, cartInfo: IUpdate):Promise<ICartUpdateAxiosResponse> => requests({
+  url: `/cart/${id}`,
   method: 'PATCH',
   data: JSON.stringify(cartInfo)
 })
@@ -27,4 +28,23 @@ export const reqRemoveUserShopCartInfo = (ids: number[]) => requests({
   url: '/cart/',
   method: 'DELETE',
   data: { ids }
+})
+
+// 全选用户购物车接口
+export const reqSelectAllUserCart = (selected:ISelected):Promise<ICartSelectAllAxiosResponse> => requests({
+  url: '/cart/selectAll',
+  method: 'POST',
+  data: JSON.stringify(selected)
+})
+
+// 获取用户选中产品
+export const reqUserSelectProductInfo = ():Promise<ICartAllAxiosResponse> => requests({
+  url: '/cart/select',
+  method: 'GET'
+})
+
+// 删除已下单产品
+export const reqUserSuccessfulOrderProductInfo = () => requests({
+  url: '/cart/success',
+  method: 'POST'
 })

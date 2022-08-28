@@ -2,11 +2,11 @@
   <div class="section-bill">
     <div class="bill-item">
       <div class="bill-name">商品件数：</div>
-      <div class="bill-money">1件</div>
+      <div class="bill-money">{{store.totalCount}}件</div>
     </div>
     <div class="bill-item">
       <div class="bill-name">商品总价：</div>
-      <div class="bill-money">99元</div>
+      <div class="bill-money">{{store.totalPrice}}元</div>
     </div>
     <div class="bill-item">
       <div class="bill-name">活动优惠：</div>
@@ -18,18 +18,21 @@
     </div>
     <div class="bill-item">
       <div class="bill-name">运费：</div>
-      <div class="bill-money">0元</div>
+      <div class="bill-money">{{ store.freight ===0 ? '0' : '10' }}元</div>
     </div>
     <div class="bill-item total-price">
       <div class="bill-name">应付金额：</div>
       <div class="bill-money"><em>
-          99
+          {{store.totalPrice + store.freight}}
         </em>元</div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
+import { useUserOrderStore } from '@/store/User/Order'
+
+const store = useUserOrderStore()
 </script>
 
 <style lang="less" scoped>

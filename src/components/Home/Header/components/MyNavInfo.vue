@@ -18,7 +18,7 @@
 
 <script setup lang="ts">
 import { ref, getCurrentInstance } from 'vue'
-import { INavChild } from '@/store/Home/Header/Type/NavList'
+import { INavChild } from '@/model/NavList'
 defineProps<{
   list: INavChild[],
   flag: boolean
