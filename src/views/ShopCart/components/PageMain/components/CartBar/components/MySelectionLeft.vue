@@ -1,6 +1,6 @@
 <template>
   <div class="selection-left">
-    <a href="#" class="back-shoppinp">继续购物</a>
+    <router-link to="/category" class="back-shoppinp">继续购物</router-link>
     <span class="cart-total">已选择<i>{{ store.selectCount }}</i>件</span>
   </div>
 </template>

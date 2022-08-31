@@ -1,7 +1,9 @@
 import { defineStore } from 'pinia'
 import { UserOrder } from '@/enums/store/user_store_name'
+import { reqCreateOrder } from '@/api/Order'
 import { reqUserSelectProductInfo } from '@/api/Carts'
 import { ICartInfo } from '@/model/CartsAllInfo'
+import { IOrder } from '@/model/Order'
 
 export const useUserOrderStore = defineStore(UserOrder.Test, {
   state: () => {
@@ -15,6 +17,14 @@ export const useUserOrderStore = defineStore(UserOrder.Test, {
       const res = await reqUserSelectProductInfo()
       if (res.code === 200) {
         this.orderProductInfo = res.data.list
+      } else {
+        return Promise.reject(new Error('false'))
+      }
+    },
+    async postCreateOrder (order:IOrder) {
+      const res = await reqCreateOrder(order)
+      if (res.code === 200) {
+        console.log(res)
       } else {
         return Promise.reject(new Error('false'))
       }

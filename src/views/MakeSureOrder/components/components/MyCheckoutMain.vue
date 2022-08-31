@@ -2,11 +2,8 @@
   <div class="checkout-main">
     <div class="checkout-detail">
       <div class="fixed-header"></div>
-      <!-- address detail -->
       <MyAddressDetailVue></MyAddressDetailVue>
-      <!-- detail info -->
       <MyDetailInfoVue></MyDetailInfoVue>
-      <!-- other -->
       <MyOtherVue></MyOtherVue>
       <MyCountDetailVue></MyCountDetailVue>
       <MyFooterDetailVue></MyFooterDetailVue>

@@ -12,3 +12,9 @@ export interface INavList {
   show: boolean
   navChildren: INavChild[]
 }
+
+export interface IHomeNavListAxiosResponse {
+  code: number
+  message: string
+  data : INavList[]
+}

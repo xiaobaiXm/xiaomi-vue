@@ -55,15 +55,10 @@
 <script setup lang="ts">
 import { reactive } from 'vue'
 import { useCartsStore } from '@/store/Carts'
-
 import { ICartInfo } from '@/model/CartsAllInfo'
+import { IError } from '@/model/Error'
 
 const store = useCartsStore()
-
-type IError = {
-  flag: boolean
-  msg:string
-}
 
 let error = reactive<IError>({
   flag: false,
@@ -72,6 +67,7 @@ let error = reactive<IError>({
 
 const shutMsg = ():void => {
   error.flag = false
+  error.msg = ''
 }
 
 const productDetail = (productId: number): void => {

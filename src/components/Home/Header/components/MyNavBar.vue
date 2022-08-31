@@ -17,6 +17,7 @@ store.getHeaderNavBarList()
   position: absolute;
   top: 0;
   left: 0;
+  font-size: 12px;
 
   ul {
     li {

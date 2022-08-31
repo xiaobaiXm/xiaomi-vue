@@ -4,3 +4,9 @@ export interface IHeroList {
   icon: string,
   path: string
 }
+
+export interface IHomeHeroListAxiosResponse {
+  code: number
+  message: string
+  data : IHeroList[]
+}

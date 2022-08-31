@@ -1,7 +1,7 @@
 <template>
   <div class="main">
     <div class="cart-header-box">
-      <MyCartHeader></MyCartHeader>
+      <MySiteHeaderVue :title="'我的购物车'" :desc="'温馨提示：产品是否购买成功，以最终下单为准哦，请尽快结算'"></MySiteHeaderVue>
     </div>
     <Suspense>
       <template #default>
@@ -11,7 +11,6 @@
         <MyLoading :padding="'50px 0'"></MyLoading>
       </template>
     </Suspense>
-
   </div>
 </template>
 
@@ -19,7 +18,7 @@
 import '@/style/ShopCart/Col.less'
 import '@/style/ShopCart/BodyCol.less'
 
-import MyCartHeader from './components/CartHeader/MyCartHeader.vue'
+import MySiteHeaderVue from '@/components/SiteHeader/MySiteHeader.vue'
 import { defineAsyncComponent } from 'vue'
 
 const MyPageMainVue = defineAsyncComponent(() => import('./components/PageMain/MyPageMain.vue'))

@@ -19,7 +19,7 @@
     <router-link to="/cart" class="item cart" style="position: relative;">
       <span class="iconfont icon-xiazai1"></span>
       <span class="text">购物车</span>
-      <span class="cart-num" v-if="false">{{ 1 }}</span>
+      <span class="cart-num" v-if="store.allCount > 0">{{ store.allCount }}</span>
     </router-link>
     <a href="javascript:;" class="goBackTop item" v-if="goBackTopFlag" @click="goBack">
       <span class="iconfont icon-dingbu"></span>
@@ -59,7 +59,6 @@ onUnmounted(() => {
   bottom: 70px;
   right: 0;
   width: 84px;
-  height: 455px;
   z-index: 99;
 
   .item {

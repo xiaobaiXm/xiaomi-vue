@@ -2,7 +2,7 @@
   <div class="con_right">
     <ul>
       <li class="hover_List_up" v-for="item in phoneRight" :key="item.id">
-        <a href="#">
+        <a href="javascript:;" @click="productDetail(item.productId)">
           <div class="img">
             <img v-lazy="item.img" alt="">
           </div>
@@ -19,7 +19,9 @@
 </template>
 
 <script setup lang="ts">
-import { IPhoneChildren } from '@/store/Home/Container/Type/Phone'
+import { IPhoneChildren } from '@/model/Phone'
+
+import { productDetail } from '@/hooks/Detail'
 defineProps<{
   phoneRight : IPhoneChildren
 }>()

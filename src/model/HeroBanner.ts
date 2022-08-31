@@ -3,3 +3,9 @@ export interface IHeroBanner {
   productId: number
   img: string
 }
+
+export interface IHomeHeroBannerAxiosResponse {
+  code: number
+  message: string
+  data : IHeroBanner[]
+}

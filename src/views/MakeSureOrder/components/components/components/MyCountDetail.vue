@@ -1,7 +1,6 @@
 <template>
   <div class="detail-section count-detail">
     <MySectionDiscountVue></MySectionDiscountVue>
-
     <MySectionBillVue></MySectionBillVue>
   </div>
 </template>

@@ -27,6 +27,7 @@ store.getHeroList()
   width: 234px;
   height: 170px;
   padding: 3px;
+  font-size: 12px;
   background-color: #5f5750;
   box-sizing: border-box;
 

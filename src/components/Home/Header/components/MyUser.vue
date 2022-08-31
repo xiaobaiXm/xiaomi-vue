@@ -52,6 +52,7 @@ const logout = (): void => {
   float: right;
   height: 40px;
   line-height: 40px;
+  font-size: 12px;
 
   >.sep {
     display: inline-block;

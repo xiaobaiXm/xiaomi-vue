@@ -5,3 +5,9 @@ export interface IVideo {
   desc: string;
   link: string;
 }
+
+export interface IHomeVideoAxiosResponse {
+  code: number
+  message: string
+  data : IVideo[]
+}

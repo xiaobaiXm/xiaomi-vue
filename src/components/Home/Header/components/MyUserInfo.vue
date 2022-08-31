@@ -3,7 +3,6 @@
     <div class="shop_car">
       <MyCartVue></MyCartVue>
     </div>
-
     <MyUserVue v-if="auth()"></MyUserVue>
     <div class="userL" v-else>
       <ul>

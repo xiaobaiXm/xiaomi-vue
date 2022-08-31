@@ -4,12 +4,12 @@
       <ul class="cart-list" style="overflow: hidden scroll; max-height: 445.5px;">
         <li v-for="item in cart.list" :key="item.id">
           <div class="cart-item clearfix">
-            <a href="javascript" class="thumb" @click="productInfo(item.cart_product_info.id)">
+            <a href="javascript" class="thumb" @click="productDetail(item.cart_product_info.id)">
               <img v-lazy="item.cart_sku_info.img" alt="">
             </a>
-            <a href="javascript:;" class="name" @click="productInfo(item.cart_product_info.id)">{{
+            <a href="javascript:;" class="name" @click="productDetail(item.cart_product_info.id)">{{
                 item.cart_product_info.name
-            }} {{ item.cart_sku_info.color }}</a>
+            }} {{ item.cart_sku_info.version }} {{ item.cart_sku_info.color }}</a>
             <span class="price">{{ item.cart_sku_info.price }}元 × {{ item.number }}</span>
             <a href="javascript:;" class="btn-del" @click="removeCart(item.id)">
               <span class="iconfont icon-close"></span>
@@ -19,8 +19,8 @@
       </ul>
       <div class="cart-total clearfix">
         <span class="total">
-          共 <em>{{ cart.count }}</em> 件商品
-          <span class="price"><em>{{ totalPrice }}</em>元
+          共 <em>{{ store.allCount }}</em> 件商品
+          <span class="price"><em>{{ store.totalPrice }}</em>元
           </span>
         </span>
         <router-link to="/cart" class="btn btn-primary btn-cart">去购物车结算</router-link>
@@ -30,8 +30,9 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted } from 'vue'
+import { onMounted } from 'vue'
 import { useCartsStore } from '@/store/Carts'
+import { productDetail } from '@/hooks/Detail/index'
 import { ICartInfo } from '@/model/CartsAllInfo'
 import { auth } from '@/hooks/User/auth'
 const store = useCartsStore()
@@ -40,21 +41,9 @@ const cart = defineProps<{
   count: number
 }>()
 
-const productInfo = (productId: number): void => {
-  console.log(productId)
-}
-
 const removeCart = (id: number): void => {
   store.removeUserShopCartInfo([id])
 }
-
-const totalPrice = computed<number>((): number => {
-  let total = 0
-  cart.list.forEach((item: ICartInfo) => {
-    total = item.number * item.cart_sku_info.price
-  })
-  return total
-})
 
 onMounted(() => {
   if (auth()) {
@@ -104,18 +93,20 @@ onMounted(() => {
           }
 
           .name {
-            float: left;
+            display: inline-block;
             width: 95px;
             height: 40px;
-            line-height: 40px;
+            line-height: 20px;
             margin: 10px 0;
             color: #424242;
+            font-size: 12px;
             overflow: hidden;
           }
 
           .price {
             float: right;
             margin: 20px 20px 0 5px;
+            font-size: 12px;
           }
 
           .btn-del {

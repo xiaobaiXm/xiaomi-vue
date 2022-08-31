@@ -14,3 +14,9 @@ export interface IPhone {
   phoneArea: string
   phoneChild: IPhoneChildren
 }
+
+export interface IHomePhoneAxiosResponse {
+  code: number
+  message: string
+  data : IPhone[]
+}

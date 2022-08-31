@@ -60,10 +60,17 @@ export const useCartsStore = defineStore(Carts.Test, {
     }
   },
   getters: {
+    allCount () {
+      let count = 0
+      this.cart.forEach(item => {
+        count += item.number
+      })
+      return count
+    },
     selectCount (): number {
       let count = 0
       this.cart.forEach(item => {
-        if (item.selected) count++
+        if (item.selected) count += item.number
       })
       return count
     },

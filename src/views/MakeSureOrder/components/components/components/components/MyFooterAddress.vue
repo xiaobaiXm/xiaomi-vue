@@ -10,7 +10,6 @@
     </div>
   </div>
 </template>
-
 <script setup lang="ts">
 import { ref, reactive, getCurrentInstance } from 'vue'
 

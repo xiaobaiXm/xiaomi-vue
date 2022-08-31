@@ -22,14 +22,14 @@ export interface IContainerChildRight {
         name?: string
         oldPrice?: number
         price?: number
-        productId?: number
+        productId: number
     }>
     groupMini: Array<{
         id: number
         img: string
         name?: string
         price?: number
-        productId?: number
+        productId: number
     }>
     groupTitle: string
   }
@@ -41,4 +41,10 @@ export interface IContainer {
     left: IContainerChildLeft
     right: IContainerChildRight
   }
+}
+
+export interface IHomeContainerAxiosResponse {
+  code: number
+  message: string
+  data : IContainer[]
 }

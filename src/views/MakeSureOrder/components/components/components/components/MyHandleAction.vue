@@ -5,11 +5,61 @@
       <router-link to="/cart" class="btn btn-return">返回购物车</router-link>
     </div>
   </div>
+    <teleport to='body'>
+    <MyMessageBox v-if="error.flag" :msg="error.msg" @shutMsg="shutMsg"></MyMessageBox>
+  </teleport>
 </template>
 
 <script setup lang="ts">
+import { ref, reactive, getCurrentInstance } from 'vue'
+import { useRouter } from 'vue-router'
+import { useUserOrderStore } from '@/store/User/Order'
+import { IOrder } from '@/model/Order'
+import { IError } from '@/model/Error'
+
+const router = useRouter()
+const instance = getCurrentInstance()
+const store = useUserOrderStore()
+
+let error = reactive<IError>({
+  flag: false,
+  msg: ''
+})
+
+let addressFlag = ref<boolean>(false)
+let orderInfo = reactive<IOrder>({
+  addressId: 0,
+  productInfo: [],
+  freight: 0,
+  total: 0,
+  totalPrice: 0
+})
+
+instance?.proxy?.$Bus.on('sendOrderAddressInfo', (addressId):void => {
+  orderInfo.addressId = addressId as number
+  addressFlag.value = true
+})
+
 const settlement = ():void => {
-  console.log('ok')
+  orderInfo.productInfo = store.orderProductInfo
+  orderInfo.freight = store.freight
+  orderInfo.totalPrice = store.totalPrice
+  orderInfo.total = store.totalCount
+  if (addressFlag.value) {
+    try {
+      store.postCreateOrder(orderInfo)
+    } catch (err) {
+
+    }
+  } else {
+    error.flag = true
+    error.msg = '请选择地址'
+  }
+}
+
+const shutMsg = ():void => {
+  error.flag = false
+  error.msg = ''
 }
 </script>
 

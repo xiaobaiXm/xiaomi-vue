@@ -3,12 +3,12 @@
     <ul>
       <li>
         <template v-if="!child">
-          <a href="#" class="big hover_List_up">
+          <a href="javascript:;" @click="productDetail(list.containerLeft[0].productId)" class="big hover_List_up">
             <img v-lazy="list.containerLeft[0].img" alt="">
           </a>
         </template>
         <template v-else>
-          <a href="#" class="mini hover_List_up" v-for="item  in list.containerLeft" :key="item.id">
+          <a href="javascript:;" @click="productDetail(item.productId)" class="mini hover_List_up" v-for="item  in list.containerLeft" :key="item.id">
             <img v-lazy="item.img" alt="">
           </a>
         </template>
@@ -18,8 +18,9 @@
 </template>
 
 <script setup lang="ts">
-import { IContainerChildLeft } from '@/store/Home/Container/Type/Container'
+import { IContainerChildLeft } from '@/model/Container'
 import { computed } from 'vue'
+import { productDetail } from '@/hooks/Detail'
 
 const list = defineProps<{
   containerLeft: IContainerChildLeft

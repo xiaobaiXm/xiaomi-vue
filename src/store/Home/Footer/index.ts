@@ -1,15 +1,15 @@
 import { defineStore } from 'pinia'
 import { Footer } from '@/enums/store/home_store_name'
 
-import { reqGetFooterHelpOInfo, reqGetFooterNavInfo } from '@/api/Home/index'
+import { reqGetFooterHelpOInfo, reqGetFooterNavInfo } from '@/api/Home'
 
-import { FooterHelp } from '@/model/FooterHelp'
+import { IFooterHelp } from '@/model/FooterHelp'
 import { IFooterNav } from '@/model/FooterNav'
 
 export const useFooter = defineStore(Footer.Test, {
   state: () => {
     return {
-      footerHelpList: [] as FooterHelp[],
+      footerHelpList: [] as IFooterHelp[],
       footerNavList: [] as IFooterNav[]
     }
   },

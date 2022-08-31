@@ -21,3 +21,9 @@ export interface ISearchProductInfo {
   pageSize: number
   total: number
 }
+
+export interface ISearchProductAxiosResponse {
+  code: number
+  message: string
+  data : ISearchProductInfo
+}

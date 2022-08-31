@@ -1,10 +1,10 @@
-export interface ISearch {
+export type ISearch = {
   keyword: string
   order: string
   filterTag: Array<{
     promotion: boolean
     installment: boolean
-    available:boolean
+    available: boolean
   }>
   pageNo: number
   pageSize: number

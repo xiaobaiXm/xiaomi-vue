@@ -2,9 +2,6 @@
   <div class="page-main">
     <div class="container w">
       <div class="checkout-wrap">
-        <!-- loading -->
-        <div class="loading"></div>
-        <!-- main -->
         <MyCheckoutMainVue></MyCheckoutMainVue>
       </div>
     </div>
@@ -12,7 +9,9 @@
 </template>
 
 <script setup lang="ts">
-import MyCheckoutMainVue from './components/MyCheckoutMain.vue'
+import { defineAsyncComponent } from 'vue'
+
+const MyCheckoutMainVue = defineAsyncComponent(() => import('./components/MyCheckoutMain.vue'))
 </script>
 
 <style lang="less" scoped>

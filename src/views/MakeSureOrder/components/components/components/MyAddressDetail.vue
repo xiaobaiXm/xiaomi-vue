@@ -63,12 +63,14 @@ let active = ref<number>(-1)
 const chooseAddress = (item: IAddressInfoList, index: number): void => {
   instance?.proxy?.$Bus.emit('activeOrderAddressInfo', item)
   active.value = index
+  sendAddressInfo(item.id)
 }
 
 const choose = (): void => {
   goBack()
   instance?.proxy?.$Bus.emit('activeOrderAddressInfo', store.address[0])
   active.value = 0
+  sendAddressInfo(store.address[0].id)
 }
 
 const handleScroll = (): void => {
@@ -77,6 +79,10 @@ const handleScroll = (): void => {
   } else {
     fixedFlag.value = false
   }
+}
+
+const sendAddressInfo = (addressId:number | undefined): void => {
+  instance?.proxy?.$Bus.emit('sendOrderAddressInfo', addressId)
 }
 
 onMounted(() => {

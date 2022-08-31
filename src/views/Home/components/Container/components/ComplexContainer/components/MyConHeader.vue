@@ -3,7 +3,7 @@
     <h2>{{ title }}</h2>
     <div class="more">
       <ul class="tab_lists">
-        <li v-for="( item, index ) in container" :key="index" :class="flag === index ? 'tab_active' : ''"
+        <li v-for="( item, index ) in list" :key="index" :class="flag === index ? 'tab_active' : ''"
           @mouseenter="flagChange(index)">{{ item.groupTitle }}</li>
       </ul>
     </div>
@@ -11,26 +11,24 @@
 </template>
 
 <script setup lang="ts">
-import { ref, getCurrentInstance } from 'vue'
-import { IContainerChildRight } from '@/store/Home/Container/Type/Container'
-let flag = ref<number | string>(0)
+import { ref, Ref, inject } from 'vue'
+import { IContainerChildRight } from '@/model/Container'
 
-const instance = getCurrentInstance()
-
-const flagChange = (index: number | string) => {
-  flag.value = index
-  instance?.proxy?.$Bus.emit('containerIndexChange', index)
-}
+const flag = inject<Ref<number>>('containerFlag', ref(0))
 
 defineProps<{
-  container: IContainerChildRight,
-  title: string,
-}>()
+  list: IContainerChildRight
+    title: string,
+  }>()
+
+const flagChange = (newIndex: number): void => {
+  flag.value = newIndex
+}
 
 </script>
 
 <style lang="less" scoped>
-.con_header {
+  .con_header {
   height: 58px;
 
   h2 {
@@ -62,4 +60,5 @@ defineProps<{
     }
   }
 }
+
 </style>

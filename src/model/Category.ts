@@ -8,3 +8,9 @@ export interface ICategory {
     keyword: boolean
   }>
 }
+
+export interface IHomeCategoryAxiosResponse {
+  code: number
+  message: string
+  data : ICategory[]
+}

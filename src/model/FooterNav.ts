@@ -6,3 +6,9 @@ export interface IFooterNav {
     path: string
   }>
 }
+
+export interface IHomeFooterNavAxiosResponse {
+  code: number
+  message: string
+  data : IFooterNav[]
+}

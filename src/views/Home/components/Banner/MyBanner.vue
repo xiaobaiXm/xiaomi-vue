@@ -26,7 +26,7 @@ import { useHeaderMainStore } from '@/store/Home/HeaderMain/index'
 const modules = [Autoplay, EffectFade, Navigation, Pagination]
 
 const store = useHeaderMainStore()
-// 加载数据
+
 store.getBannerList()
 
 </script>

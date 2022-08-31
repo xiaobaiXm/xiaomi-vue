@@ -4,8 +4,8 @@
       <template v-for="(conItem, index) in containerRight" :key="index">
         <ul v-show="flag == index">
           <div v-for="item in conItem.groupChildren" :key="item.id">
-            <li class="hover_List_up">
-              <a href="#">
+            <li class="hover_List_up" @click="productDetail(item.productId)">
+              <a href="javascript:;">
                 <div class="img">
                   <img v-lazy="item.img" alt="">
                 </div>
@@ -22,7 +22,7 @@
           </div>
           <div v-if="conItem.groupMini.length > 0">
             <li id="go_hot" class="hover_List_up">
-              <a href="#" class="go_a_hot">
+              <a href="javascript:;" class="go_a_hot">
                 <section class="move">
                   <h3 class="good_title">{{ conItem.groupMini[0].name }}</h3>
                   <span class="price">{{ conItem.groupMini[0].price }}元</span>
@@ -35,7 +35,7 @@
           </div>
           <div>
             <li id="go_hot" class="hover_List_up">
-              <a href="#" class="go_a_hot">
+              <a href="javascript:;" class="go_a_hot">
                 <section class="move">
                   <h3 class="title">浏览更多</h3>
                   <span class="text">{{ conItem.groupTitle }}</span>
@@ -51,16 +51,11 @@
 </template>
 
 <script setup lang="ts">
-import { ref, getCurrentInstance } from 'vue'
-import { IContainerChildRight } from '@/store/Home/Container/Type/Container'
-const instance = getCurrentInstance()
+import { ref, Ref, inject } from 'vue'
+import { IContainerChildRight } from '@/model/Container'
+import { productDetail } from '@/hooks/Detail'
 
-let flag = ref<number | string>(0)
-
-instance?.proxy?.$Bus.on('containerIndexChange', (index): void => {
-  console.log('index', index)
-  flag.value = index as number | string
-})
+const flag = inject<Ref<number>>('containerFlag', ref(0))
 
 defineProps<{
   containerRight: IContainerChildRight
@@ -69,6 +64,7 @@ defineProps<{
 </script>
 
 <style lang="less" scoped>
+
 .con_right {
 
   div {

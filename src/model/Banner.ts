@@ -3,3 +3,9 @@ export interface IBanner {
   img: string,
   productId: number
 }
+
+export interface IHomeBannerAxiosResponse {
+  code: number
+  message: string
+  data : IBanner[]
+}
