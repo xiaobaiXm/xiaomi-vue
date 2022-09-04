@@ -1,11 +1,11 @@
 <template>
   <div class="footer-address" v-if="flag">
-    <div class="selecter-address">
+    <div class="select-address">
       <div class="address-name">{{ activeAddress.consignee }} {{activeAddress.phone}}</div>
       <div class="address-desc">
         <span class="info">{{ activeAddress.provinces }} {{ activeAddress.city }} {{ activeAddress.area }}
             {{ activeAddress.address_detail }}</span>
-        <a href="javascript:;" @Click="changeAddress"> 修改</a>
+        <a href="javascript:;" @click="changeAddress"> 修改</a>
       </div>
     </div>
   </div>
@@ -33,7 +33,7 @@ const changeAddress = () => {
 .footer-address {
   float: left;
 
-  .selecter-address {
+  .select-address {
     .address-name {
       line-height: 20px;
       color: #424242;

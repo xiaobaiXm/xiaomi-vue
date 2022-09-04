@@ -64,6 +64,7 @@ const chooseAddress = (item: IAddressInfoList, index: number): void => {
   instance?.proxy?.$Bus.emit('activeOrderAddressInfo', item)
   active.value = index
   sendAddressInfo(item.id)
+  window.removeEventListener('scroll', handleScroll)
 }
 
 const choose = (): void => {
@@ -71,6 +72,8 @@ const choose = (): void => {
   instance?.proxy?.$Bus.emit('activeOrderAddressInfo', store.address[0])
   active.value = 0
   sendAddressInfo(store.address[0].id)
+  window.removeEventListener('scroll', handleScroll)
+  fixedFlag.value = false
 }
 
 const handleScroll = (): void => {

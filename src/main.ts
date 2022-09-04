@@ -14,10 +14,10 @@ import MyLoading from '@/components/Loading/MyLoading.vue'
 import MyLoopsLoading from '@/components/Loading/MyLoopsLoading.vue'
 import MyFixedSlideBar from '@/components/Home/MyFixedSlideBar.vue'
 import MyBread from '@/components/Bread/MyBread.vue'
-import MyGuessLike from '@/components/GuessLike/MyGuessLike.vue'
 import MyPagination from '@/components/Pagination/MyPagination.vue'
 import MyAddress from './components/Address/MyAddress.vue'
 import MyMessageBox from './components/MessageBox/MyMessageBox.vue'
+import MyWarningMsgBox from './components/WarningMsgBox/MyWarningMsgBox.vue'
 
 const pinia = createPinia()
 pinia.use(createPersistedState())
@@ -34,12 +34,12 @@ const app = createApp(App)
 // 注册全局组件
 app.component('MyFixedSlideBar', MyFixedSlideBar)
 app.component('MyBread', MyBread)
-app.component('MyGuessLike', MyGuessLike)
 app.component('MyLoading', MyLoading)
 app.component('MyLoopsLoading', MyLoopsLoading)
 app.component('MyPagination', MyPagination)
 app.component('MyAddress', MyAddress)
 app.component('MyMessageBox', MyMessageBox)
+app.component('MyWarningMsgBox', MyWarningMsgBox)
 
 // 图片懒加载
 app.use(lazyPlugin, {

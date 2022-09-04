@@ -91,6 +91,12 @@ const routes: Array<RouteRecordRaw> = [
     name: 'Make',
     component: () => import('@/views/MakeSureOrder/MyMakeSureOrder.vue'),
     meta: { HeaderShow: false, FooterShow: true, FixedSlideBar: false } as RouteMeta
+  },
+  {
+    path: '/confirm:orderNum?',
+    name: 'Confirm',
+    component: () => import('@/views/ConfirmOrder/MyConfirmOrder.vue'),
+    meta: { HeaderShow: false, FooterShow: true, FixedSlideBar: false } as RouteMeta
   }
 ]
 

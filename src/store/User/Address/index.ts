@@ -18,7 +18,6 @@ export const useUserAddressStore = defineStore(UserAddress.Test, {
     // get all address info
     async getAllAddressInfo ():Promise<void> {
       const res = await reqGetAllAddressInfo()
-      console.log(res)
       if (res.code === 200) {
         const map = res.data.reduce((pre: { [x: number]: unknown }, cur: { id: number; children: never[] }) => {
           pre[cur.id] = cur

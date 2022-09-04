@@ -3,7 +3,7 @@
     <div class="cart-recommend">
       <div class="recommend-bd">
         <ul class="recommend-list">
-          <li class="recommend-item">
+          <li class="recommend-item" v-for="(item, index) in 10" :key="index">
             <a href="javascript:;">
               <img
                 src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/45e49d5b5f78f11e9f99a9f95381235e.jpg?thumb=1&w=225&h=225&f=webp&q=90"
@@ -12,10 +12,10 @@
               <div class="price">229元</div>
               <div class="tips">70.9万人好评</div>
               <div class="recommend-action ">
-                <a href="javascript:;" class="btn btn-small btn-line-primary" @click="joinCart">加入购物车</a>
+                <a href="javascript:;" class="btn btn-small btn-line-primary" @click="joinCart(index)">加入购物车</a>
               </div>
-              <div class="recommend-notice" :class="flag === 0 ? 'joinCart' : ''">
-                <a href="#" class="btn btn-green btn-block">成功加入购物车</a>
+              <div class="recommend-notice" :class="flag === index ? 'joinCart' : ''">
+                <a href="javascript:;" class="btn btn-green btn-block">成功加入购物车</a>
               </div>
             </a>
           </li>
@@ -26,23 +26,13 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
-let flag = ref<number>(1)
-// eslint-disable-next-line no-undef
-let timer: null| NodeJS.Timeout = null
-
-const joinCart = (): void => {
-  flag.value = 0
-  timer = setTimeout(() => {
-    flag.value = 1
-    clearInterval(Number(timer))
-  }, 1500)
-}
+import { flag, joinCart } from '@/hooks/Guess'
 
 </script>
 
 <style lang="less" scoped>
 .empty-cart-bottom {
+
   .cart-recommend {
     margin: 60px 0 0;
 
@@ -111,7 +101,7 @@ const joinCart = (): void => {
               color: #757575;
             }
 
-            .add_shopcar {
+            .add_shop_car {
               position: absolute;
               bottom: -35px;
               left: 50%;
@@ -132,13 +122,94 @@ const joinCart = (): void => {
               }
             }
 
-          }
-
-          &:hover {
             .recommend-action {
+              position: absolute;
+              left: 0;
+              bottom: 10px;
+              width: 100%;
+              opacity: 1;
+              transform: translate3d(0, 200%, 0);
+              transition: all .4s;
+            }
+
+            .recommend-notice {
+              position: absolute;
+              top: 0;
+              left: 0;
+              z-index: 5;
+              width: 100%;
+              opacity: 0;
+              transform: translate3d(0, -10px, 0);
+              transition: all .2s linear;
+
+            }
+
+            .joinCart {
+              opacity: 1 !important;
               transform: none !important;
             }
+
+            .recommend-action,
+            .recommend-notice {
+
+              .btn {
+                display: inline-block;
+                width: 158px;
+                height: 38px;
+                padding: 0;
+                margin: 0;
+                border: 1px solid #b0b0b0;
+                font-size: 12px !important;
+                line-height: 38px;
+                text-align: center;
+                color: #b0b0b0;
+                cursor: pointer;
+                transition: all .4s;
+              }
+
+              .btn-line-primary {
+                border-color: #ff6700;
+                background: #fff;
+                color: #ff6700;
+
+                &:hover {
+                  color: #fff !important;
+                  background-color: #ff6700;
+                }
+              }
+
+              .btn-small {
+                width: 118px;
+                height: 28px;
+                font-size: 12px;
+                line-height: 28px;
+              }
+
+              .btn-green {
+                background: #83c44e;
+                border-color: #83c44e;
+                color: #fff;
+
+                &:hover {
+                  color: #fff !important;
+                }
+              }
+
+              .btn-block {
+                display: block;
+                width: 100%;
+                padding-left: 0;
+                padding-right: 0;
+              }
+            }
+
+            &:hover {
+              .recommend-action {
+                transform: none !important;
+              }
+            }
           }
+
         }
       }
     }

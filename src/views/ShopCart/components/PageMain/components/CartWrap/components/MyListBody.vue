@@ -38,7 +38,7 @@
             </div>
             <div class="col col-total">{{ item.number * item.cart_sku_info.price }}元</div>
             <div class="col col-action">
-              <a href="javascript:;" class="del" @click="remove(item)">
+              <a href="javascript:;" class="del" @click="remove(item.id)">
                 <span class="iconfont icon-close"></span>
               </a>
             </div>
@@ -50,13 +50,17 @@
   <teleport to='body'>
     <MyMessageBox v-if="error.flag" :msg="error.msg" @shutMsg="shutMsg"></MyMessageBox>
   </teleport>
+  <teleport to='body'>
+    <MyWarningMsgBox v-if="warning.flag" :msg="warning.msg" @confirm="confirm" @cancel="cancel"></MyWarningMsgBox>
+  </teleport>
 </template>
 
 <script setup lang="ts">
-import { reactive } from 'vue'
+import { ref, reactive } from 'vue'
 import { useCartsStore } from '@/store/Carts'
 import { ICartInfo } from '@/model/CartsAllInfo'
 import { IError } from '@/model/Error'
+import { IWarning } from '@/model/Warning'
 
 const store = useCartsStore()
 
@@ -65,10 +69,12 @@ let error = reactive<IError>({
   msg: ''
 })
 
-const shutMsg = ():void => {
-  error.flag = false
-  error.msg = ''
-}
+let warning = reactive<IWarning>({
+  flag: false,
+  msg: ''
+})
+
+let id = ref<number>(0)
 
 const productDetail = (productId: number): void => {
   console.log(productId)
@@ -119,12 +125,28 @@ const updateSelected = (item: ICartInfo): void => {
 }
 
 // 想删除多个可以自己写一个按钮 删除参数列表是一个数组
-const remove = (item: ICartInfo): void => {
+const remove = (ids:number): void => {
+  warning.flag = true
+  warning.msg = '确认删除所选商品吗？'
+  id.value = ids
+}
+
+const confirm = ():void => {
   try {
-    store.removeUserShopCartInfo([item.id])
+    store.removeUserShopCartInfo([id.value])
+    warning.flag = false
   } catch (err) {
 
   }
+}
+
+const cancel = ():void => {
+  warning.flag = false
+}
+
+const shutMsg = ():void => {
+  error.flag = false
+  error.msg = ''
 }
 </script>
 

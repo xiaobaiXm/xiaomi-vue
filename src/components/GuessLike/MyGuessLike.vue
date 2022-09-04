@@ -1,9 +1,8 @@
 <template>
   <div class="search_favourite w">
     <div class="recommend clearfix">
-      <MyRecommendTitleVue></MyRecommendTitleVue>
-      <MyRecommendSearchVue v-if="show"></MyRecommendSearchVue>
-      <MyEmptyCartBottom v-if="!show"></MyEmptyCartBottom>
+      <MyRecommendTitleVue :title="title"></MyRecommendTitleVue>
+      <MyRecommendSearchVue></MyRecommendSearchVue>
     </div>
   </div>
 </template>
@@ -11,23 +10,10 @@
 <script setup lang="ts">
 import MyRecommendTitleVue from './components/MyRecommendTitle.vue'
 import MyRecommendSearchVue from './components/MyRecommendSearch.vue'
-import MyEmptyCartBottom from './components/MyEmptyCartBottom.vue'
 
-import { useRouter } from 'vue-router'
-import { computed } from 'vue'
-const router = useRouter()
-const currentRoute = router.currentRoute
-
-const show = computed(() => {
-  let flag = null
-  if (currentRoute.value.path === '/cart') {
-    flag = false
-  } else {
-    flag = true
-  }
-  return flag
-})
-
+defineProps<{
+  title: string
+}>()
 </script>
 
 <style lang="less" scoped>

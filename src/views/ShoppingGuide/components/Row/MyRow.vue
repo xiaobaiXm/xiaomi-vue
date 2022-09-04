@@ -1,8 +1,6 @@
 <template>
   <div class="row">
-    <!-- left -->
     <MyLeftVue></MyLeftVue>
-    <!-- right -->
     <MyRightVue></MyRightVue>
   </div>
 </template>

@@ -57,6 +57,7 @@ import MyInfoLinksVue from './components/MyInfoLinks.vue'
   height: 265px;
   padding: 30px 0;
   box-sizing: border-box;
+  font-size: 12px;
 
   .container {
     position: relative;

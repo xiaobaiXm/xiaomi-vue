@@ -1,8 +1,6 @@
 <template>
   <div class="site_footer clearfix">
-    <!-- header -->
     <MySieHeaderVue></MySieHeaderVue>
-    <!-- body -->
     <MySiteBodyVue></MySiteBodyVue>
   </div>
 </template>

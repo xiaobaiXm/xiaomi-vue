@@ -21,7 +21,7 @@ export const useUserOrderStore = defineStore(UserOrder.Test, {
         return Promise.reject(new Error('false'))
       }
     },
-    async postCreateOrder (order:IOrder) {
+    async postCreateOrder (order:IOrder):Promise<void> {
       const res = await reqCreateOrder(order)
       if (res.code === 200) {
         console.log(res)

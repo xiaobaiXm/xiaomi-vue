@@ -14,7 +14,14 @@
     </keep-alive>
     <MyPagination v-if="total > 20" @updateData="updateData" :total="total" :pageNo="pageNo" :pageSize="pageSize"
       :continues="5"></MyPagination>
-    <MyGuessLike></MyGuessLike>
+    <Suspense>
+      <template #default>
+        <MyGuessLike :title="'猜你喜欢'"></MyGuessLike>
+      </template>
+      <template #fallback>
+        <MyLoading></MyLoading>
+      </template>
+    </Suspense>
   </div>
 </template>
 
@@ -27,6 +34,7 @@ import { useSearchStore } from '@/store/Search'
 import { ISearch } from '@/model/Search'
 
 const MySearchResultVue = defineAsyncComponent(() => import('./components/SearchResult/MySearchResult.vue'))
+const MyGuessLike = defineAsyncComponent(() => import('@/components/GuessLike/MyGuessLike.vue'))
 const router = useRouter()
 const currentRoute = router.currentRoute
 const store = useSearchStore()

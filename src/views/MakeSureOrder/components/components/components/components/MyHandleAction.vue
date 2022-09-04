@@ -48,6 +48,7 @@ const settlement = ():void => {
   if (addressFlag.value) {
     try {
       store.postCreateOrder(orderInfo)
+      const location = { name: 'Confirm', query: { } }
     } catch (err) {
 
     }

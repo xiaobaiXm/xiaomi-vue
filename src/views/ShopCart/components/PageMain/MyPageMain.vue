@@ -10,7 +10,14 @@
           </template>
           <div class="placeholder-div" v-if="store.count > 0"></div>
           <MyCartBar v-if="store.count > 0"></MyCartBar>
-          <MyGuessLike></MyGuessLike>
+          <Suspense>
+            <template #default>
+              <MyGuessYouBuyVue :title="'买购物车中商品的人还买了'"></MyGuessYouBuyVue>
+            </template>
+            <template #callback>
+              <MyLoading></MyLoading>
+            </template>
+          </Suspense>
         </div>
       </div>
     </div>
@@ -21,11 +28,11 @@ import MyEmptyCartTopVue from './components/MyEmptyCartTop.vue'
 import MyCartWrap from './components/CartWrap/MyCartWrap.vue'
 import MyCartBar from './components/CartBar/MyCartBar.vue'
 import MyEmptyCartsVue from './components/EmptyCarts/MyEmptyCarts.vue'
-
-import { ref } from 'vue'
+import { ref, defineAsyncComponent } from 'vue'
 import { useCartsStore } from '@/store/Carts'
 import { auth } from '@/hooks/User/auth'
 
+const MyGuessYouBuyVue = defineAsyncComponent(() => import('@/components/GuessYouBuy/MyGuessYouBuy.vue'))
 const store = useCartsStore()
 let loginFlag = ref<boolean>(false)
 
