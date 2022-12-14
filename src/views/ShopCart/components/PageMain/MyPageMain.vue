@@ -29,7 +29,7 @@ import MyCartWrap from './components/CartWrap/MyCartWrap.vue'
 import MyCartBar from './components/CartBar/MyCartBar.vue'
 import MyEmptyCartsVue from './components/EmptyCarts/MyEmptyCarts.vue'
 import { ref, defineAsyncComponent } from 'vue'
-import { useCartsStore } from '@/store/Carts'
+import { useCartsStore } from '@/store/carts'
 import { auth } from '@/hooks/User/auth'
 
 const MyGuessYouBuyVue = defineAsyncComponent(() => import('@/components/GuessYouBuy/MyGuessYouBuy.vue'))

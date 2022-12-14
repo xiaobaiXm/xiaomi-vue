@@ -16,12 +16,11 @@ import MyMoreVue from '@/components/Home/MyMore.vue'
 import MyConLeftVue from './components/MyConLeft.vue'
 import MyConRightVue from './components/MyConRight.vue'
 
-import { useContainerStore } from '@/store/Home/Container'
+import { useHomeStore } from '@/store/home'
 
-const store = useContainerStore()
+const store = useHomeStore()
 
 store.getPhoneListInfo()
-
 </script>
 
 <style lang="less" scoped>

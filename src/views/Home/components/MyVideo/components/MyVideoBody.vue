@@ -1,11 +1,10 @@
 <template>
   <div class="video_body clearfix">
     <ul class="clearfix">
-      <li class="hover_List_up clearfix" v-for="item in store.videoList"
-       :key="item.id">
+      <li class="hover_List_up clearfix" v-for="item in store.videoList" :key="item.id">
         <a href="javascript:;">
           <div class="video_img">
-            <img v-lazy="item.img" alt="点击播放视频" @click="videoInfo(item)">
+            <img v-lazy="item.img" alt="点击播放视频" @click="videoInfo(item)" />
             <span class="video_play" @click="videoInfo(item)"><span class="iconfont icon-bofang"></span></span>
           </div>
           <h3 class="title">{{ item.title }}</h3>
@@ -15,18 +14,18 @@
     </ul>
   </div>
   <template v-if="videoInfoFlag">
-  <MyVideoInfo :title="title" :link="link" @cutVideoInfo="cutVideoInfo"></MyVideoInfo>
+    <MyVideoInfo :title="title" :link="link" @cutVideoInfo="cutVideoInfo"></MyVideoInfo>
   </template>
 </template>
 
 <script setup lang="ts">
 import MyVideoInfo from '@/components/VideoInfo/MyVideoInfo.vue'
-import { useContainerStore } from '@/store/Home/Container'
-import { IVideo } from '@/store/Home/Container/Type/Video'
+import { useHomeStore } from '@/store/home'
+import { IVideo } from '@/model/Video'
 
 import { ref } from 'vue'
 
-const store = useContainerStore()
+const store = useHomeStore()
 
 store.getVideoListInfo()
 
@@ -34,21 +33,19 @@ let videoInfoFlag = ref<boolean>(false)
 let title = ref<string>('')
 let link = ref<string>('')
 
-const cutVideoInfo = (flag:boolean):void => {
+const cutVideoInfo = (flag: boolean): void => {
   videoInfoFlag.value = flag
 }
 
-const videoInfo = (item:IVideo):void => {
+const videoInfo = (item: IVideo): void => {
   videoInfoFlag.value = true
   title.value = item.title
   link.value = item.link
 }
-
 </script>
 
 <style lang="less" scoped>
 .video_body {
-
   ul {
     height: 285px;
     display: grid;
@@ -57,7 +54,7 @@ const videoInfo = (item:IVideo):void => {
 
     li {
       background-color: #fff;
-      transition: all .2s;
+      transition: all 0.2s;
 
       a {
         display: block;
@@ -85,9 +82,9 @@ const videoInfo = (item:IVideo):void => {
             border: 2px solid #fff;
             border-radius: 12px;
             background-color: #424242;
-            background-color: rgba(0, 0, 0, .6);
+            background-color: rgba(0, 0, 0, 0.6);
             color: #fff;
-            transition: all .2s;
+            transition: all 0.2s;
             overflow: hidden;
 
             .iconfont {
@@ -103,7 +100,6 @@ const videoInfo = (item:IVideo):void => {
               background-color: #ff6700;
               border-color: #ff6700;
             }
-
           }
         }
 

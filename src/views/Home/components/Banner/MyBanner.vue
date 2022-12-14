@@ -1,12 +1,19 @@
 <template>
   <div class="banner">
-    <swiper :spaceBetween="30" :effect="'fade'" :navigation="true" :loop="true" :pagination="{
-      clickable: true,
-    }"
-    :autoplay="{
-  delay: 6000,
-  disableOnInteraction: false,
-}" :modules="modules" class="mySwiper">
+    <swiper
+      :spaceBetween="30"
+      :effect="'fade'"
+      :navigation="true"
+      :loop="true"
+      :pagination="{
+        clickable: true,
+      }"
+      :autoplay="{
+        delay: 6000,
+        disableOnInteraction: false,
+      }"
+      :modules="modules"
+      class="mySwiper">
       <swiper-slide v-for="item in store.bannerList" :key="item.id">
         <a href="#"> <img :src="item.img" /></a>
       </swiper-slide>
@@ -21,14 +28,13 @@ import 'swiper/css/navigation'
 import 'swiper/css/pagination'
 import { Autoplay, EffectFade, Navigation, Pagination } from 'swiper'
 
-import { useHeaderMainStore } from '@/store/Home/HeaderMain/index'
+import { useHomeStore } from '@/store/homeMain/index'
 
 const modules = [Autoplay, EffectFade, Navigation, Pagination]
 
-const store = useHeaderMainStore()
+const store = useHomeStore()
 
 store.getBannerList()
-
 </script>
 
 <style lang="less" scoped>
@@ -71,16 +77,16 @@ store.getBannerList()
     width: 6px;
     height: 6px;
     border: 2px solid #fff;
-    border-color: hsla(0, 0%, 100%, .3);
+    border-color: hsla(0, 0%, 100%, 0.3);
     border-radius: 10px;
     overflow: hidden;
-    background: rgba(0, 0, 0, .4);
+    background: rgba(0, 0, 0, 0.4);
     opacity: 1;
   }
 
   .swiper::v-deep .swiper-pagination .swiper-pagination-bullet-active {
-    background: hsla(0, 0%, 100%, .4);
-    border-color: rgba(0, 0, 0, .4);
+    background: hsla(0, 0%, 100%, 0.4);
+    border-color: rgba(0, 0, 0, 0.4);
   }
 
   .swiper::v-deep .swiper-button-prev,
@@ -88,12 +94,12 @@ store.getBannerList()
     width: 41px;
     height: 65px;
     color: #d1d1d1;
-    transition: all .3s;
+    transition: all 0.3s;
 
     &:hover {
       color: white;
       background-color: #7c7c7c;
-      opacity: .7;
+      opacity: 0.7;
     }
 
     &:after {

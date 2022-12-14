@@ -89,7 +89,7 @@
 
 <script setup lang="ts">
 import { ref, reactive, computed, watch, onMounted } from 'vue'
-import { useUserAddressStore } from '@/store/User/Address'
+import { useUserAddressStore } from '@/store/address'
 import { IAddressInfoFlag, IPage } from './Type'
 import { IAddressInfo, ICity, IArea, IAddress } from '@/model/AddressInfo'
 import { IAddressInfoList } from '@/model/UserAddressInfo'

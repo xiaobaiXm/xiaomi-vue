@@ -21,7 +21,7 @@ em<template>
 
 <script setup lang="ts">
 import { ref, watch, defineAsyncComponent, onMounted } from 'vue'
-import { useCartsStore } from '@/store/Carts'
+import { useCartsStore } from '@/store/carts'
 import { auth } from '@/hooks/User/auth'
 
 const store = useCartsStore()

@@ -16,8 +16,8 @@
 import MySiteHeaderVue from '@/components/SiteHeader/MySiteHeader.vue'
 import MyPageMainVue from './components/MyPageMain.vue'
 
-import { useUserOrderStore } from '@/store/User/Order'
-import { useUserAddressStore } from '@/store/User/Address'
+import { useUserOrderStore } from '@/store/order'
+import { useUserAddressStore } from '@/store/address'
 const OrderStore = useUserOrderStore()
 const AddressStore = useUserAddressStore()
 

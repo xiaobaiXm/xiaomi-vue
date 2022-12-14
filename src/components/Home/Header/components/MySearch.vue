@@ -18,7 +18,7 @@
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 
-import { useSearchStore } from '@/store/Search'
+import { useSearchStore } from '@/store/search'
 
 const router = useRouter()
 const store = useSearchStore()

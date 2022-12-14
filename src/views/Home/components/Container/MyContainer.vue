@@ -7,10 +7,10 @@
         <MyComplexContainer v-for="(item, index) in store.firstContainer" :key="index" :list="item">
         </MyComplexContainer>
         <!-- <MyBigBanner :img="store.bigBannerList[1].img"></MyBigBanner> -->
-        <MyComplexContainer v-for=" (item, index) in store.contentContainer" :key="index" :list="item">
+        <MyComplexContainer v-for="(item, index) in store.contentContainer" :key="index" :list="item">
         </MyComplexContainer>
         <!-- <MyBigBanner :img="store.bigBannerList[2].img"></MyBigBanner> -->
-        <MyComplexContainer v-for=" (item, index) in store.lastContainer" :key="index" :list="item">
+        <MyComplexContainer v-for="(item, index) in store.lastContainer" :key="index" :list="item">
         </MyComplexContainer>
         <MyVideo></MyVideo>
       </div>
@@ -23,13 +23,12 @@
 import MySimpleContainer from './components/SimpleContainer/MySimpleContainer.vue'
 import MyComplexContainer from './components/ComplexContainer/MyComplexContainer.vue'
 import MyVideo from '../MyVideo/MyVideo.vue'
-import { useContainerStore } from '@/store/Home/Container'
+import { useHomeStore } from '@/store/home'
 
-const store = useContainerStore()
+const store = useHomeStore()
 
 store.getContainerList()
 store.getBigBannerInfo()
-
 </script>
 
 <style scoped lang="less">

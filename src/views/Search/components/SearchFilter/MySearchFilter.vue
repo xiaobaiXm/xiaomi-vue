@@ -16,7 +16,7 @@
 
 <script setup lang="ts">
 import { ref, Ref, inject } from 'vue'
-import { useSearchStore } from '@/store/Search'
+import { useSearchStore } from '@/store/search'
 
 let keyword = inject<Ref<string>>('keyword', ref(''))
 

@@ -16,7 +16,7 @@ import MyDetailNavBarVue from './components/DetailNavBar/MyDetailNavBar.vue'
 import { reactive, onMounted, defineAsyncComponent } from 'vue'
 import { useRouter } from 'vue-router'
 
-import { useDetailStore } from '@/store/Detail'
+import { useDetailStore } from '@/store/detail'
 const MyDetailInfo = defineAsyncComponent(() => import('./components/DetailInfo/MyDetailInfo.vue'))
 const router = useRouter()
 const currentRoute = router.currentRoute

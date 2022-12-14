@@ -1,18 +1,18 @@
 import requests from '@/utils/requests'
 
 import { IUserAddressInfo } from '@/model/Address'
-import { IAddressPageInfoAxiosResponse, IAddressAllInfoAxiosResponse } from '@/model/UserAddressInfo'
+// import { IAddressPageInfoAxiosResponse, IAddressAllInfoAxiosResponse } from '@/model/UserAddressInfo'
 import { } from '@/model/AddressInfo'
 
 // 用户分页地址接口
-export const reqUserPageAddressInfo = (data:IUserAddressInfo):Promise<IAddressPageInfoAxiosResponse> => requests({
+export const reqUserPageAddressInfo = (data: IUserAddressInfo) => requests({
   url: '/address/address',
   method: 'POST',
   data: JSON.stringify(data)
 })
 
 // 用户全部地址接口
-export const reqUserAddressInfo = ():Promise<IAddressAllInfoAxiosResponse> => requests({
+export const reqUserAddressInfo = () => requests({
   url: '/address/',
   method: 'GET'
 })

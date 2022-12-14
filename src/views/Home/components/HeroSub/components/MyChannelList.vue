@@ -12,9 +12,9 @@
 </template>
 
 <script setup lang="ts">
-import { useHeaderMainStore } from '@/store/Home/HeaderMain/index'
+import { useHomeStore } from '@/store/homeMain/index'
 
-const store = useHeaderMainStore()
+const store = useHomeStore()
 
 store.getHeroList()
 </script>

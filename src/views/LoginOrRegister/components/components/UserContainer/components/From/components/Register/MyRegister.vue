@@ -65,7 +65,7 @@ import {
 import { Form, Field } from 'vee-validate'
 
 import { VeeValidateRegister } from '@/utils/validate'
-import { useUserStore } from '@/store/User/LoginOrRegister'
+import { useUserStore } from '@/store/user'
 
 const store = useUserStore()
 

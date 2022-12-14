@@ -3,7 +3,9 @@
     <ul>
       <li class="hover_List_up">
         <a href="javascript:;" @click="productDetail(1)">
-          <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/6b99bcb716c8f76e1fc5475172bdfc27.jpg?thumb=1&w=234&h=614&f=webp&q=90" alt="">
+          <img
+            src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/6b99bcb716c8f76e1fc5475172bdfc27.jpg?thumb=1&w=234&h=614&f=webp&q=90"
+            alt="" />
         </a>
       </li>
     </ul>
@@ -12,12 +14,11 @@
 
 <script setup lang="ts">
 import { productDetail } from '@/hooks/Detail'
-// import { IPhoneChildren } from '@/store/Home/Container/Type/Phone'
+// import { IPhoneChildren } from '@/store/home/Type/Phone'
 
 // defineProps<{
 //   phoneLeft :IPhoneChildren
 // }>()
-
 </script>
 
 <style lang="less" scoped>
@@ -29,7 +30,7 @@ import { productDetail } from '@/hooks/Detail'
 
   ul {
     li {
-      transition: all .2s linear;
+      transition: all 0.2s linear;
 
       a {
         display: block;

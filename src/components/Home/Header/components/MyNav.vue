@@ -2,15 +2,20 @@
   <div class="header_nav">
     <ul class="clearfix">
       <li class="category">
-        <router-link to="/category" :class="showFlag ? 'category_hide' : ''"><span class="text">全部商品分类</span>
+        <router-link to="/category" :class="showFlag ? 'category_hide' : ''"
+          ><span class="text">全部商品分类</span>
         </router-link>
         <MyTypeNavVue :showFlag="showFlag"></MyTypeNavVue>
       </li>
-      <li class="nav-item nav-item-active" @mouseenter="item.show = !item.show" @mouseleave="item.show = !item.show"
-        v-for="(item, index ) in store.navList" :key="index">
+      <li
+        class="nav-item nav-item-active"
+        @mouseenter="item.show = !item.show"
+        @mouseleave="item.show = !item.show"
+        v-for="(item, index) in store.navList"
+        :key="index">
         <a href="javascript:;" class="nav-title">
           <span class="text">{{ item.navTitle }}</span>
-          <teleport to='body'>
+          <teleport to="body">
             <MyNavInfoVue :list="item.navChildren" :flag="item.show"></MyNavInfoVue>
           </teleport>
         </a>
@@ -31,21 +36,25 @@ import MyNavInfoVue from './MyNavInfo.vue'
 
 import { ref, watch, getCurrentInstance } from 'vue'
 import { useRouter } from 'vue-router'
-import { useHeaderStore } from '@/store/Home/Header/index'
+import { useHomeStore } from '@/store/home'
 const router = useRouter()
 const currentRoute = router.currentRoute
 const instance = getCurrentInstance()
 
 let showFlag = ref<boolean>(false)
-watch(() => currentRoute.value.path, (newPath) => {
-  if (newPath === '/home') {
-    showFlag.value = true
-  } else {
-    showFlag.value = false
-  }
-}, { immediate: true })
+watch(
+  () => currentRoute.value.path,
+  (newPath) => {
+    if (newPath === '/home') {
+      showFlag.value = true
+    } else {
+      showFlag.value = false
+    }
+  },
+  { immediate: true },
+)
 
-const store = useHeaderStore()
+const store = useHomeStore()
 
 store.getHeaderNav()
 
@@ -56,7 +65,6 @@ store.getHeaderNav()
 // const hide = (): void => {
 //   console.log('hide')
 // }
-
 </script>
 
 <style lang="less" scoped>
@@ -90,7 +98,6 @@ store.getHeaderNav()
       }
 
       &:hover ::v-deep {
-
         .site-category-list {
           display: inline-block !important;
         }

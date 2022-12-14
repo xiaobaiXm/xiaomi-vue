@@ -30,7 +30,7 @@ export const reqGetOrderStatusByOrderNumber = (orderNumber: string) => requests(
 })
 
 // 修改订单状态
-export const reqUpdateOrderStatus = (orderId:number, status:number) => requests({
+export const reqUpdateOrderStatus = (orderId: number, status: number) => requests({
   url: `/order/${orderId}`,
   method: 'PATCH',
   data: JSON.stringify(status)

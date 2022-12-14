@@ -7,7 +7,7 @@ import lazyPlugin from 'vue3-lazy'
 import mitt from 'mitt'
 
 // 样式
-import '@/assets/style/base.css'
+import '@/style/index.less'
 
 // 全局组件
 import MyLoading from '@/components/Loading/MyLoading.vue'
@@ -25,7 +25,7 @@ const Mit = mitt()
 
 declare module 'vue' {
   export interface ComponentCustomProperties {
-    $Bus:typeof Mit
+    $Bus: typeof Mit
   }
 }
 

@@ -12,7 +12,7 @@
 import MyGatherSingle from '@/components/GatherSingle/MyGatherSingle.vue'
 
 import { ref, provide } from 'vue'
-import { useCartsStore } from '@/store/Carts'
+import { useCartsStore } from '@/store/carts'
 
 const store = useCartsStore()
 let flag = ref<boolean>(false)

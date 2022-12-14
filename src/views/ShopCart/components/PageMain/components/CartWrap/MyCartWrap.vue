@@ -13,7 +13,7 @@ import MyAddonItemsTips from './components/MyAddonItemsTips.vue'
 import MyListHeader from './components/MyListHeader.vue'
 import MyListBody from './components/MyListBody.vue'
 
-import { useCartsStore } from '@/store/Carts'
+import { useCartsStore } from '@/store/carts'
 
 const store = useCartsStore()
 </script>

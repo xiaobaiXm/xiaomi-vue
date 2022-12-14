@@ -1,14 +1,16 @@
 <template>
   <div class="nav_bar">
     <ul>
-      <li v-for="item in store.navBarList" :key="item.id"><a href="#">{{ item.name }}</a></li>
+      <li v-for="item in store.navBarList" :key="item.id">
+        <a href="#">{{ item.name }}</a>
+      </li>
     </ul>
   </div>
 </template>
 
 <script setup lang="ts">
-import { useHeaderStore } from '@/store/Home/Header/index'
-const store = useHeaderStore()
+import { useHomeStore } from '@/store/home'
+const store = useHomeStore()
 store.getHeaderNavBarList()
 </script>
 

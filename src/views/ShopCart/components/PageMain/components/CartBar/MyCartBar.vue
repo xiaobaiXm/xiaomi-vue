@@ -11,7 +11,7 @@ import MySelectionLeft from './components/MySelectionLeft.vue'
 import MyTotalPrice from './components/MyTotalPrice.vue'
 import MyNoSelectTipVue from './components/MyNoSelectTip.vue'
 
-import { useCartsStore } from '@/store/Carts'
+import { useCartsStore } from '@/store/carts'
 
 const store = useCartsStore()
 

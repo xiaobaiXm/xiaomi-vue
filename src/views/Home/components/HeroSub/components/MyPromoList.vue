@@ -3,7 +3,7 @@
     <ul>
       <li v-for="promo in store.heroBanner" :key="promo.id">
         <a href="#">
-          <img v-lazy="promo.img" alt="">
+          <img v-lazy="promo.img" alt="" />
         </a>
       </li>
     </ul>
@@ -11,8 +11,8 @@
 </template>
 
 <script setup lang="ts">
-import { useHeaderMainStore } from '@/store/Home/HeaderMain/index'
-const store = useHeaderMainStore()
+import { useHomeStore } from '@/store/homeMain/index'
+const store = useHomeStore()
 store.getHeroBanner()
 </script>
 

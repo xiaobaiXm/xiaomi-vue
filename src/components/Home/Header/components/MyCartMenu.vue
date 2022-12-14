@@ -31,7 +31,7 @@
 
 <script setup lang="ts">
 import { onMounted } from 'vue'
-import { useCartsStore } from '@/store/Carts'
+import { useCartsStore } from '@/store/carts'
 import { productDetail } from '@/hooks/Detail/index'
 import { ICartInfo } from '@/model/CartsAllInfo'
 import { auth } from '@/hooks/User/auth'

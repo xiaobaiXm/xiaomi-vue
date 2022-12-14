@@ -17,8 +17,4 @@
   "useTabs": false,
   "vueIndentScriptAndStyle": false,
   "singleAttributePerLine": false
-  "trailingComma": "none",
-  "singleQuote": true,
-  "semi": false,
-  "arrowParens": "avoid"
 }

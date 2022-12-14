@@ -1,7 +1,7 @@
 <template>
   <div class="handle-action">
     <div class="operating-button">
-      <a href="javaceript:;" @click="settlement" class="btn btn-primary">立即下单</a>
+      <a href="javascript:;" @click="settlement" class="btn btn-primary">立即下单</a>
       <router-link to="/cart" class="btn btn-return">返回购物车</router-link>
     </div>
   </div>
@@ -13,7 +13,7 @@
 <script setup lang="ts">
 import { ref, reactive, getCurrentInstance } from 'vue'
 import { useRouter } from 'vue-router'
-import { useUserOrderStore } from '@/store/User/Order'
+import { useUserOrderStore } from '@/store/order'
 import { IOrder } from '@/model/Order'
 import { IError } from '@/model/Error'
 

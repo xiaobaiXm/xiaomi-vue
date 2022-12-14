@@ -2,19 +2,18 @@
   <div class="site_header">
     <ul>
       <li v-for="item in store.footerHelpList" :key="item.id">
-      <router-link to=""> <span class="iconfont" :class="item.icon"></span>{{ item.name }}</router-link>
+        <router-link to=""> <span class="iconfont" :class="item.icon"></span>{{ item.name }}</router-link>
       </li>
     </ul>
   </div>
 </template>
 
 <script setup lang="ts">
-import { useFooter } from '@/store/Home/Footer'
+import { useHomeStore } from '@/store/home'
 
-const store = useFooter()
+const store = useHomeStore()
 
 store.getFooterHelpInfo()
-
 </script>
 
 <style lang="less" scoped>
@@ -24,7 +23,7 @@ store.getFooterHelpInfo()
   padding: 27px 0;
   border-bottom: 1px solid #e0e0e0;
   box-sizing: border-box;
-  transition: all .5s;
+  transition: all 0.5s;
 
   ul {
     display: flex;
@@ -39,7 +38,7 @@ store.getFooterHelpInfo()
 
       a {
         color: #616161;
-        transition: color .2s;
+        transition: color 0.2s;
 
         .iconfont {
           margin-right: 6px;

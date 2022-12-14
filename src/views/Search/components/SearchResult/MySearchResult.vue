@@ -19,7 +19,7 @@ import MyTypeListVue from './components/MyTypeList.vue'
 import MyGoodsListVue from './components/MyGoodsList.vue'
 import MyEmptyList from './components/MyEmptyList.vue'
 
-import { useSearchStore } from '@/store/Search'
+import { useSearchStore } from '@/store/search'
 
 const store = useSearchStore()
 

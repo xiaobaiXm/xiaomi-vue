@@ -11,7 +11,7 @@ import { useRouter, useRoute } from 'vue-router'
 import { from, checkStatus } from '@/hooks/User'
 import { loginError } from '@/hooks/User/ChangeInpClassName'
 
-import { useUserStore } from '@/store/User/LoginOrRegister'
+import { useUserStore } from '@/store/user'
 const store = useUserStore()
 const route = useRoute()
 const router = useRouter()
@@ -31,7 +31,7 @@ const login = async (): Promise<void> => {
   if (checkStatus()) {
     try {
       await store.login(from)
-      let toPath: string = route.query.redirect || '/home'
+      let toPath: string = route.query.redirect as string || '/home'
       router.push(toPath)
     } catch (err) {
       loginError.value = true

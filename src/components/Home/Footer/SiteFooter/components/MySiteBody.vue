@@ -1,8 +1,10 @@
 <template>
   <div class="site_body clearfix">
-    <dl v-for="(item , index) in store.footerNavList" :key="index">
+    <dl v-for="(item, index) in store.footerNavList" :key="index">
       <dt>{{ item.footerNavDt }}</dt>
-      <dd v-for="DD in item.footerNavDd" :key="DD.id"><a href="#">{{ DD.name }}</a></dd>
+      <dd v-for="DD in item.footerNavDd" :key="DD.id">
+        <a href="#">{{ DD.name }}</a>
+      </dd>
     </dl>
 
     <div class="contact">
@@ -22,12 +24,11 @@
 </template>
 
 <script setup lang="ts">
-import { useFooter } from '@/store/Home/Footer'
+import { useHomeStore } from '@/store/home'
 
-const store = useFooter()
+const store = useHomeStore()
 
 store.getFooterNavInfo()
-
 </script>
 
 <style lang="less" scoped>

@@ -30,7 +30,7 @@
 
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
-import { useCartsStore } from '@/store/Carts'
+import { useCartsStore } from '@/store/carts'
 import { goBack } from '@/hooks/BackTop'
 
 const store = useCartsStore()

@@ -4,19 +4,18 @@
       <MyBread></MyBread>
     </div>
     <div class="container w clearfix">
-      <MyCateGory v-for="(item , index) in store.category" :key="index" :list="item"></MyCateGory>
+      <MyCateGory v-for="(item, index) in store.category" :key="index" :list="item"></MyCateGory>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import MyCateGory from './components/CateGory.vue'
-import { useCategory } from '../../store/Home/Category/index'
+import { useHomeStore } from '../../store/home'
 
-const store = useCategory()
+const store = useHomeStore()
 
 store.getCategoryList()
-
 </script>
 
 <style lang="less" scoped>

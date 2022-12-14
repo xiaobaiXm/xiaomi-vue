@@ -50,7 +50,7 @@
 
 <script setup lang="ts">
 import { ref, getCurrentInstance, onMounted, onUnmounted } from 'vue'
-import { useUserAddressStore } from '@/store/User/Address'
+import { useUserAddressStore } from '@/store/address'
 import { IAddressInfoList } from '@/model/UserAddressInfo'
 import { goBack } from '@/hooks/BackTop'
 

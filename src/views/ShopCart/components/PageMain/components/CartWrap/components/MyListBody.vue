@@ -57,7 +57,7 @@
 
 <script setup lang="ts">
 import { ref, reactive } from 'vue'
-import { useCartsStore } from '@/store/Carts'
+import { useCartsStore } from '@/store/carts'
 import { ICartInfo } from '@/model/CartsAllInfo'
 import { IError } from '@/model/Error'
 import { IWarning } from '@/model/Warning'

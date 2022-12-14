@@ -3,11 +3,11 @@
   <div class="main">
     <div class="type_nav" :class="showFlag ? '' : 'site-category-list'">
       <ul>
-        <li v-for="(item, index) in store.category"  :key="index">
+        <li v-for="(item, index) in store.category" :key="index">
           <a href="javascript:;">{{ item.categoryTitle }}<span class="iconfont icon-youjiantou"></span></a>
           <div class="secondary_menu">
             <a href="#" v-for="childItem in item.categoryChild" :key="childItem.id">
-              <img v-lazy="childItem.img" alt="">
+              <img v-lazy="childItem.img" alt="" />
               <span>{{ childItem.name }}</span>
             </a>
           </div>
@@ -18,13 +18,13 @@
 </template>
 
 <script setup lang="ts">
-import { useCategory } from '@/store/Home/Category'
-const store = useCategory()
+import { useHomeStore } from '@/store/home'
+const store = useHomeStore()
 
 store.getCategoryList()
 
 defineProps<{
-  showFlag : boolean
+  showFlag: boolean
 }>()
 </script>
 
@@ -33,9 +33,9 @@ defineProps<{
   display: none;
   border: 1px solid #ff6700;
   background: #fff !important;
-  >ul {
-    >li {
-      >a {
+  > ul {
+    > li {
+      > a {
         color: #424242 !important;
       }
     }
@@ -50,13 +50,13 @@ defineProps<{
   height: 460px;
   z-index: 999;
   color: #fff;
-  background: rgba(105, 101, 101, .6);
+  background: rgba(105, 101, 101, 0.6);
 
   ul {
     padding: 20px 0;
 
     li {
-      >a {
+      > a {
         display: block;
         width: 204px;
         height: 42px;

@@ -9,7 +9,7 @@ import { ref, watch, getCurrentInstance } from 'vue'
 import { useRouter } from 'vue-router'
 import { from, checkStatus } from '@/hooks/User'
 
-import { useUserStore } from '@/store/User/LoginOrRegister'
+import { useUserStore } from '@/store/user'
 const router = useRouter()
 const store = useUserStore()
 

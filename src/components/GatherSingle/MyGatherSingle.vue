@@ -66,7 +66,7 @@
 
 <script setup lang="ts">
 import { ref, Ref, inject } from 'vue'
-import { useCartsStore } from '@/store/Carts'
+import { useCartsStore } from '@/store/carts'
 
 const flag = inject<Ref<boolean>>('gatherSingleFlag', ref(false))
 let area = ref<number>(0)
